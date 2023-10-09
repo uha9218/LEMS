@@ -13,7 +13,6 @@
 	<!-- common.js -->
 	<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
 
-
 	<!-- PAGE PLUGINS -->
 	<!-- jQuery Mapael -->
 	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
@@ -39,3 +38,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
+	<!--sik-->
+	<!-- moment -->
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/moment/moment.min.js"></script>
+	<!-- Date range -->
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.js"></script>
+
+

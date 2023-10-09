@@ -14,12 +14,15 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+  <!-- Data range -->
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css?v=3.2.0">
   <!-- route style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/route.css" type="text/css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
+
 	<!--kwang-->
   <!-- datepicker -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
@@ -29,9 +32,6 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <!--   jQuery UI 라이브러리 js파일-->
   <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> 
-
-  
-	
 
 <decorator:head />
 </head>
