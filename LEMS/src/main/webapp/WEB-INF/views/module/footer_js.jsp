@@ -15,21 +15,14 @@
 
 	<!-- PAGE PLUGINS -->
 	<!-- jQuery Mapael -->
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/plugins/raphael/raphael.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/raphael/raphael.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 	<!-- ChartJS -->
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>
 
 	<!-- AdminLTE for demo purposes -->
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/demo.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/demo.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script
-		src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/pages/dashboard2.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/pages/dashboard2.js"></script>
