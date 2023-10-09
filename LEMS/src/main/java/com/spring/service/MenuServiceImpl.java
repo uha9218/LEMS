@@ -18,7 +18,6 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public List<MenuVO> getMainMenuList() throws SQLException {
 		List<MenuVO> menuList = menuDAO.selectMainMenu();
-		System.out.println(menuList.get(3));
 		return menuList;
 	}
 

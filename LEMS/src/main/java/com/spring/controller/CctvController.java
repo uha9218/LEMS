@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/cctv")
 public class CctvController {
-   @GetMapping("/cctv")
+   @GetMapping("/main")
       public String cctv() throws Exception{
          String url="/cctv/cctv";         
          return url;

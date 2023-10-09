@@ -44,4 +44,7 @@
 	<!-- Date range -->
 	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.js"></script>
 
-
+	<!-- uha -->
+	<!-- toggle -->   
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap-toggle.min.js"></script>
+  

@@ -5,8 +5,7 @@
 
 <title></title>
 <head>
-  <!-- toggle -->
-  <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap-toggle.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/css/jquery.datetimepicker.css"/ >
 </head>
 <body>
   <div class="col-lg-12">
@@ -20,7 +19,7 @@
           <div class="row">
           <div class="col-md-1"></div>
               <div class="col-md-5">
-                 <div class="card">
+                 <div class="card" style="width: 100%; height: 100%;">
                     <div class="card-header">
                        <h5 class="card-title">Controller</h5>
                        <div class="card-tools">
@@ -126,13 +125,16 @@
                  </div>
               </div>
               <div class="col-md-5">
-                 <div class="card" style="width: 100%; height: 100%; float: left">
-                    <div class="card-header">
-                       <div class="row">
-                        	<div class="col-md-2">
+                 <div class="card" style="width: 100%; height: 100%; ">
+                    <div class="card-header" >
+                       <div class="row" >
+                        	<div class="col-md-6">
                              	<button type="button" id="button" class="btn btn-tool btn-primary btn-xs" style="float: center;" onclick="window.location.href='main.do'">추천 설정표</button>
 							</div>
-							<div class="col-md-10">                         
+							<div class="col-md-4" >
+								<input id="datetimepicker" type="text" style="float: right;" >
+					        </div>
+							<div class="col-md-2">                         
 	                           <select class="form-tool"  style="float: right;" onchange="location.href=this.value">
 	                              <option value="">구간 선택</option>
 	                           </select>
@@ -158,68 +160,68 @@
                              <div class="jsgrid-grid-body" style="height: 520px;">
                                 <table class="jsgrid-table" style="width: 100%;">
                                    <tbody>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">A</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">B</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">C</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">D</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">E</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td></tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">F</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td></tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">G</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td></tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">H</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td></tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">I</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">J</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>	
 									</tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">K</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">L</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>
 									</tr>
-									<tr class="jsgrid-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">M</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>	
 									</tr>
-									<tr class="jsgrid-alt-row" style="height: 35px; text-align:center;">
+									<tr class="jsgrid-alt-row" style="height: 38px; text-align:center;">
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">N</td>
 										<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;">2023.10.03 00:10</td>
 										<td class="jsgrid-cell jsgrid-align-center"style="width: 150px;">on</td>	
@@ -232,14 +234,12 @@
                     </div>
                  </div>
               </div>
-              <div class="col-md-1"></div>
          </div>
         </div>
        </div>
       </section>
    <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
-   <!-- toggle -->   
-   <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap-toggle.min.js"></script>
+   <script src="<%=request.getContextPath() %>/resources/js/jquery.datetimepicker.full.min.js"></script>
    <script>
       $(function() {
          $("#jsGrid1").jsGrid({
@@ -291,6 +291,9 @@
             } ]
          });
       });
+   </script>
+   <script>
+  	 jQuery('#datetimepicker').datetimepicker();
    </script>
 
 </body>
