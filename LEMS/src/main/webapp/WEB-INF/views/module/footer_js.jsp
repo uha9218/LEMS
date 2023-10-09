@@ -13,6 +13,7 @@
 	<!-- common.js -->
 	<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
 
+
 	<!-- PAGE PLUGINS -->
 	<!-- jQuery Mapael -->
 	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
@@ -26,3 +27,9 @@
 	<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/demo.js"></script>
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/pages/dashboard2.js"></script>
+	<!-- Ekko Lightbox -->
+	<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+	<!-- Filterizr-->
+	<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/filterizr/jquery.filterizr.min.js"></script>
+
+
