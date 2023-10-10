@@ -18,8 +18,6 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css?v=3.2.0">
-  <!-- route style -->
-  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/route.css" type="text/css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">  
 
@@ -28,7 +26,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
   <!--  jQuery UI CSS파일 --> 
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-	<!-- jQuery 기본 js파일  --> 
+   <!-- jQuery 기본 js파일  --> 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
   <!--   jQuery UI 라이브러리 js파일-->
   <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -37,12 +35,16 @@
   <!-- toggle -->
   <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap-toggle.min.css" rel="stylesheet">
   
+  <!-- soon -->
+  <!-- route style -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/route.css" type="text/css">
+  <!-- weather style -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/weather.css" type="text/css">
 
 <decorator:head />
 </head>
 
 <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
-
 
 
 

@@ -42,13 +42,24 @@
 						</select>
 						<!-- sort num -->
 						<select class="form-control col-md-3" name="perPageNum"
-							id="perPageNum" onchange="">
-							<option value="10">구간코드</option>
-							<option value="all">전체</option>
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="C">C</option>
-						</select>
+		                    id="perPageNum" onchange="">
+		                    <option value="10">구간코드</option>
+		                    <option value="all">전체</option>
+		                    <option value="A">A</option>
+		                    <option value="B">B</option>
+		                    <option value="C">C</option>
+		                    <option value="C">D</option>
+		                    <option value="C">E</option>
+		                    <option value="C">F</option>
+		                    <option value="C">G</option>
+		                    <option value="C">H</option>
+		                    <option value="C">I</option>
+		                    <option value="C">J</option>
+		                    <option value="C">K</option>
+		                    <option value="C">L</option>
+		                    <option value="C">M</option>
+		                    <option value="C">N</option>
+	                 	</select>
 						<!-- Date range as a button -->
 						<div class="input-group-prepend">
 							<span class="input-group-text"> <i
@@ -87,90 +98,155 @@
                     <h5 style="text-align:center;">월</h5>
               </div>
 				<div class="col-sm-12" style="text-align:center;">
-					<table id="example1" 
-						class="table table-bordered table-striped dataTable dtr-inline"
-						aria-describedby="example1_info">
-						<thead>
-							<tr>
-								<th style="width:9%; height:7%;">구분</th>
-								<th style="width:7%; height:7%;">9</th>
-								<th style="width:7%; height:7%;">10</th>
-								<th style="width:7%; height:7%;">11</th>
-								<th style="width:7%; height:7%;">12</th>
-								<th style="width:7%; height:7%;">1</th>
-								<th style="width:7%; height:7%;">2</th>
-								<th style="width:7%; height:7%;">3</th>
-								<th style="width:7%; height:7%;">4</th>
-								<th style="width:7%; height:7%;">5</th>
-								<th style="width:7%; height:7%;">6</th>
-								<th style="width:7%; height:7%;">7</th>
-								<th style="width:7%; height:7%;">8</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>평균</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>표준편차</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>최대값</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>최소값</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+               <table id="example1"
+                  class="table table-bordered table dataTable dtr-inline"
+                  aria-describedby="example1_info">
+                  <thead>
+                     <tr>
+                        <th style="width:9%; height:7%;">구분</th>
+                        <th style="width:8%; height:7%;">월</th>
+                        <th style="width:5%; height:7%;">9</th>
+                        <th style="width:5%; height:7%;">10</th>
+                        <th style="width:5%; height:7%;">11</th>
+                        <th style="width:5%; height:7%;">12</th>
+                        <th style="width:5%; height:7%;">1</th>
+                        <th style="width:5%; height:7%;">2</th>
+                        <th style="width:5%; height:7%;">3</th>
+                        <th style="width:5%; height:7%;">4</th>
+                        <th style="width:5%; height:7%;">5</th>
+                        <th style="width:5%; height:7%;">6</th>
+                        <th style="width:5%; height:7%;">7</th>
+                        <th style="width:5%; height:7%;">8</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td rowspan="2">평균</td>
+                        <td>통행량</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td>속도</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td rowspan="2">표준편차</td>
+                        <td>통행량</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td>속도</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td rowspan="2">최대값</td>
+                        <td>통행량</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td>속도</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td rowspan="2">최소값</td>
+                        <td>통행량</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                     <tr>
+                        <td>속도</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
           </div>
     </div>
     </div>

@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/br")
 public class BrController {
-   @GetMapping("/list")
-      public String list() throws Exception{
-         String url="/br/list";         
-         return url;
-      }
+	@GetMapping("/main")
+	public String main() throws Exception{
+		String url="/br/list";
+		return url;
+	}
+	
+	@GetMapping("/list")
+	public String list() throws Exception{
+		String url="/br/list";         
+		return url;
+	}
    @GetMapping("/regist")
    public String regist() throws Exception{
       String url="/br/regist";         

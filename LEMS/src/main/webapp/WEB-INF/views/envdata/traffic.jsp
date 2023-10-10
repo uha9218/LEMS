@@ -36,13 +36,24 @@
 							</select>
 							<!-- sort num -->
 							<select class="form-control col-md-3" name="perPageNum"
-								id="perPageNum" onchange="">
-								<option value="10">구간코드</option>
-								<option value="all">전체</option>
-								<option value="A">A</option>
-								<option value="B">B</option>
-								<option value="C">C</option>
-							</select>
+		                     id="perPageNum" onchange="">
+		                     <option value="10">구간코드</option>
+		                     <option value="all">전체</option>
+		                     <option value="A">A</option>
+		                     <option value="B">B</option>
+		                     <option value="C">C</option>
+		                     <option value="C">D</option>
+		                     <option value="C">E</option>
+		                     <option value="C">F</option>
+		                     <option value="C">G</option>
+		                     <option value="C">H</option>
+		                     <option value="C">I</option>
+		                     <option value="C">J</option>
+		                     <option value="C">K</option>
+		                     <option value="C">L</option>
+		                     <option value="C">M</option>
+		                     <option value="C">N</option>
+		                    </select>
 							<!-- Date range as a button -->
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i

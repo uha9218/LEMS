@@ -46,14 +46,25 @@
 							<option value="http://localhost/project/envdata/sunDetail.do">일조시간</option>
 						</select>
 						<!-- sort num -->
-						<select class="form-control col-md-3"  style="width:30px" name="perPageNum"
-							id="perPageNum" onchange="">
-							<option value="10">구간코드</option>
-							<option value="all">전체</option>
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="C">C</option>
-						</select>
+						<select class="form-control col-md-3" name="perPageNum"
+	                     id="perPageNum" onchange="">
+	                     <option value="10">구간코드</option>
+	                     <option value="all">전체</option>
+	                     <option value="A">A</option>
+	                     <option value="B">B</option>
+	                     <option value="C">C</option>
+	                     <option value="C">D</option>
+	                     <option value="C">E</option>
+	                     <option value="C">F</option>
+	                     <option value="C">G</option>
+	                     <option value="C">H</option>
+	                     <option value="C">I</option>
+	                     <option value="C">J</option>
+	                     <option value="C">K</option>
+	                     <option value="C">L</option>
+	                     <option value="C">M</option>
+	                     <option value="C">N</option>
+	                    </select>
 						<!-- Date range as a button -->
 						<div class="input-group-prepend">
 							<span class="input-group-text"> <i
@@ -89,7 +100,6 @@
                     <h5>월</h5>
                   </div>
               </div>
-              <div class="row">
 				<div class="col-md-12" style="text-align:center;">
 					<table id="example1"
 						class="table table-bordered table-striped dataTable dtr-inline"
@@ -179,7 +189,6 @@
 			</div>
           </div>
       </div>
-    </div>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
 <script>
