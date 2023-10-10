@@ -37,13 +37,13 @@
 						<!-- search bar -->
 						<select class="form-control col-md-3" name="perPageNum"
 							id="perPageNum" onchange="if(this.value)location.href=(this.value);">
-							<option value="http://localhost/project/envdata/sunDetail.do">그래프</option>
-							<option value="http://localhost/project/envdata/sun.do">리스트</option>
+							<option value="<%=request.getContextPath() %>/envdata/sunDetail.do">그래프</option>
+							<option value="<%=request.getContextPath() %>/envdata/sun.do">리스트</option>
 						</select>
 						<select class="form-control col-md-3" style="width:20px" name="perPageNum"
 							id="perPageNum" onchange="if(this.value)location.href=(this.value);">
-							<option value="http://localhost/project/envdata/sunDetail.do">일조시간</option>
-							<option value="http://localhost/project/envdata/sunVariation.do">증감률</option>
+							<option value="<%=request.getContextPath() %>/envdata/sunDetail.do">일조시간</option>
+							<option value="<%=request.getContextPath() %>/envdata/sunVariation.do">증감률</option>
 						</select>
 						<!-- sort num -->
 						<select class="form-control col-md-3" name="perPageNum"

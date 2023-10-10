@@ -123,7 +123,13 @@
                               <!-- 전력량 차트 끝 -->
                               <!-- 원인 내용 레이아웃 시작 -->
                               <div class="col-lg-5 text-right" style="padding: 0;" >
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
+                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
                               </div>
                               <!-- 원인 내용 레이아웃 끝 -->
                            </div>
@@ -196,17 +202,17 @@
                         </div>
                         <div class="card-body">
                         <!-- 교통량 그래프 시작 -->
-                        <div class="row" style="padding-top: 7%; padding-bottom: 7%;">
-                     <div class="col-lg-6 text-center">
-                        <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" data-width="90vw" data-height="90vw" data-fgColor="#00c0ef">
-                        <div class="knob-label">통행량</div>
-                     </div>
-                     <div class="col-lg-6 text-center">
-                        <input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" data-width="90vw" data-height="90vw" data-fgColor="#00c0ef">
-                        <div class="knob-label">통행속도</div>
-                     </div>
-                  </div>
-                  <!-- 교통량 그래프 끝 -->
+                        <div class="row" style="padding-top: 3vw; padding-bottom: 3vw;">
+	                       <div class="col-6 col-md-6 text-center">	
+								<input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" data-width="130" data-height="130" data-fgColor="#00c0ef">
+								<div class="knob-label">통행량"</div>
+							</div>
+	                       <div class="col-6 col-md-6 text-center">
+								<input type="text" class="knob" value="100" data-skin="tron" data-thickness="0.2" data-angleArc="250" data-angleOffset="-125" data-width="130" data-height="130" data-fgColor="#00c0ef">
+								<div class="knob-label">통행속도"</div>
+							</div>
+	                    </div>
+                 		<!-- 교통량 그래프 끝 -->
                         </div>
                      </div>
                   </div>
@@ -229,7 +235,7 @@
                         <div class="card-body">
                         <!-- 사고량 그래프 시작 -->
                   <div class="chart">
-                     <canvas id="stackedBarChart" style="min-height: 15vw; height: 15vw; max-height: 15vw; max-width: 100%;"></canvas>
+                     <canvas id="stackedBarChart" style="min-height: 15.8vw; height: 15.8vw; max-height: 15.8vw; max-width: 100%;"></canvas>
                   </div>
                         <!-- 사고량 그래프 끝 -->
                         </div>

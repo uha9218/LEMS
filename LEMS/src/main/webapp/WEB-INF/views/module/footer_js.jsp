@@ -22,9 +22,6 @@
    <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery-mapael/maps/usa_states.min.js"></script>
    <!-- ChartJS -->
    <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>
-
-   <!-- AdminLTE for demo purposes -->
-   <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/demo.js"></script>
    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
    <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/pages/dashboard2.js"></script>
    <!-- Ekko Lightbox -->

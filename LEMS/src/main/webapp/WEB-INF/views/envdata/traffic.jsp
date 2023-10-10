@@ -31,8 +31,8 @@
 							<!-- search bar -->
 							<select class="form-control col-md-3" name="perPageNum"
 								id="perPageNum" onchange="location.href=this.value">
-								<option value="http://localhost/project/envdata/traffic.do">리스트</option>
-								<option value="http://localhost/project/envdata/trafficDetail.do">그래프</option>
+								<option value="<%=request.getContextPath() %>/envdata/traffic.do">리스트</option>
+								<option value="<%=request.getContextPath() %>/envdata/trafficDetail.do">그래프</option>
 							</select>
 							<!-- sort num -->
 							<select class="form-control col-md-3" name="perPageNum"
