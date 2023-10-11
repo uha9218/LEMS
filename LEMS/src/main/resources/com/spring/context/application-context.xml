@@ -7,6 +7,9 @@
 	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
 		 p:sqlSession-ref="sqlSession" 
 	/>
+	
 	<bean id="menuService" class="com.spring.service.MenuServiceImpl"
 	     p:menuDAO-ref="menuDAO"/>
+	<bean id="CCTVService" class="com.spring.service.CCTVServiceImpl"/>
+	
 </beans>
