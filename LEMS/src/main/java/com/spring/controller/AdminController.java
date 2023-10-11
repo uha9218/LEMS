@@ -1,40 +1,31 @@
-
 package com.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
-@RequestMapping("/br")
-public class BrController {
+@RequestMapping("/admin")
+public class AdminController {
 	@GetMapping("/main")
-	public String main() throws Exception{
-		String url="/br/list";
-		return url;
-	}
-	
-	@GetMapping("/list")
-	public String list() throws Exception{
-		String url="/br/list";         
-		return url;
-	}
+    public String cctv() throws Exception{
+       String url="/admin/list";         
+       return url;
+    }
+
    @GetMapping("/regist")
    public String regist() throws Exception{
-      String url="/br/regist";         
+      String url="/admin/regist";         
       return url;
    }
    @GetMapping("/modify")
    public String modify() throws Exception{
-      String url="/br/modify";         
+      String url="/admin/modify";         
       return url;
    }
    @GetMapping("/delete")
    public String delete() throws Exception{
-      String url="/br/delete";         
+      String url="/admin/delete";         
       return url;
    }
-
 }
-
