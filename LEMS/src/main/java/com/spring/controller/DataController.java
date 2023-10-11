@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DataController {
 	@GetMapping("/main")
 	   public String index() throws Exception{
-	      String url="/light/list";	      
+	      String url="/data/light";	      
 	      return url;
 	   }
 	
 	@GetMapping("/light")
 	   public String light() throws Exception{
-	      String url="/light/list";	      
+	      String url="/data/light";	      
 	      return url;
 	   }
 	
 	@GetMapping("/traffic")
 	   public String traffic() throws Exception{
-	      String url="/traffic/list";	      
+	      String url="/data/traffic";	      
 	      return url;
 	   }
 	
 	@GetMapping("/acci")
 	   public String acci() throws Exception{
-	      String url="/acci/list";	      
+	      String url="/data/acci";	      
 	      return url;
 	   }
 	
 	@GetMapping("/sun")
 	   public String sun() throws Exception{
-	      String url="/sun/list";	      
+	      String url="/data/sun";	      
 	      return url;
 	   }
 }

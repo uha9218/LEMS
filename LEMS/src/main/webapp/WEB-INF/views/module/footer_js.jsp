@@ -38,9 +38,11 @@
    <!--sik-->
    <!-- moment -->
    <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/moment/moment.min.js"></script>
+   <!-- Chat -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
    <!-- Date range -->
    <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.js"></script>
-
    <!-- uha -->
    <!-- toggle -->   
    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap-toggle.min.js"></script>
