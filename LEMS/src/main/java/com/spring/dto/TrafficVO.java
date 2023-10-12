@@ -1,32 +1,24 @@
 package com.spring.dto;
 
-import java.util.Date;
-
 public class TrafficVO {
 
-	private String trafficNum; //교통정보번호
-	private Date trafficDate; //교통량집계일시
-	private String occupancy; //차량점유율
-	private String speedAvg; //평균속도
-	private String trafficVlm; //단위시간교통량
-	private String hwSecCode; //구간코드
-	public String getTrafficNum() {
-		return trafficNum;
+	private String traffNum;	//교통번호
+	private String traffDate;	//교통량집계일시
+	private String speedAvg;	//통행속도
+	private String traff;		//교통량
+	private String hwCode;		//구간코드
+	
+	public String getTraffNum() {
+		return traffNum;
 	}
-	public void setTrafficNum(String trafficNum) {
-		this.trafficNum = trafficNum;
+	public void setTraffNum(String traffNum) {
+		this.traffNum = traffNum;
 	}
-	public Date getTrafficDate() {
-		return trafficDate;
+	public String getTraffDate() {
+		return traffDate;
 	}
-	public void setTrafficDate(Date trafficDate) {
-		this.trafficDate = trafficDate;
-	}
-	public String getOccupancy() {
-		return occupancy;
-	}
-	public void setOccupancy(String occupancy) {
-		this.occupancy = occupancy;
+	public void setTraffDate(String traffDate) {
+		this.traffDate = traffDate;
 	}
 	public String getSpeedAvg() {
 		return speedAvg;
@@ -34,16 +26,18 @@ public class TrafficVO {
 	public void setSpeedAvg(String speedAvg) {
 		this.speedAvg = speedAvg;
 	}
-	public String getTrafficVlm() {
-		return trafficVlm;
+	public String getTraff() {
+		return traff;
 	}
-	public void setTrafficVlm(String trafficVlm) {
-		this.trafficVlm = trafficVlm;
+	public void setTraff(String traff) {
+		this.traff = traff;
 	}
-	public String getHwSecCode() {
-		return hwSecCode;
+	public String getHwCode() {
+		return hwCode;
 	}
-	public void setHwSecCode(String hwSecCode) {
-		this.hwSecCode = hwSecCode;
+	public void setHwCode(String hwCode) {
+		this.hwCode = hwCode;
 	}
+	
+	
 }
