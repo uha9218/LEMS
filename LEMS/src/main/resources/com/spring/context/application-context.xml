@@ -5,9 +5,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
-		 p:sqlSession-ref="sqlSession" 
-	/>
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="adminDAO" class="com.spring.dao.AdminDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
 	
+	<bean id="adminService" class="com.spring.service.AdminServiceImpl"
+	     p:adminDAO-ref="adminDAO"/>
 	<bean id="menuService" class="com.spring.service.MenuServiceImpl"
 	     p:menuDAO-ref="menuDAO"/>
 	<bean id="CCTVService" class="com.spring.service.CCTVServiceImpl"/>

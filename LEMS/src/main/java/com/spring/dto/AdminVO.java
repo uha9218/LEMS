@@ -2,6 +2,8 @@ package com.spring.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class AdminVO {
 	private String adminNum;
 	private	String email;
@@ -42,8 +44,14 @@ public class AdminVO {
 	public Date getRegDate() {
 		return regDate;
 	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
+	}
+	@Override
+	public String toString() {
+		return "AdminVO [adminNum=" + adminNum + ", email=" + email + ", pwd=" + pwd + ", name=" + name + ", roll="
+				+ roll + ", regDate=" + regDate + "]";
 	}
 		
 	

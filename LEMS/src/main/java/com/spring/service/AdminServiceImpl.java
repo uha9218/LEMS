@@ -1,10 +1,56 @@
 package com.spring.service;
 
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import com.spring.command.PageMaker;
+import com.spring.command.SearchListCommand;
 import com.spring.dao.AdminDAO;
+import com.spring.dto.AdminVO;
 
-public class AdminServiceImpl {
+public class AdminServiceImpl implements AdminService{
+	
 	private AdminDAO dao;
 	public void setAdminDAO(AdminDAO dao) {
 		this.dao = dao;
+	}
+	@Override
+	public Map<String, Object> getAdminList(SearchListCommand command) throws SQLException {
+
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		
+		List<AdminVO> adminList = dao.selectAdminList(command);
+		
+		int adminCount = dao.selectSearchAdminListCount(command);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCommand(command);
+		pageMaker.setTotalCount(adminCount);
+		
+		dataMap.put("pageMaker", pageMaker);
+		dataMap.put("adminList", adminList);
+		
+		return dataMap;
+	}
+	@Override
+	public AdminVO getAdminDetail(String AdminNum) throws SQLException {
+		
+		AdminVO admin = dao.selectAdminByAdminNum(AdminNum);
+		return admin;
+	}
+	@Override
+	public void registAdmin(AdminVO admin) throws SQLException {
+		String adminNum = dao.selectAdminNumSeqNext()+"";
+		admin.setAdminNum(adminNum);
+		dao.insertAdmin(admin);
+	}
+	@Override
+	public void modifyAdmin(AdminVO admin) throws SQLException {
+		dao.updateAdmin(admin);
+	}
+	@Override
+	public void deleteAdmin(String adminNum) throws SQLException {
+		dao.deleteAdmin(adminNum);
 	}
 }

@@ -10,7 +10,6 @@
 		from
 		admin
 		where adminNum is not null  			  	
-		order by regDate desc
 	</select>
 	
 	<select id="selectSearchAdminListCount" resultType="int">
@@ -19,7 +18,6 @@
 		from
 		admin
 		where adminNum is not null  			  	
-		order by regDate desc
 	</select>
 	
 	<select id="selectAdminByAdminNum"  resultType="admin">
@@ -44,7 +42,7 @@
 		where adminNum=#{adminNum}
 	</update>
 	
-	<update id="deleteAdmin" parameterType="int">
+	<update id="deleteAdmin" >
 		delete 
 		from admin 
 		where adminNum=#{adminNum}
