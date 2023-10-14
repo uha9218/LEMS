@@ -4,10 +4,23 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
-		 p:sqlSession-ref="sqlSession" 
-	/>
+	<!-- Admin.picture -->
+	<bean id="picturePath" class="java.lang.String">
+		<constructor-arg value="${admin.picture.upload}" />      
+	</bean>
 	
+	<!-- Repository -->
+	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="adminDAO" class="com.spring.dao.AdminDAOImpl"
+		 p:sqlSession-ref="sqlSession" 
+	/>	 
+		 
+		 
+	<!-- Service -->
+	<bean id="adminService" class="com.spring.service.AdminServiceImpl"
+	     p:adminDAO-ref="adminDAO" 
+	/>	 
 	<bean id="menuService" class="com.spring.service.MenuServiceImpl"
 	     p:menuDAO-ref="menuDAO"/>
 	<bean id="CCTVService" class="com.spring.service.CCTVServiceImpl"/>

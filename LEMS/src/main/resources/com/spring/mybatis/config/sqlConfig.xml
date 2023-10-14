@@ -9,9 +9,10 @@
 	<typeAlias type="java.lang.String" alias="str" />
 	<typeAlias type="java.lang.Integer" alias="int" />
 	
+	<typeAlias type="com.spring.command.SearchListCommand" alias="searchCommand"/>
+	<typeAlias type="com.spring.dto.AdminVO" alias="admin"/>
 	<typeAlias type="com.spring.dto.MenuVO" alias="menu"/>
 </typeAliases>
-
 
 </configuration>
 
