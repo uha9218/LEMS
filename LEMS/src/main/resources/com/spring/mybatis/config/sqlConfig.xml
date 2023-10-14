@@ -10,11 +10,12 @@
 	<typeAlias type="java.lang.Integer" alias="int" />
 	<typeAlias type="java.util.Date" alias="date" />
 	
+	<typeAlias type="com.spring.command.SearchListCommand" alias="searchCommand"/>
+	<typeAlias type="com.spring.dto.AdminVO" alias="admin"/>
 	<typeAlias type="com.spring.dto.MenuVO" alias="menu"/>
 	<typeAlias type="com.spring.dto.AdminVO" alias="admin"/>
 	<typeAlias type="com.spring.dto.RecordVO" alias="record"/>
 </typeAliases>
-
 
 </configuration>
 

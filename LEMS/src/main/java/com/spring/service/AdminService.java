@@ -1,3 +1,4 @@
+
 package com.spring.service;
 
 import java.sql.SQLException;
@@ -8,7 +9,7 @@ import com.spring.dto.AdminVO;
 
 public interface AdminService {
 	
-	
+	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException;
 	//목록 조회
 	Map<String, Object> getAdminList(SearchListCommand command) throws SQLException;
 	

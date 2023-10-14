@@ -1,3 +1,4 @@
+
 package com.spring.dao;
 
 import java.sql.SQLException;
@@ -10,8 +11,10 @@ public interface AdminDAO {
 	List<AdminVO> selectAdminList(SearchListCommand command) throws SQLException;
 	int selectSearchAdminListCount(SearchListCommand command) throws SQLException;
 	AdminVO selectAdminByAdminNum(String adminNum) throws SQLException;
+	AdminVO selectAdminByPicture(String picture) throws SQLException;
 	void insertAdmin(AdminVO admin) throws SQLException;
 	void updateAdmin(AdminVO admin) throws SQLException;
 	void deleteAdmin(String adminNum) throws SQLException;
 	int selectAdminNumSeqNext() throws SQLException;
 }
+

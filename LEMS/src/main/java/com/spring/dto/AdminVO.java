@@ -1,3 +1,4 @@
+
 package com.spring.dto;
 
 import java.util.Date;
@@ -10,6 +11,10 @@ public class AdminVO {
 	private String name;
 	private String roll;
 	private Date regDate;
+	private String phone; // 전화번호
+	private String picture; // 사진파일 경로/파일명
+	private int enabled; // 사용여부
+	private String address;// 주소
 	public String getAdminNum() {
 		return adminNum;
 	}
@@ -53,7 +58,39 @@ public class AdminVO {
 				+ roll + ", regDate=" + regDate + "]";
 	}
 		
+		
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	
-	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
 }
+

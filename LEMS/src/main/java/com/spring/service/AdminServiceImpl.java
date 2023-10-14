@@ -1,3 +1,4 @@
+
 package com.spring.service;
 
 import java.sql.SQLException;
@@ -16,6 +17,17 @@ public class AdminServiceImpl implements AdminService{
 	public void setAdminDAO(AdminDAO dao) {
 		this.dao = dao;
 	}
+	
+	@Override
+	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException {
+		AdminVO admin = adminDAO.selectAdminById(id);
+		if (admin == null)
+			throw new NotFoundIdException();
+		if (!pwd.equals(admin.getPwd()))
+			throw new InvalidPasswordException();
+
+	}
+
 	@Override
 	public Map<String, Object> getAdminList(SearchListCommand command) throws SQLException {
 
@@ -54,3 +66,4 @@ public class AdminServiceImpl implements AdminService{
 		dao.deleteAdmin(adminNum);
 	}
 }
+

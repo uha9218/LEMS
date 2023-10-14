@@ -1,3 +1,4 @@
+
 package com.spring.dao;
 
 import java.sql.SQLException;
@@ -42,6 +43,13 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
+	public AdminVO selectAdminByPicture(String picture) throws SQLException {
+		AdminVO admin = null;
+		admin = sqlSession.selectOne("Admin-Mapper.selectAdminByPicture", picture);
+		return admin;
+	}
+
+	@Override
 	public void insertAdmin(AdminVO admin) throws SQLException {
 		session.update("Admin-Mapper.insertAdmin",admin);
 	}
@@ -63,3 +71,4 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 }
+
