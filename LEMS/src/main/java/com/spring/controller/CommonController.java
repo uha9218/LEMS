@@ -44,7 +44,7 @@ public class CommonController {
       MenuVO menu = menuService.getMenuByMcode(mCode);
       
       String id = (String)session.getAttribute("loginUser");
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = adminService.getAdminDetail(id);
       
       model.addAttribute("menuList", menuList);
       model.addAttribute("menu", menu);
@@ -59,7 +59,6 @@ public class CommonController {
       List<MenuVO> menuList = menuService.getSubMenuList(mCode);
       return menuList;
    }
-   
    @GetMapping("/common/login")
    public String login(@ModelAttribute("retUrl") String retUrl,
                        String error,
@@ -106,6 +105,7 @@ public class CommonController {
       session.invalidate();
       return url;
    }
+   
    
   }
 

@@ -45,7 +45,7 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public AdminVO selectAdminByPicture(String picture) throws SQLException {
 		AdminVO admin = null;
-		admin = sqlSession.selectOne("Admin-Mapper.selectAdminByPicture", picture);
+		admin = session.selectOne("Admin-Mapper.selectAdminByPicture", picture);
 		return admin;
 	}
 

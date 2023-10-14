@@ -427,49 +427,5 @@
   })
 </script>
 
-<script>
-//날씨 api
-
-var today = new Date();   
-
-var year = today.getFullYear(); // 년도
-var month = today.getMonth() + 1;  // 월
-var date = today.getDate();  // 날짜
-var day = today.getDay();  // 요일
-var hours = today.getHours(); // 시
-var minutes = today.getMinutes();  // 분
-var seconds = today.getSeconds();  // 초
-var milliseconds = today.getMilliseconds(); // 밀리초
-
-document.write(encodeURIComponent(year+''+ month+''+ date))
-document.write('<br>')
-document.write(hours, minutes);
-
-
-var xhr = new XMLHttpRequest();
-var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'; /*URL*/
-var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'41HzN/rkQU/HYJDT0ItPwZb5y8B88MImTBmGgxnJCGSg3PoEnqMbbFrpkhTePg0iJoOgzfNQvHeFNdii1VbthQ=='; /*Service Key*/
-queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
-queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /**/
-queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); /**/
-queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(year +''+ month +''+ date); /**/
-queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours +''+ minutes); /**/
-queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); /**/
-queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
-xhr.open('GET', url + queryParams);
-xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-    }
-};
-xhr.send('');
-
-var keys = Object.keys(json); //키를 가져옵니다. 이때, keys 는 반복가능한 객체가 됩니다.
-for (var i=0; i<keys.length; i++) {
-	var key = keys[i];
-	console.log("key : " + key + ", value : " + json[key])
-}
-</script>
-
 </body>
 </html>

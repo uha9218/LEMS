@@ -2,16 +2,28 @@
 package com.spring.controller;
 
 
-import java.time.LocalTime;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.annotation.Resource;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import com.josephoconnell.html.HTMLInputFilter;
+import com.spring.command.AdminModifyCommand;
 import com.spring.command.SearchListCommand;
 import com.spring.dto.AdminVO;
 import com.spring.service.AdminService;
@@ -76,10 +88,16 @@ public class AdminController {
       return url;
    }
    
-   @PostMapping("/modify")
-   public String modify(AdminVO admin, Model model) throws Exception{
-      String url="redirect:/admin/detail.do?adminNum="+admin.getAdminNum();  
-      String oldPicture = adminService.getAdmin(admin.getAdminNum()).getPicture();
+   @PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
+   public String modify(AdminModifyCommand modifyReq) throws Exception {
+      
+      String url = "redirect:/admin/detail.do?id="+modifyReq.getAdminNum();
+      
+      AdminVO admin = modifyReq.toAdmin();
+      admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
+      
+      // 신규 파일 변경 및 기존 파일 삭제
+      String oldPicture = service.getAdminDetail(admin.getAdminNum()).getPicture();
       
       if(modifyReq.getPicture() != null && modifyReq.getPicture().getSize() > 0) {
          String fileName = savePicture(oldPicture, modifyReq.getPicture());
@@ -87,6 +105,8 @@ public class AdminController {
       }else {
          admin.setPicture(oldPicture);
       }
+      
+      // DB 내용 수정
       service.modifyAdmin(admin);
       
       return url;
@@ -95,6 +115,8 @@ public class AdminController {
    @GetMapping("/delete")
    public String delete(String adminNum) throws Exception{
       String url="/admin/delete";
+      
+      AdminVO admin =service.getAdminDetail(adminNum);
 
       String savePath = this.picturePath;
 	   File imageFile = new File(savePath, admin.getPicture());
@@ -112,7 +134,7 @@ public class AdminController {
    public ResponseEntity<String> idCheck(String id) throws Exception {
       ResponseEntity<String> entity = null;
 
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = service.getAdminDetail(id);
 
       if (admin != null) {
          entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);
@@ -182,7 +204,7 @@ public class AdminController {
    
    @GetMapping("/getPicture")
    public ResponseEntity<byte[]> getPicture(String id) throws Exception{
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = service.getAdminDetail(id);
       
       if(admin==null) return new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
       

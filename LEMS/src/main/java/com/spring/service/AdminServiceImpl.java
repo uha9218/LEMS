@@ -2,14 +2,16 @@
 package com.spring.service;
 
 import java.sql.SQLException;
-import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.spring.command.PageMaker;
 import com.spring.command.SearchListCommand;
 import com.spring.dao.AdminDAO;
 import com.spring.dto.AdminVO;
+import com.spring.exception.InvalidPasswordException;
+import com.spring.exception.NotFoundIdException;
 
 public class AdminServiceImpl implements AdminService{
 	
@@ -20,7 +22,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException {
-		AdminVO admin = adminDAO.selectAdminById(id);
+		AdminVO admin = dao.selectAdminByAdminNum(id);
 		if (admin == null)
 			throw new NotFoundIdException();
 		if (!pwd.equals(admin.getPwd()))

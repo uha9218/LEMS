@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -30,16 +29,16 @@
 	<update id="insertAdmin" parameterType="admin">
 		insert 
 		into 
-		admin(adminNum, email, pwd, name, roll)
+		admin(adminNum, email, pwd, name, roll, phone, picture, enabled, address)
 		values
-		(#{adminNum},#{email},#{pwd},#{name},#{roll})
+		(#{adminNum},#{email},#{pwd},#{name},#{roll},#{phone},#{picture},#{enabled},#{address})
 	</update>
 	
 	<update id="updateAdmin" parameterType="admin">
 		update 
 		admin 
 		set 
-		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}  
+		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}, phone=#{phone}, picture=#{picture}, enabled=#{enabled}, address=#{address}  
 		where adminNum=#{adminNum}
 	</update>
 	
