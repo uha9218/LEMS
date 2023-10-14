@@ -5,11 +5,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
-		 p:sqlSession-ref="sqlSession" 
-	/>
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="lightDAO" class="com.spring.dao.LightDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="highwayDAO" class="com.spring.dao.HighwayDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="predictDAO" class="com.spring.dao.PredictDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="TrafficDAO" class="com.spring.dao.TrafficDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+	<bean id="SunlightDAO" class="com.spring.dao.SunlightDAOImpl"
+		 p:sqlSession-ref="sqlSession" />
+		 	 
 	
 	<bean id="menuService" class="com.spring.service.MenuServiceImpl"
 	     p:menuDAO-ref="menuDAO"/>
 	<bean id="CCTVService" class="com.spring.service.CCTVServiceImpl"/>
-	
+	<bean id="lightService" class="com.spring.service.LightServiceImpl"
+		 p:lightDAO-ref="lightDAO"/>
+	<bean id="highwayService" class="com.spring.service.HighwayServiceImpl"
+		 p:highwayDAO-ref="highwayDAO"/>
+	<bean id="predictService" class="com.spring.service.PredictServiceImpl"
+		 p:predictDAO-ref="predictDAO"/>
+	<bean id="TrafficService" class="com.spring.service.TrafficServiceImpl"
+		 p:trafficDAO-ref="TrafficDAO"/>
+	<bean id="SunlightService" class="com.spring.service.SunlightServiceImpl"
+		 p:sunlightDAO-ref="SunlightDAO"/>
 </beans>

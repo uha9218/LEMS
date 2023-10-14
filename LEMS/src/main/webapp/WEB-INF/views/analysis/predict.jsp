@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="command" value="${pageMaker.command }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,25 +40,27 @@
                <div id="keyword" class="card-tools" style="width: 600px;">
                   <div class="input-group row">
                      <!-- search bar -->
+                     <!-- <select class="form-control col-md-3" name="perPageNum" id="perPageNum"
+				  		onchange="searchList_go(1);">
+				  		<option value="10" >정렬</option>
+					 </select> -->
                      <!-- sort num -->
-                     <select class="form-control col-md-3" name="perPageNum"
-                        id="perPageNum" onchange="">
-                        <option value="10">구간코드</option>
-                        <option value="all">전체</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="J">J</option>
-                        <option value="K">K</option>
-                        <option value="L">L</option>
-                        <option value="M">M</option>
-                        <option value="N">N</option>
+                     <select class="form-control col-md-3" name="searchType" id="searchType" >
+                        <option>전체</option>
+                        <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
+                        <option value="B" ${command.searchType eq 'B' ? 'selected':'' }>B</option>
+                        <option value="C" ${command.searchType eq 'C' ? 'selected':'' }>C</option>
+                        <option value="D" ${command.searchType eq 'D' ? 'selected':'' }>D</option>
+                        <option value="E" ${command.searchType eq 'E' ? 'selected':'' }>E</option>
+                        <option value="F" ${command.searchType eq 'F' ? 'selected':'' }>F</option>
+                        <option value="G" ${command.searchType eq 'G' ? 'selected':'' }>G</option>
+                        <option value="H" ${command.searchType eq 'H' ? 'selected':'' }>H</option>
+                        <option value="I" ${command.searchType eq 'I' ? 'selected':'' }>I</option>
+                        <option value="J" ${command.searchType eq 'J' ? 'selected':'' }>J</option>
+                        <option value="K" ${command.searchType eq 'K' ? 'selected':'' }>K</option>
+                        <option value="L" ${command.searchType eq 'L' ? 'selected':'' }>L</option>
+                        <option value="M" ${command.searchType eq 'M' ? 'selected':'' }>M</option>
+                        <option value="N" ${command.searchType eq 'N' ? 'selected':'' }>N</option>
                      </select>
                      <!-- Date range as a button -->
                      <div class="input-group-prepend">
@@ -65,11 +69,10 @@
                         </span>
                      </div>
                      <input type="text" class="form-control float-right"
-                        style="width: 100px" id="reservation">&nbsp;&nbsp;&nbsp;&nbsp;
+                        style="width: 100px" id="reservation"/>&nbsp;&nbsp;&nbsp;&nbsp;
                      <!-- keyword -->
-
                      <button class="btn btn-primary" type="button" id="searchBtn"
-                        data-card-widget="search" onclick="">조회</button>
+                        data-card-widget="search" onclick="searchList_go(1);">조회</button>
                      <!-- end : search bar -->
                   </div>
                </div>
@@ -96,83 +99,42 @@
                </div>
             </section>
             <section class="col-lg-5">
-            <div class="card" style="height:95%;">
-               <table id="example1" style="height:100%;"
-                  class="table table-bordered table-hover dataTable dtr-inline">
+            <div class="card-body" style="height:95%;">
+               <table class="table table-bordered table-striped" id="predictList" style="height:90%; text-align:center;">
                   <thead>
-                     <tr>
-                        <th>No.</th>
-                        <th>연도</th>
-                        <th>월</th>
-                        <th>전력소비량(kW)</th>
+                     <tr style='font-size:1em;'>
+                        <th style="width:15%;">No.</th>
+                        <th style="width:20%;">구간</th>
+                        <th style="width:35%;">날짜</th>
+                        <th>예측전력소비량(kW)</th>
                      </tr>
                   </thead>
-                  <tbody>
-                     <tr class="odd">
-                        <td class="dtr-control sorting_1" tabindex="0">1</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                     </tr>
-                     <tr class="even">
-                        <td class="dtr-control sorting_1" tabindex="0">2</td>
-                        <td>Firefox 1.5</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                     </tr>
-                     <tr class="odd">
-                        <td class="dtr-control sorting_1" tabindex="0">3</td>
-                        <td>Firefox 2.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                     </tr>
-                     <tr class="even">
-                        <td class="dtr-control sorting_1" tabindex="0">4</td>
-                        <td>Firefox 3.0</td>
-                        <td>Win 2k+ / OSX.3+</td>
-                        <td>1.9</td>
-                     </tr>
-                     <tr class="odd">
-                        <td class="sorting_1 dtr-control">5</td>
-                        <td>Camino 1.0</td>
-                        <td>OSX.2+</td>
-                        <td>1.8</td>
-                     </tr>
-                     <tr class="even">
-                        <td class="sorting_1 dtr-control">6</td>
-                        <td>Camino 1.5</td>
-                        <td>OSX.3+</td>
-                        <td>1.8</td>
-                     </tr>
-                     <tr class="odd">
-                        <td class="sorting_1 dtr-control">7</td>
-                        <td>Netscape 7.2</td>
-                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                        <td>1.7</td>
-                     </tr>
-                     <tr class="even">
-                        <td class="sorting_1 dtr-control">8</td>
-                        <td>Netscape Browser 8</td>
-                        <td>Win 98SE+</td>
-                        <td>1.7</td>
-                     </tr>
-                     <tr class="odd">
-                        <td class="sorting_1 dtr-control">9</td>
-                        <td>Netscape Navigator 9</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                     </tr>
-                     <tr class="even">
-                        <td class="sorting_1 dtr-control">10</td>
-                        <td>Mozilla 1.0</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1</td>
-                     </tr>
-                  </tbody>
+                  <c:if test="${empty predictList }" >
+					<tr>
+						<td colspan="4">
+							<strong>해당 내용이 없습니다.</strong>
+						</td>
+					</tr>
+				  </c:if>	
+				 <tbody>		  
+                  <c:forEach items="${predictList }" var="predict">
+                  	<tr style='font-size:1em;'>
+                  		<td>${predict.predNum }</td>
+                  		<td>${predict.hwCode }</td>
+                  		<td>
+							<fmt:formatDate value="${predict.predDate }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>${predict.predUse }</td>
+                  	</tr>
+                  </c:forEach>
+                 </tbody>	
                </table>
                </div>
             </section>
          </div>
+	         <div class="card-footer">
+				<%@ include file="/WEB-INF/views/analysis/pagination.jsp" %>				
+			</div>
       </div>
    </section>
    <%@ include file="/WEB-INF/views/module/footer_js.jsp"%>
