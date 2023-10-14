@@ -4,10 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-
-import com.spring.command.SearchListCommand;
 import com.spring.dto.RecordVO;
 
 public class RecordDAOImpl implements RecordDAO{
