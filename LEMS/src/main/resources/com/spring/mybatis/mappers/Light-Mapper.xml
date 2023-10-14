@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Light-Mapper">
+	<sql id="search">
+		<if test="searchType == 'l'.toString()">
+			and lnum like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+    <select id="selectSearchLightList" resultType="light">
+    	select *
+    	from light
+    	where lnum is not null
+    	<include refid="search" />
+    </select>
+    
+	<select id="selectSearchLightListCount" resultType="int">
+    	select count(*)
+    	from light
+    	where lnum is not null
+    	<include refid="search" />
+    </select>
+
+    <select id="selectLightByLnum" resultType="light">
+    	select *
+    	from light
+    	where lnum=#{lnum}
+    </select>
+    
+    <select id="selectLightByLstate" resultType="light">
+    	select *
+    	from light
+    	where lstate=#{lstate}
+    </select>
+    
+</mapper>

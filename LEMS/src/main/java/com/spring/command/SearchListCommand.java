@@ -1,4 +1,5 @@
 
+
 package com.spring.command;
 
 public class SearchListCommand {
@@ -44,4 +45,3 @@ public class SearchListCommand {
 	   
 	   
 	}
-

@@ -58,6 +58,7 @@
 					</table>
 				</div>
 				<div class="card-footer">
+
 					<%@ include file="/WEB-INF/views/admin/pagination.jsp"%>
 				</div>
 			</div>

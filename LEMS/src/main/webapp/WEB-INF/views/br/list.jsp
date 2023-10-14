@@ -141,7 +141,7 @@
 					</div>
 				</table>
 				<div class="card-footer">
-					<%@ include file="/WEB-INF/views/module/pagination.jsp"%>
+					<%@ include file="/WEB-INF/views/br/pagination.jsp"%>
 				</div>
 			</div>
 		</div>
