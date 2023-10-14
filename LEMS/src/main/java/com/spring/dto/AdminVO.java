@@ -1,50 +1,96 @@
+
 package com.spring.dto;
 
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class AdminVO {
-	private String adminId;
-	private	String adminEmail;
-	private String adminPwd;
-	private String adminName;
-	private String adminAuthority;
-	private Date adminRegDate;
-	public String getAdminId() {
-		return adminId;
+	private String adminNum;
+	private	String email;
+	private String pwd;
+	private String name;
+	private String roll;
+	private Date regDate;
+	private String phone; // 전화번호
+	private String picture; // 사진파일 경로/파일명
+	private int enabled; // 사용여부
+	private String address;// 주소
+	public String getAdminNum() {
+		return adminNum;
 	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setAdminNum(String adminNum) {
+		this.adminNum = adminNum;
 	}
-	public String getAdminEmail() {
-		return adminEmail;
+	public String getEmail() {
+		return email;
 	}
-	public void setAdminEmail(String adminEmail) {
-		this.adminEmail = adminEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getAdminPwd() {
-		return adminPwd;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setAdminPwd(String adminPwd) {
-		this.adminPwd = adminPwd;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	public String getAdminName() {
-		return adminName;
+	public String getName() {
+		return name;
 	}
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getAdminAuthority() {
-		return adminAuthority;
+	public String getRoll() {
+		return roll;
 	}
-	public void setAdminAuthority(String adminAuthority) {
-		this.adminAuthority = adminAuthority;
+	public void setRoll(String roll) {
+		this.roll = roll;
 	}
-	public Date getAdminRegDate() {
-		return adminRegDate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setAdminRegDate(Date adminRegDate) {
-		this.adminRegDate = adminRegDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
+	@Override
+	public String toString() {
+		return "AdminVO [adminNum=" + adminNum + ", email=" + email + ", pwd=" + pwd + ", name=" + name + ", roll="
+				+ roll + ", regDate=" + regDate + "]";
+	}
+		
+		
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	
-	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
 }
+

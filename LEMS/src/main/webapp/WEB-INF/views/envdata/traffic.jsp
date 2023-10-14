@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="command" value="${pageMaker.command }" />
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +25,8 @@
 <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
 	<div class="card-header">
 		<h3 class="card-title">교통데이터 조회</h3>
-		</div>
-			<section class="content">
+	</div>
+		<section class="content">
 			<div class="card">
    				<div class="card-header with-border">
    					<div id="keyword" class="card-tools" style="width: 600px;">
@@ -35,25 +38,23 @@
 								<option value="<%=request.getContextPath() %>/envdata/trafficDetail.do">그래프</option>
 							</select>
 							<!-- sort num -->
-							<select class="form-control col-md-3" name="perPageNum"
-		                     id="perPageNum" onchange="">
-		                     <option value="10">구간코드</option>
-		                     <option value="all">전체</option>
-		                     <option value="A">A</option>
-		                     <option value="B">B</option>
-		                     <option value="C">C</option>
-		                     <option value="C">D</option>
-		                     <option value="C">E</option>
-		                     <option value="C">F</option>
-		                     <option value="C">G</option>
-		                     <option value="C">H</option>
-		                     <option value="C">I</option>
-		                     <option value="C">J</option>
-		                     <option value="C">K</option>
-		                     <option value="C">L</option>
-		                     <option value="C">M</option>
-		                     <option value="C">N</option>
-		                    </select>
+							 <select class="form-control col-md-3" name="searchType" id="searchType" >
+		                        <option>전체</option>
+		                        <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
+		                        <option value="B" ${command.searchType eq 'B' ? 'selected':'' }>B</option>
+		                        <option value="C" ${command.searchType eq 'C' ? 'selected':'' }>C</option>
+		                        <option value="D" ${command.searchType eq 'D' ? 'selected':'' }>D</option>
+		                        <option value="E" ${command.searchType eq 'E' ? 'selected':'' }>E</option>
+		                        <option value="F" ${command.searchType eq 'F' ? 'selected':'' }>F</option>
+		                        <option value="G" ${command.searchType eq 'G' ? 'selected':'' }>G</option>
+		                        <option value="H" ${command.searchType eq 'H' ? 'selected':'' }>H</option>
+		                        <option value="I" ${command.searchType eq 'I' ? 'selected':'' }>I</option>
+		                        <option value="J" ${command.searchType eq 'J' ? 'selected':'' }>J</option>
+		                        <option value="K" ${command.searchType eq 'K' ? 'selected':'' }>K</option>
+		                        <option value="L" ${command.searchType eq 'L' ? 'selected':'' }>L</option>
+		                        <option value="M" ${command.searchType eq 'M' ? 'selected':'' }>M</option>
+		                        <option value="N" ${command.searchType eq 'N' ? 'selected':'' }>N</option>
+		                     </select>
 							<!-- Date range as a button -->
 							<div class="input-group-prepend">
 								<span class="input-group-text"> <i
@@ -65,129 +66,92 @@
 							<!-- keyword -->
 							
 								<button class="btn btn-primary" type="button" id="searchBtn"
-									data-card-widget="search" onclick="">조회</button>
+									data-card-widget="search" onclick="searchList_go(1);">조회</button>
 							<!-- end : search bar -->
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-	<div class="card-body">
-		<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4"></div>
-			<div class="dt-buttons btn-group flex-wrap">
-						<button class="btn btn-secondary buttons-excel buttons-html5"
-							tabindex="0" aria-controls="example1" type="button">
-							<span>Excel</span>
-						</button>
-						<button class="btn btn-secondary buttons-pdf buttons-html5"
-							tabindex="0" aria-controls="example1" type="button">
-							<span>CSV</span>
-						</button>
+		
+		<div class="card-body">
+				<div class="row">
+					<div class="col-sm-12" style="text-align:center;">
+						<table class="table table-bordered table-striped" id="trafficList">
+							<thead>
+								<tr style="font-size:0.95em;">
+									<th style="width:20%;">No.</th>
+									<th style="width:20%;">날짜</th>
+									<th style="width:15%;">구간코드</th>
+									<th style="width:20%;">교통량</th>
+									<th>평균속도</th>
+								</tr>
+							</thead>
+							<c:if test="${empty trafficList }">
+								<tr>
+									<td colspan="5">
+										<strong>해당 내용이 없습니다.</strong>
+									</td>
+								</tr>
+							</c:if>
+							<tbody>
+								<c:forEach items="${trafficList }" var="traffic">
+									<tr style='font-size:1em;'>	
+										<td>${traffic.traffNum }</td>
+										<td>
+											<fmt:parseDate value="${traffic.traffDate }" var="traffDate" pattern="yyyyMMddHHmmss" />
+											<fmt:formatDate value="${traffDate }" pattern="yyyy-MM-dd-HH:mm:ss"/>
+										</td>
+										<td>${traffic.hwCode }</td>
+										<td>${traffic.traff }</td>
+										<td>${traffic.speedAvg }</td>
+									<tr>	
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
-			<div class="row">
-				<div class="col-sm-12" style="text-align:center;">
-					<table id="example1"
-						class="table table-bordered table-striped dataTable dtr-inline"
-						aria-describedby="example1_info">
-						<thead>
-							<tr>
-								<th>No.</th>
-								<th>날짜</th>
-								<th>구간코드</th>
-								<th>교통량</th>
-								<th>평균속도</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-
-							<tr>
-								<td>1</td>
-								<td>2023-08</td>
-								<td>A</td>
-								<td>1336</td>
-								<td>95</td>
-							</tr>
-							
-						</tbody>
-					</table>
 				</div>
+			<div class="card-footer">
+				<%@ include file="/WEB-INF/views/envdata/pagination1.jsp" %>				
 			</div>
-		<div class="card-footer">
-			<%@ include file="/WEB-INF/views/module/pagination.jsp" %>				
 		</div>
-	</div>
+	</section>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
+
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jszip/jszip.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <script>
 //Date range picker
-    $('#reservation').daterangepicker()
+  $('#reservation').daterangepicker()
+ 
+//Download    
+  $("#trafficList").DataTable({
+	"paging": false,
+    "searching": false,
+    "info": false,
+    "ordering": true,
+    "responsive": true, 
+    "lengthChange": false, 
+    "autoWidth": false,
+    "buttons": ["copy", 
+    	{
+			extend: 'csv',
+       		charset: 'utf-8',
+       		bom: true
+		},
+    	
+    	"excel", "pdf", "print"]
+  }).buttons().container().appendTo('#trafficList_wrapper .col-md-6:eq(0)');
 </script>
 </body>
 </html>
