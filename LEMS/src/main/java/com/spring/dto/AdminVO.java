@@ -3,48 +3,105 @@ package com.spring.dto;
 import java.util.Date;
 
 public class AdminVO {
-	private String adminId;
-	private	String adminEmail;
-	private String adminPwd;
-	private String adminName;
-	private String adminAuthority;
-	private Date adminRegDate;
-	public String getAdminId() {
-		return adminId;
+
+	private String adminNum; // 아이디
+	private String pwd; // 패스워드
+	private String name = "---"; // 이름
+	private String phone; // 전화번호
+	private String email; // 이메일
+	private String picture; // 사진파일 경로/파일명
+	private Date regDate; // 등록일
+	private String roll; // 권한
+	private int enabled; // 사용여부
+	private String register;// 등록자
+	private String address;// 주소
+
+	public String getAdminNum() {
+		return adminNum;
 	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+
+	public void setAdminNum(String adminNum) {
+		this.adminNum = adminNum;
 	}
-	public String getAdminEmail() {
-		return adminEmail;
+
+	public String getPwd() {
+		return pwd;
 	}
-	public void setAdminEmail(String adminEmail) {
-		this.adminEmail = adminEmail;
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
-	public String getAdminPwd() {
-		return adminPwd;
+
+	public String getName() {
+		return name;
 	}
-	public void setAdminPwd(String adminPwd) {
-		this.adminPwd = adminPwd;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getAdminName() {
-		return adminName;
+
+	public String getPhone() {
+		return phone;
 	}
-	public void setAdminName(String adminName) {
-		this.adminName = adminName;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getAdminAuthority() {
-		return adminAuthority;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setAdminAuthority(String adminAuthority) {
-		this.adminAuthority = adminAuthority;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public Date getAdminRegDate() {
-		return adminRegDate;
+
+	public String getPicture() {
+		return picture;
 	}
-	public void setAdminRegDate(Date adminRegDate) {
-		this.adminRegDate = adminRegDate;
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
-	
-	
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public String getRoll() {
+		return roll;
+	}
+
+	public void setRoll(String roll) {
+		this.roll = roll;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRegister() {
+		return register;
+	}
+
+	public void setRegister(String register) {
+		this.register = register;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 }

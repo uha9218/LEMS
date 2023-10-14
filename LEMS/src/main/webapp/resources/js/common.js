@@ -15,7 +15,7 @@ function CloseWindow(){
 }
 
 
-//redirect loginForm
+//redirect login
 function AjaxErrorSecurityRedirectHandler(status) {
    if (status == "302") {
       alert("세션이 만료되었습니다.\n로그인 하세요.");
@@ -102,11 +102,11 @@ function sendFile(file, el) {
    });
 }
   //사용자 사진 출력
-  function MemberPictureThumb(contextPath){
+  function PictureThumb(contextPath){
    for(let target of document.querySelectorAll('.manPicture')){
          let id= target.getAttribute('data-id');
          
-         target.style.backgroundImage="url('"+contextPath+"/member/getPicture.do?id="+id+"')";
+         target.style.backgroundImage="url('"+contextPath+"/admin/getPicture.do?id="+id+"')";
          target.style.backgroundRepeat="no-repeat";
          target.style.backgroundSize="cover";
    }  
