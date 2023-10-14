@@ -23,12 +23,10 @@
 		 p:sqlSession-ref="sqlSession" />
 	<bean id="SunlightDAO" class="com.spring.dao.SunlightDAOImpl"
 		 p:sqlSession-ref="sqlSession" />
-	<bean id="menuDAO" class="com.spring.dao.MenuDAOImpl"
-		 p:sqlSession-ref="sqlSession" />
 	<bean id="adminDAO" class="com.spring.dao.AdminDAOImpl"
-		 p:sqlSession-ref="sqlSession" 
-	/>	 
-		 
+		 p:sqlSession-ref="sqlSession" />	 
+	<bean id="brDAO" class="com.spring.dao.BrDAOImpl"
+	    p:sqlSession-ref="sqlSession"/>
 		 
 	<!-- Service -->
 	<bean id="adminService" class="com.spring.service.AdminServiceImpl"
@@ -47,4 +45,6 @@
 		 p:trafficDAO-ref="TrafficDAO"/>
 	<bean id="SunlightService" class="com.spring.service.SunlightServiceImpl"
 		 p:sunlightDAO-ref="SunlightDAO"/>
+	<bean id="brService" class="com.spring.service.BrServiceImpl"
+		p:brDAO-ref="brDAO"/>
 </beans>

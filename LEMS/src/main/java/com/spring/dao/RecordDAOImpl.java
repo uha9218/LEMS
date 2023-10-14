@@ -18,28 +18,27 @@ public class RecordDAOImpl implements RecordDAO{
 	}
 	@Override
 	public List<RecordVO> selectRecordList() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RecordVO> record = session.selectList("Record-Mapper.selectRecordList");
+		return record;
 	}
 	@Override
 	public List<RecordVO> selectRecentRecordList() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RecordVO> record = session.selectList("Record-Mapper.selectRecentRecordList");
+		return record;
 	}
 	@Override
 	public List<RecordVO> selectRecordListByHwcode(String HwCode) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RecordVO> record = session.selectList("Record-Mapper.selectRecordListByHwcode", HwCode);
+		return record;
 	}
 	@Override
 	public List<RecordVO> selectRecordListByRecDate(Date RecDate) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<RecordVO> record = session.selectList("Record-Mapper.selectRecordListByRecDate",RecDate);
+		return record;
 	}
 	@Override
 	public void insertRecordList(RecordVO record) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		session.update("Record-Mapper.insertRecordList",record);
 	}
 	
 

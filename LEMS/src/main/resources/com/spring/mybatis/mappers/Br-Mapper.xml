@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Br-Mapper">
+
+	<select id="selectSearchBrList"	resultType="br">
+		select
+		*
+		from
+		br
+		where brNum is not null  			  	
+	</select>
+	
+	<select id="selectSearchBrListCount" resultType="int">
+		select
+		count(*)
+		from
+		br
+		where brNum is not null  			  	
+	</select>
+	
+	<select id="selectBrByBrNum"  resultType="br">
+		select * 
+		from br 
+		where brNum=#{brNum}
+	</select>
+	
+	<update id="insertBr" parameterType="br">
+		insert 
+		into 
+		br(brnum,brcontent,brDate,brState)
+		values
+		(#{brNum},#{brContent},#{brDate},#{brState})
+	</update>
+	
+	<update id="updateBr" parameterType="br">
+		update 
+		br 
+		set 
+		brnum=#{brNum}, brcontent=#{brContent}, brDate=#{brDate}, brState=#{brState}
+		where brnum=#{brNum}
+	</update>
+	
+	<update id="deleteBr" parameterType="int">
+		delete 
+		from br 
+		where brnum=#{brNum}
+	</update>
+
+	<select id="selectBrSeqNext" resultType="int">
+		select br_seq.nextval as brNum from dual
+	</select>
+	
+</mapper>
