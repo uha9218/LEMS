@@ -49,7 +49,7 @@
 	function searchList_go(page,url){
 		//alert("click search btn");
 		if(!url) url="sun.do";
-		
+	
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
 		/* jobForm.perPageNum.value 
@@ -59,6 +59,7 @@
 		/* jobForm.keyword.value 
 			= document.querySelector("input[name='keyword']").value; */
 		
+
 		jobForm.action=url;
 		jobForm.submit();
 	}
