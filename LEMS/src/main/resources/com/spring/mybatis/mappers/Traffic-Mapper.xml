@@ -61,6 +61,10 @@
 		</if>
 	</sql>
 	
+	<sql id="date">
+		and TO_CHAR(traffdate, 'YYYYMMDD') between #{fromDate} and #{toDate}
+	</sql>
+	
     <select id="selectsearchTrafficList" resultType="traffic">
     	select *
     	from traffic

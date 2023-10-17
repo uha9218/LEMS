@@ -3,11 +3,13 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
   
-<form id="jobForm">	
+<form id="jobForm">
 	<input type='hidden' name="page" value="" />
 	<!-- <input type='hidden' name="perPageNum" value=""/> -->
 	<input type='hidden' name="searchType" value="" />
 	<!-- <input type='hidden' name="keyword" value="" /> -->
+	<input type='hidden' name="fromDate" value="" />
+	<input type='hidden' name="toDate" value="" />
 </form>
 
 
@@ -52,12 +54,14 @@
 		
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
-		/* jobForm.perPageNum.value 
-			= document.querySelector("select[name='perPageNum']").value; */
+	/* jobForm.perPageNum.value 
+		= document.querySelector("select[name='perPageNum']").value; */
 		jobForm.searchType.value 
 			= document.querySelector("select[name='searchType']").value;
-		/* jobForm.keyword.value 
+	/* jobForm.keyword.value 
 			= document.querySelector("input[name='keyword']").value; */
+		jobForm.fromDate.value = $('#datepicker').val();
+		jobForm.toDate.value = $('#datepicker2').val();
 		
 		jobForm.action=url;
 		jobForm.submit();
