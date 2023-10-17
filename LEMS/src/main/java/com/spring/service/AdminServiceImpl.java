@@ -1,3 +1,4 @@
+
 package com.spring.service;
 
 import java.sql.SQLException;
@@ -12,17 +13,16 @@ import com.spring.dto.AdminVO;
 import com.spring.exception.InvalidPasswordException;
 import com.spring.exception.NotFoundIdException;
 
-public class AdminServiceImpl implements AdminService {
-
-	private AdminDAO adminDAO;
-
-	public void setAdminDAO(AdminDAO adminDAO) {
-		this.adminDAO = adminDAO;
+public class AdminServiceImpl implements AdminService{
+	
+	private AdminDAO dao;
+	public void setAdminDAO(AdminDAO dao) {
+		this.dao = dao;
 	}
-
+	
 	@Override
 	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException {
-		AdminVO admin = adminDAO.selectAdminById(id);
+		AdminVO admin = dao.selectAdminByAdminNum(id);
 		if (admin == null)
 			throw new NotFoundIdException();
 		if (!pwd.equals(admin.getPwd()))
@@ -31,47 +31,41 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Map<String, Object> getAdminList(SearchListCommand command) throws Exception {
-		Map<String, Object> dataMap = new HashMap<String, Object>();
+	public Map<String, Object> getAdminList(SearchListCommand command) throws SQLException {
 
-		List<AdminVO> adminList = adminDAO.selectSearchAdminList(command);
-		dataMap.put("adminList", adminList);
-
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		
+		List<AdminVO> adminList = dao.selectAdminList(command);
+		
+		int adminCount = dao.selectSearchAdminListCount(command);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCommand(command);
-		pageMaker.setTotalCount(adminDAO.selectSearchAdminListCount(command));
+		pageMaker.setTotalCount(adminCount);
+		
 		dataMap.put("pageMaker", pageMaker);
-
+		dataMap.put("adminList", adminList);
+		
 		return dataMap;
 	}
-
 	@Override
-	public AdminVO getAdmin(String id) throws Exception {
-
-		AdminVO admin = adminDAO.selectAdminById(id);
+	public AdminVO getAdminDetail(String AdminNum) throws SQLException {
+		
+		AdminVO admin = dao.selectAdminByAdminNum(AdminNum);
 		return admin;
-
 	}
-
 	@Override
-	public void regist(AdminVO admin) throws Exception {
-
-		adminDAO.insertAdmin(admin);
-
+	public void registAdmin(AdminVO admin) throws SQLException {
+		String adminNum = dao.selectAdminNumSeqNext()+"";
+		admin.setAdminNum(adminNum);
+		dao.insertAdmin(admin);
 	}
-
 	@Override
-	public void modify(AdminVO admin) throws Exception {
-
-		adminDAO.updateAdmin(admin);
-
+	public void modifyAdmin(AdminVO admin) throws SQLException {
+		dao.updateAdmin(admin);
 	}
-
 	@Override
-	public void remove(String id) throws Exception {
-
-		adminDAO.deleteAdmin(id);
-
+	public void deleteAdmin(String adminNum) throws SQLException {
+		dao.deleteAdmin(adminNum);
 	}
-
 }
+

@@ -1,16 +1,15 @@
+
 package com.spring.dto;
 
 import java.util.Date;
 
 public class RecordVO {
-
-	private String recNum;		//설정기록번호
-	private Date recDate; 		//설정날짜
-	private int lightState;		//점등여부
-	private String reason;		//설정구분
-	private Date timeSet;		//점등시간대
-	private String hwCode;		//구간코드
-	
+	private String recNum;
+	private Date recDate;
+	private int lightState;
+	private String reason;
+	private Date timeSet;
+	private String hwCode;
 	public String getRecNum() {
 		return recNum;
 	}
@@ -50,3 +49,4 @@ public class RecordVO {
 	
 	
 }
+

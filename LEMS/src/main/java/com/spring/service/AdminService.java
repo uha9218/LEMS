@@ -1,3 +1,4 @@
+
 package com.spring.service;
 
 import java.sql.SQLException;
@@ -9,21 +10,20 @@ import com.spring.exception.InvalidPasswordException;
 import com.spring.exception.NotFoundIdException;
 
 public interface AdminService {
-
+	
 	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException;
-
-	// 회원리스트
-	public Map<String, Object> getAdminList(SearchListCommand command) throws Exception;
-
-	// 회원상세
-	public AdminVO getAdmin(String id) throws Exception;
-
-	// 회원등록
-	public void regist(AdminVO admin) throws Exception;
-
-	// 회원수정
-	public void modify(AdminVO admin) throws Exception;
-
-	// 회원탈퇴
-	public void remove(String id) throws Exception;
+	//목록 조회
+	Map<String, Object> getAdminList(SearchListCommand command) throws SQLException;
+	
+	//상세 보기
+	AdminVO getAdminDetail(String AdminNum) throws SQLException;
+	
+	//등록
+	void registAdmin(AdminVO admin) throws SQLException;
+	
+	//수정
+	void modifyAdmin(AdminVO admin) throws SQLException;
+	
+	//삭제
+	void deleteAdmin(String AdminNum) throws SQLException;
 }

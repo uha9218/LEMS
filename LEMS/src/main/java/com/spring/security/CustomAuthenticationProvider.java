@@ -28,7 +28,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		try {
 			adminService.login(login_id, login_pwd);
 			
-			AdminVO admin = adminService.getAdmin(login_id);
+			AdminVO admin = adminService.getAdminDetail(login_id);
 			
 			UserDetails authUser = new User(admin);
 			boolean invalidCheck = authUser.isAccountNonExpired()

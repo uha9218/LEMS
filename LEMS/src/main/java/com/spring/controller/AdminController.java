@@ -1,4 +1,6 @@
+
 package com.spring.controller;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +11,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.josephoconnell.html.HTMLInputFilter;
 import com.spring.command.AdminModifyCommand;
 import com.spring.command.SearchListCommand;
@@ -29,61 +31,53 @@ import com.spring.service.AdminService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-   @Resource(name = "adminService")
-   private AdminService adminService;
-   
-   @GetMapping("/main")
-   public String main() {
-	   String url="/admin/list";         
+	
+	@Autowired
+	private AdminService service;
+	
+	@GetMapping("/main")
+    public String list(SearchListCommand command, Model model) throws Exception{
+       String url="/admin/list";
+       
+       Map<String,Object> dataMap = service.getAdminList(command);
+       model.addAllAttributes(dataMap);
+       
        return url;
-   }
+    }
 
-   @GetMapping("/list")
-   public void list(SearchListCommand command, Model model) throws Exception {
-      Map<String, Object> dataMap = adminService.getAdminList(command);
-      model.addAllAttributes(dataMap);
-   }
-   
-
+	@GetMapping("/detail")
+	public String detail(String adminNum, Model model) throws Exception{
+		String url = "/admin/detail";
+		
+		AdminVO admin = service.getAdminDetail(adminNum);
+		model.addAttribute("admin",admin);
+		
+		return url;
+	}
+	
    @GetMapping("/registForm")
-   public String registForm() {
-      String url = "/admin/regist";
+   public String registForm() throws Exception{
+      String url="/admin/regist";
       return url;
    }
    
    @PostMapping("/regist")
-   public String regist(AdminVO admin, @RequestParam("phone")String phones[])throws Exception{
-      String url = "/admin/regist_success";
-      
-      admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
-      admin.setPhone("");
-      for(String phone : phones) {
-         admin.setPhone(admin.getPhone()+phone);
+   public String regist(AdminVO admin) throws Exception{
+	   String url="/admin/registSuccess";
+     
+      if(admin.getPicture().split("\\$\\$").length > 1) {
+         admin.setPicture(admin.getPicture().split("\\$\\$")[1]);
       }
       
-      adminService.regist(admin);
-      
-      return url;
-   }
-   
-   @GetMapping("/detail")
-   public String detail(String id, Model model) throws Exception {
-      
-      String url = "/admin/detail";
-      
-      AdminVO admin = adminService.getAdmin(id);
-      model.addAttribute("admin",admin);
-      
-      return url;
+	   service.registAdmin(admin);
+	   return url;
    }
    
    @GetMapping("/modifyForm")
-   public String modify(String id, Model model)throws Exception {
+   public String modifyForm(String adminNum, Model model) throws Exception{
+      String url="/admin/modify";
       
-      String url = "/admin/modify";
-      
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = service.getAdminDetail(adminNum);
       
       if(admin.getPicture().split("\\$\\$").length > 1) {
          admin.setPicture(admin.getPicture().split("\\$\\$")[1]);
@@ -103,7 +97,7 @@ public class AdminController {
       admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
       
       // 신규 파일 변경 및 기존 파일 삭제
-      String oldPicture = adminService.getAdmin(admin.getAdminNum()).getPicture();
+      String oldPicture = service.getAdminDetail(admin.getAdminNum()).getPicture();
       
       if(modifyReq.getPicture() != null && modifyReq.getPicture().getSize() > 0) {
          String fileName = savePicture(oldPicture, modifyReq.getPicture());
@@ -113,34 +107,34 @@ public class AdminController {
       }
       
       // DB 내용 수정
-      adminService.modify(admin);
+      service.modifyAdmin(admin);
       
       return url;
    }
-   @GetMapping(value ="/remove")
-   public String remove(String id)throws Exception{
-	   String url="/admin/remove_success";
-	   
-	   //이미지 파일을 삭제
-	   AdminVO admin = adminService.getAdmin(id);
-	   String savePath = this.picturePath;
+   
+   @GetMapping("/delete")
+   public String delete(String adminNum) throws Exception{
+      String url="/admin/delete";
+      
+      AdminVO admin =service.getAdminDetail(adminNum);
+
+      String savePath = this.picturePath;
 	   File imageFile = new File(savePath, admin.getPicture());
 	   if(imageFile.exists()) {
 		   imageFile.delete();
 	   }
-	   //db삭제
-	   adminService.remove(id);
-	   
-	   return url;
+
+      service.deleteAdmin(adminNum);
+
+      return url;
    }
-   
    
    @GetMapping("/idCheck")
    @ResponseBody
    public ResponseEntity<String> idCheck(String id) throws Exception {
       ResponseEntity<String> entity = null;
 
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = service.getAdminDetail(id);
 
       if (admin != null) {
          entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);
@@ -210,7 +204,7 @@ public class AdminController {
    
    @GetMapping("/getPicture")
    public ResponseEntity<byte[]> getPicture(String id) throws Exception{
-      AdminVO admin = adminService.getAdmin(id);
+      AdminVO admin = service.getAdminDetail(id);
       
       if(admin==null) return new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
       
@@ -230,7 +224,3 @@ public class AdminController {
       return entity;
    }
 }
-
-
-
-

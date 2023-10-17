@@ -3,62 +3,53 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Admin-Mapper">
-	<sql id="search">
-		<if test="searchType == 'i'.toString() ">
-			and adminNum like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'n'.toString() ">
-			and name like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'p'.toString() ">
-			and phone like '%'||#{keyword}||'%'
-		</if>
-		<if test="searchType == 'e'.toString() ">
-			and email like '%'||#{keyword}||'%'
-		</if>
-	</sql>
-	<select id="selectSearchAdminList" resultType="admin">
+	
+	<select id="selectAdminList" resultType="admin">
 		select
 		*
-		from admin
-		where adminNum is not null
-		<include refid="search" />
-		order by regDate desc
+		from
+		admin
+		where adminNum is not null  			  	
 	</select>
+	
 	<select id="selectSearchAdminListCount" resultType="int">
-		select count(*)
-		from admin
-		where adminNum is not null
-		<include refid="search" />
-	</select>
-	<select id="selectAdminById" parameterType="str" resultType="admin">
 		select
-		*
-		from admin
-		where adminNum=#{adminNum,jdbcType=VARCHAR}
+		count(*)
+		from
+		admin
+		where adminNum is not null  			  	
 	</select>
+	
+	<select id="selectAdminByAdminNum"  resultType="admin">
+		select * 
+		from admin 
+		where adminNum=#{adminNum}
+	</select>
+	
 	<update id="insertAdmin" parameterType="admin">
-		insert into 
-		admin(adminNum, pwd, email, phone,picture,name,roll)
-		values(#{adminNum,jdbcType=VARCHAR},#{pwd},#{email},#{phone},#{picture},#{name},#{roll})
+		insert 
+		into 
+		admin(adminNum, email, pwd, name, roll, phone, picture, enabled, address)
+		values
+		(#{adminNum},#{email},#{pwd},#{name},#{roll},#{phone},#{picture},#{enabled},#{address})
 	</update>
 	
 	<update id="updateAdmin" parameterType="admin">
-		update admin 
+		update 
+		admin 
 		set 
-		pwd=#{pwd},email=#{email},phone=#{phone},name=#{name},
-		picture=#{picture}
-		
-		<if test="roll != null">
-			,roll=#{roll}
-		</if>
-		
-		where adminNum=#{adminNum,jdbcType=VARCHAR}
+		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}, phone=#{phone}, picture=#{picture}, enabled=#{enabled}, address=#{address}  
+		where adminNum=#{adminNum}
 	</update>
 	
-	<update id="deleteAdmin" parameterType="str" >
+	<update id="deleteAdmin" >
 		delete 
 		from admin 
-		where adminNum=#{adminNum,jdbcType=VARCHAR}		
+		where adminNum=#{adminNum}
 	</update>
+	
+	<select id="selectAdminNumSeqNext" resultType="int">
+		select adminNum_seq.nextval as adminNum from dual
+	</select>
+
 </mapper>

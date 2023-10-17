@@ -440,6 +440,7 @@
   })
 </script>
 
+
 <script>
 //날씨 API
     var today = new Date();
@@ -649,6 +650,7 @@
 	
 	alert(weather_json);
 </script>
+
 
 </body>
 </html>
