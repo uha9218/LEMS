@@ -5,8 +5,9 @@ public class SearchListCommand {
 	private int perPageNum = 10;
 	private String keyword = "";
 	private String searchType = "";
-	
 	private int startRowNum = 0;
+	private String fromDate = "";
+	private String toDate = "";
 	
 	public int getPage() {
 		return page;
@@ -40,6 +41,17 @@ public class SearchListCommand {
 	public void setStartRowNum() {
 		this.startRowNum = (this.page - 1) * this.perPageNum;
 	}
-	
+	public String getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+	public String getToDate() {
+		return toDate;
+	}
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
+	}
 	
 }
