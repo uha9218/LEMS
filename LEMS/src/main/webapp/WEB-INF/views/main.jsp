@@ -6,5 +6,5 @@
 <head></head>
 
 <body>
-	<h1>main.jsp</h1>
+
 </body>
