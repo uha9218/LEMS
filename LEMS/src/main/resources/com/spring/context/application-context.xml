@@ -17,8 +17,6 @@
 		 p:sqlSession-ref="sqlSession" />
 	<bean id="highwayDAO" class="com.spring.dao.HighwayDAOImpl"
 		 p:sqlSession-ref="sqlSession" />
-	<bean id="predictDAO" class="com.spring.dao.PredictDAOImpl"
-		 p:sqlSession-ref="sqlSession" />
 	<bean id="TrafficDAO" class="com.spring.dao.TrafficDAOImpl"
 		 p:sqlSession-ref="sqlSession" />
 	<bean id="SunlightDAO" class="com.spring.dao.SunlightDAOImpl"
@@ -27,11 +25,16 @@
 		 p:sqlSession-ref="sqlSession" />	 
 	<bean id="brDAO" class="com.spring.dao.BrDAOImpl"
 	    p:sqlSession-ref="sqlSession"/>
+	<bean id="recommandDAO" class="com.spring.dao.RecommandDAOImpl"
+	    p:sqlSession-ref="sqlSession"/>
+	<bean id="settingRecordDAO" class="com.spring.dao.SettingRecordDAOImpl"
+	    p:sqlSession-ref="sqlSession"/>
+	<bean id="statDAO" class="com.spring.dao.StatDAOImpl"
+	    p:sqlSession-ref="sqlSession"/>
 		 
 	<!-- Service -->
 	<bean id="adminService" class="com.spring.service.AdminServiceImpl"
-	     p:adminDAO-ref="adminDAO" 
-	/>	 
+	     p:adminDAO-ref="adminDAO" />	 
 	<bean id="menuService" class="com.spring.service.MenuServiceImpl"
 	     p:menuDAO-ref="menuDAO"/>
 	<bean id="CCTVService" class="com.spring.service.CCTVServiceImpl"/>
@@ -39,12 +42,16 @@
 		 p:lightDAO-ref="lightDAO"/>
 	<bean id="highwayService" class="com.spring.service.HighwayServiceImpl"
 		 p:highwayDAO-ref="highwayDAO"/>
-	<bean id="predictService" class="com.spring.service.PredictServiceImpl"
-		 p:predictDAO-ref="predictDAO"/>
 	<bean id="TrafficService" class="com.spring.service.TrafficServiceImpl"
 		 p:trafficDAO-ref="TrafficDAO"/>
 	<bean id="SunlightService" class="com.spring.service.SunlightServiceImpl"
 		 p:sunlightDAO-ref="SunlightDAO"/>
 	<bean id="brService" class="com.spring.service.BrServiceImpl"
 		p:brDAO-ref="brDAO"/>
+	<bean id="recommandService" class="com.spring.service.RecommandServiceImpl"
+		p:recommandDAO-ref="recommandDAO"/>
+	<bean id="settingRecordService" class="com.spring.service.SettingRecordServiceImpl"
+		p:settingRecordDAO-ref="settingRecordDAO"/>
+	<bean id="statService" class="com.spring.service.StatServiceImpl"
+		p:statDAO-ref="statDAO"/>		
 </beans>

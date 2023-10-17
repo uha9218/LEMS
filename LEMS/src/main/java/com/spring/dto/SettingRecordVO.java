@@ -3,24 +3,25 @@ package com.spring.dto;
 
 import java.util.Date;
 
-public class RecordVO {
-	private String recNum;
-	private Date recDate;
+public class SettingRecordVO {
+	private String setNum;
+	private Date setDate;
 	private int lightState;
 	private String reason;
 	private Date timeSet;
 	private String hwCode;
-	public String getRecNum() {
-		return recNum;
+	private String strState;
+	public String getSetNum() {
+		return setNum;
 	}
-	public void setRecNum(String recNum) {
-		this.recNum = recNum;
+	public void setSetNum(String setNum) {
+		this.setNum = setNum;
 	}
-	public Date getRecDate() {
-		return recDate;
+	public Date getSetDate() {
+		return setDate;
 	}
-	public void setRecDate(Date recDate) {
-		this.recDate = recDate;
+	public void setSetDate(Date setDate) {
+		this.setDate = setDate;
 	}
 	public int getLightState() {
 		return lightState;
@@ -46,7 +47,13 @@ public class RecordVO {
 	public void setHwCode(String hwCode) {
 		this.hwCode = hwCode;
 	}
+	public String getStrState() {
+		return strState;
+	}
+	public void setStrState(String strState) {
+		this.strState = strState;
+	}
 	
-	
+		
 }
 

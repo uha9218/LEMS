@@ -24,25 +24,25 @@
           
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>정밀도</b> <a class="float-right">0.823</a>
+                <b>정밀도</b> <a class="float-right">${st.precision }</a>
               </li>
               <li class="list-group-item">
-                <b>재현률</b> <a class="float-right">0.788</a>
+                <b>재현률</b> <a class="float-right">${st.recall }</a>
               </li>
               <li class="list-group-item">
-                <b>민감도</b> <a class="float-right">0.788</a>
+                <b>민감도</b> <a class="float-right">${st.specificity }</a>
               </li>
               <li class="list-group-item">
-                <b>정확도</b> <a class="float-right">0.876</a>
+                <b>정확도</b> <a class="float-right">${st.accuracy }</a>
               </li>
               <li class="list-group-item">
-                <b>F1-점수</b> <a class="float-right">0.805</a>
+                <b>F1-점수</b> <a class="float-right">${st.f1score }</a>
               </li>
               <li class="list-group-item">
-                <b>평균 절대 오차</b> <a class="float-right">0.124</a>
+                <b>평균 절대 오차</b> <a class="float-right">${st.mae }</a>
               </li>
               <li class="list-group-item">
-                <b>평균 제곱 오차</b> <a class="float-right">0.124</a>
+                <b>평균 제곱 오차</b> <a class="float-right">${st.mse }</a>
               </li>
             </ul>
 
