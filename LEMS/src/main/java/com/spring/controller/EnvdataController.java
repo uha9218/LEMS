@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,12 @@ public class EnvdataController {
 	private SunlightService sunlightService;
 	
 	@GetMapping("/main")
-	public String main() throws Exception{
-		String url="/envdata/traffic";
+	public String main(SearchListCommand command, Model model) throws Exception{
+		Map<String, Object> dataMap = trafficService.getTrafficList(command);
+		
+		String url = "/envdata/traffic";
+		
+		model.addAllAttributes(dataMap);
 		return url;
 	}
 	

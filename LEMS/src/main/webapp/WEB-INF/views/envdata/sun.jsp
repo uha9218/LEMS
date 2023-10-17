@@ -17,6 +17,10 @@
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
 
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
@@ -63,8 +67,7 @@
 									class="far fa-calendar-alt"></i>
 								</span>
 							</div>
-							<input type="text" class="form-control float-right"
-								style="width: 100px" id="reservation">&nbsp;&nbsp;&nbsp;&nbsp;
+							<input class="form-control" type="text" name="date-range-picker" id="dateRangePicker" style="width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;
 							<!-- keyword -->
 							
 								<button class="btn btn-primary" type="button" id="searchBtn"
@@ -76,22 +79,7 @@
 			</div>
 		</section>
 	<div class="card-body">
-		<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4"></div>
-			<div class="dt-buttons btn-group flex-wrap">
-				<button class="btn btn-secondary buttons-excel buttons-html5"
-					tabindex="0" aria-controls="example1" type="button">
-					<span>Excel</span>
-				</button>
-				<button class="btn btn-secondary buttons-pdf buttons-html5"
-					tabindex="0" aria-controls="example1" type="button">
-					<span>CSV</span>
-				</button>
-			</div>
-			<div class="row">
-				<div class="col-sm-12" style="text-align:center;">
-					<table id="example1"
-						class="table table-bordered table-striped dataTable dtr-inline"
-						aria-describedby="example1_info">
+					<table class="table table-bordered table-striped" id="sunList">
 						<thead>
 							<tr style='font-size:1em;'>
 								<th style="width:10%;">No.</th>
@@ -134,17 +122,61 @@
 				  		</c:forEach>	
 						</tbody>
 					</table>
-				</div>
-			</div>
 		<div class="card-footer">
 			<%@ include file="/WEB-INF/views/envdata/pagination.jsp" %>				
 		</div>
 	</div>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
+<!-- jQuery -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jszip/jszip.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!-- moment -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/moment/moment.min.js"></script>
+<!-- Date range -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- AdminLTE App -->
+<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
+<!-- common -->
+<script src="<%=request.getContextPath()%>/resources/js/common.js"></script>
+
 <script>
 //Date range picker
-    $('#reservation').daterangepicker()
+	$('#reservation').daterangepicker()
+	   
+		
+	$("#sunList").DataTable({
+		"paging": false,
+	    "searching": false,
+	    "info": false,
+	    "ordering": true,
+	    "responsive": true, 
+	    "lengthChange": false, 
+	    "autoWidth": false,
+	    "buttons": [ 
+	    	{
+				extend: 'csv',
+	       		charset: 'utf-8',
+	       		bom: true
+			},
+	    	
+	    	"excel"]
+	  }).buttons().container().appendTo('#sunList_wrapper .col-md-6:eq(0)');
 </script>
 </body>
 </html>

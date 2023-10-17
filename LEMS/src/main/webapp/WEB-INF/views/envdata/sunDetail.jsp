@@ -46,24 +46,22 @@
 							<option value="<%=request.getContextPath() %>/envdata/sunVariation.do">증감률</option>
 						</select>
 						<!-- sort num -->
-						<select class="form-control col-md-3" name="perPageNum"
-	                     id="perPageNum" onchange="">
-	                     <option value="10">구간코드</option>
-	                     <option value="all">전체</option>
-	                     <option value="A">A</option>
-	                     <option value="B">B</option>
-	                     <option value="C">C</option>
-	                     <option value="C">D</option>
-	                     <option value="C">E</option>
-	                     <option value="C">F</option>
-	                     <option value="C">G</option>
-	                     <option value="C">H</option>
-	                     <option value="C">I</option>
-	                     <option value="C">J</option>
-	                     <option value="C">K</option>
-	                     <option value="C">L</option>
-	                     <option value="C">M</option>
-	                     <option value="C">N</option>
+						<select class="form-control col-md-3" name="searchType" id="searchType">
+	                     <option>전체</option>
+	                        <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
+	                        <option value="B" ${command.searchType eq 'B' ? 'selected':'' }>B</option>
+	                        <option value="C" ${command.searchType eq 'C' ? 'selected':'' }>C</option>
+	                        <option value="D" ${command.searchType eq 'D' ? 'selected':'' }>D</option>
+	                        <option value="E" ${command.searchType eq 'E' ? 'selected':'' }>E</option>
+	                        <option value="F" ${command.searchType eq 'F' ? 'selected':'' }>F</option>
+	                        <option value="G" ${command.searchType eq 'G' ? 'selected':'' }>G</option>
+	                        <option value="H" ${command.searchType eq 'H' ? 'selected':'' }>H</option>
+	                        <option value="I" ${command.searchType eq 'I' ? 'selected':'' }>I</option>
+	                        <option value="J" ${command.searchType eq 'J' ? 'selected':'' }>J</option>
+	                        <option value="K" ${command.searchType eq 'K' ? 'selected':'' }>K</option>
+	                        <option value="L" ${command.searchType eq 'L' ? 'selected':'' }>L</option>
+	                        <option value="M" ${command.searchType eq 'M' ? 'selected':'' }>M</option>
+	                        <option value="N" ${command.searchType eq 'N' ? 'selected':'' }>N</option>
 		                </select>
 						<!-- Date range as a button -->
 						<div class="input-group-prepend">
@@ -76,7 +74,7 @@
 							<!-- keyword -->
 							
 								<button class="btn btn-primary" type="button" id="searchBtn"
-									data-card-widget="search" onclick="">조회</button>
+									data-card-widget="search" onclick="searchList_go(1);">조회</button>
 						<!-- end : search bar -->
 					</div>
 				</div>
@@ -93,9 +91,9 @@
 		<div class="row my-2">
           <div class="col-md-12">
               <div class="card">
-                  <div class="card-body">
-                      <canvas class="sunChart" height="51"></canvas>
-                  </div>
+                 <div class="sunCanvas">
+                   <canvas id="sunChart" height="65"></canvas>
+               </div>
                   <div class="card-body text-center text-align-center">
                     <h5>월</h5>
                   </div>
@@ -103,30 +101,28 @@
           </div>
       </div>
       <div class="col-sm-12" style="text-align:center;">
-               <table id="example1"
-                  class="table table-bordered table dataTable dtr-inline"
-                  aria-describedby="example1_info">
+              <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;">
                   <thead>
                      <tr>
-                        <th style="width:9%; height:7%;">구분</th>
-                        <th style="width:8%; height:7%;">월</th>
-                        <th style="width:5%; height:7%;">9</th>
-                        <th style="width:5%; height:7%;">10</th>
-                        <th style="width:5%; height:7%;">11</th>
-                        <th style="width:5%; height:7%;">12</th>
-                        <th style="width:5%; height:7%;">1</th>
-                        <th style="width:5%; height:7%;">2</th>
-                        <th style="width:5%; height:7%;">3</th>
-                        <th style="width:5%; height:7%;">4</th>
-                        <th style="width:5%; height:7%;">5</th>
-                        <th style="width:5%; height:7%;">6</th>
-                        <th style="width:5%; height:7%;">7</th>
-                        <th style="width:5%; height:7%;">8</th>
+                        <th style="width:10%;">구분</th>
+                        <th style="width:6%;">월</th>
+                        <th style="width:6%;">9</th>
+                        <th style="width:6%;">10</th>
+                        <th style="width:6%;">11</th>
+                        <th style="width:6%;">12</th>
+                        <th style="width:6%;">1</th>
+                        <th style="width:6%;">2</th>
+                        <th style="width:6%;">3</th>
+                        <th style="width:6%;">4</th>
+                        <th style="width:6%;">5</th>
+                        <th style="width:6%;">6</th>
+                        <th style="width:6%;">7</th>
+                        <th style="width:6%;">8</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr>
-                        <td rowspan="2">평균</td>
+                        <th rowspan="2">평균</th>
                         <td>밤의길이</td>
                         <td></td>
                         <td></td>
@@ -157,7 +153,7 @@
                         <td></td>
                      </tr>
                      <tr>
-                        <td rowspan="2">표준편차</td>
+                        <th rowspan="2">표준편차</th>
                         <td>밤의길이</td>
                         <td></td>
                         <td></td>
@@ -188,7 +184,7 @@
                         <td></td>
                      </tr>
                      <tr>
-                        <td rowspan="2">최대값</td>
+                        <th rowspan="2">최대값</th>
                         <td>밤의길이</td>
                         <td></td>
                         <td></td>
@@ -219,7 +215,7 @@
                         <td></td>
                      </tr>
                      <tr>
-                        <td rowspan="2">최소값</td>
+                        <th rowspan="2">최소값</th>
                         <td>밤의길이</td>
                         <td></td>
                         <td></td>
@@ -257,42 +253,88 @@
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
 <script>
-	//Date range picker
-	$('#reservation').daterangepicker()
-	//chart
-/* const time = [09:19, 09:20, 09:25, 10:17, 11:25, 12:40, 13:42, 14:24, 14:14, 13:22, 12:11, 11:00]; */
-const ev = [50, 51, 47, 49, 51, 49, 46, 47, 49, 49, 48, 48];
-  // var ctx = document.getElementById("myChart");
-  var ctx = document.getElementsByClassName("sunChart");
 
-  var mixedChart = {
-    type: 'bar',
-    labels: ['9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8'],
-    datasets : [
-     /*  {
-        label: '밤의길이',
-        data : time,
-        backgroundColor: 'rgba(256, 0, 0, 0.1)'
-      }, */
-      {
-        label: '전력량',
-        data: ev,
-        backgroundColor: 'transparent',
-        borderColor: 'skyblue',
-        type: 'bar'
-      }
-    ]
-    };
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: mixedChart,
-      options: {
-        legend: {
-          display: true
+
+
+    $(function(){
+        var ctx = document.getElementById('sunChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: chartData,
+            options: chartOptions
+        })
+    })
+
+    // chart data and options
+    var chartData = {
+        labels: ['9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8'],
+        datasets: [
+            {
+                label: '밤의길이',
+                type:'line',
+                yAxisID: 'y-left',
+                data: [''],
+                backgroundColor: [
+                    'rgba(256, 0, 0, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(256, 0, 0, 0.4)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: '전력량',
+                type:'bar',
+                yAxisID: 'y-right',
+                data: [60, 70, 80, 90, 100, 90, 80, 70, 60, 50, 70, 80],
+                backgroundColor: [
+                    'skyblue'
+                ],
+                borderColor: [
+                    'skyblue'
+                ],
+                borderWidth: 1
+            }
+        ]
+    }
+
+    var chartOptions = {
+        responsive:true,
+        // maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: '월',
+                    color:'white'
+                }
+            },
+            'y-left': {
+                type: 'linear',
+                position: 'left',
+                title: {
+                    display: true,
+                    text: '밤의길이',
+                    color:'white'
+                },
+                grid: {
+                    display: false
+                }
+            },
+            'y-right': {
+                type: 'linear',
+                position: 'right',
+                title: {
+                    display: true,
+                    text: '전력량(kW)',
+                    color:'white'
+                },
+                grid: {
+                    display: false
+                }
+            }
         }
-      }
-    });  
-   
+    }
 </script>
 </body>
 </html>
