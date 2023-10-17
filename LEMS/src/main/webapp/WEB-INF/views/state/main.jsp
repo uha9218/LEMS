@@ -149,7 +149,7 @@
                         <div class="card-body">
                            <div style="padding-bottom: 5.5%;">
                            <div>
-                              <div class="weather_time float-left">2023-10-09(월)</div>
+                              <div class="weather_time float-left weather-date"></div>
                               <div class="weather_time float-right">
                                   <i class="fas fa-exclamation-circle"></i> 기준 : 현재시간
                               </div>
@@ -159,25 +159,24 @@
                            </div>
                            <br/>
                             <div class="row">
-                              <div class="weather_text_2 col-lg-6 float-left">
-                                 <i class="fas fa-cloud-rain"></i> 10℃
-                              </div>
-                              <div class="weather_text_3 col-lg-6 float-right">
+                              <i id="weather_sky" class="weather_text_2 col-lg-2 fas"></i>
+                              <div id="temperature" class="weather_text_3 col-lg-4 float-left"></div>
+                              <div class="weather_text_4 col-lg-6 float-right">
                                  <div>
-                                    <i class="fas fa-sun"></i> 05:40
+                                    <i id="sunrise" class="fas fa-sun"></i> 05:40
                                  </div>
                                  <div>
-                                    <i class="fas fa-moon"></i> 18:56
+                                    <i id="sunset" class="fas fa-moon"></i> 18:56
                                  </div>
                               </div>
                               <div class="weather_text_div">
-                                 <div class="weather_text">강수확률 : 98 %</div>
-                                 <div class="weather_text">강수량 : 1.2 mm</div>
+                                 <div id="noname" class="weather_text">강수확률 : 98 %</div>
+                                 <div id="rain" class="weather_text"></div>
                               </div>
                               <div class="weather_text_div">
-                                 <div class="weather_text">습도 : 85 %</div>
-                                 <div class="weather_text">풍속 : 0.8 m/s</div>
-                                 <div class="weather_text">풍향 : 서</div>
+                                 <div id="humidity" class="weather_text"></div>
+                                 <div id="windSpeed" class="weather_text"></div>
+                                 <div id="windDir" class="weather_text"></div>
                               </div>
                             </div>
                            </div>
@@ -243,10 +242,24 @@
                   </div>
                   <!-- 교통량 현황 레이아웃 끝-->
                </div>
+               
                <!-- sec2 끝-->
             </div>
          </div>
    </section>
+   
+     <div class="vis-weather">
+        <h2 class="vh_hide">날씨정보</h2>
+        <p class="weather-date"></p>
+        <p class="weather-state-text"></p>
+        <ul>
+            <li class="weather-temp"></li>
+            <li id="RN1">시간당강수량 : ?</li>
+            <li class="weather_sky"></li>
+        </ul>
+    </div>
+
+   
   <!-- /.container-fluid -->
   <!-- /.content -->
 
@@ -428,47 +441,213 @@
 </script>
 
 <script>
-//날씨 api
-
-var today = new Date();   
-
-var year = today.getFullYear(); // 년도
-var month = today.getMonth() + 1;  // 월
-var date = today.getDate();  // 날짜
-var day = today.getDay();  // 요일
-var hours = today.getHours(); // 시
-var minutes = today.getMinutes();  // 분
-var seconds = today.getSeconds();  // 초
-var milliseconds = today.getMilliseconds(); // 밀리초
-
-document.write(encodeURIComponent(year+''+ month+''+ date))
-document.write('<br>')
-document.write(hours, minutes);
-
-
-var xhr = new XMLHttpRequest();
-var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'; /*URL*/
-var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'41HzN/rkQU/HYJDT0ItPwZb5y8B88MImTBmGgxnJCGSg3PoEnqMbbFrpkhTePg0iJoOgzfNQvHeFNdii1VbthQ=='; /*Service Key*/
-queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
-queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000'); /**/
-queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); /**/
-queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(year +''+ month +''+ date); /**/
-queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours +''+ minutes); /**/
-queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55'); /**/
-queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127'); /**/
-xhr.open('GET', url + queryParams);
-xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+//날씨 API
+    var today = new Date();
+    var week = new Array('일','월','화','수','목','금','토');
+    var year = today.getFullYear();
+    var month = today.getMonth()+1;
+    var day = today.getDate();
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+ 	
+    $('.weather-date').html(year + "년 " + month + "월 " + day + "일 " + "(" + week[today.getDay()] + ")");
+    /*
+     * 기상청 30분마다 발표
+     * 30분보다 작으면, 한시간 전 hours 값
+     */
+    if(minutes < 30){
+        hours = hours - 1;
+        if(hours < 0){
+            // 자정 이전은 전날로 계산
+            today.setDate(today.getDate() - 1);
+            day = today.getDate();
+            month = today.getMonth()+1;
+            year = today.getFullYear();
+            hours = 23;
+        }
     }
-};
-xhr.send('');
-
-var keys = Object.keys(json); //키를 가져옵니다. 이때, keys 는 반복가능한 객체가 됩니다.
-for (var i=0; i<keys.length; i++) {
-	var key = keys[i];
-	console.log("key : " + key + ", value : " + json[key])
-}
+    
+    /* example
+     * 9시 -> 09시 변경 필요
+     */
+    
+    if(hours < 10) {
+        hours = '0'+hours;
+    }
+    if(month < 10) {
+        month = '0' + month;
+    }    
+    if(day < 10) {
+        day = '0' + day;
+    } 
+ 
+    today = year+""+month+""+day;
+    
+    /* 좌표 */
+    var xhr = new XMLHttpRequest();
+	var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'; /*URL*/
+	var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'41HzN/rkQU/HYJDT0ItPwZb5y8B88MImTBmGgxnJCGSg3PoEnqMbbFrpkhTePg0iJoOgzfNQvHeFNdii1VbthQ=='; /*Service Key*/
+	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000');
+	queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON');
+	queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(today);
+	queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours +"00");
+	queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('55');
+	queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('127');
+	xhr.open('GET', url + queryParams);
+	xhr.onreadystatechange = function () {
+	    if (this.readyState == 4) {
+	    	
+	    	const jsonData = JSON.parse(xhr.responseText);
+			
+	        // **원하는 데이터 추출 [기온, 하늘상태, 1시간강수량, 습도, 강수형태, 풍향, 풍속]
+	        const weather_category = ['T1H', 'SKY', 'RN1', 'REH', 'PTY', 'VEC', 'WSD'];
+	        const weather_json = [];
+	        
+	        for (let i = 0; i < weather_category.length; i++) {
+	        	const weather_Values = jsonData.response.body.items.item
+	            .filter(item => item.category === weather_category[i])
+	            .map(item => item.fcstValue);
+	        	weather_json.push(weather_Values[0]);
+	        }
+	        alert(weather_json);
+	        // **현재 날씨 데이터 변수선언
+	        var temperature = weather_json[0];
+	        var sky = weather_json[1];
+	        var rain = weather_json[2];
+	        var humidity = weather_json[3];
+	        var rain_state = weather_json[4];
+	        var windDir = parseFloat(weather_json[5]);
+	        var windSpeed = weather_json[6];
+	        
+	        // **데이터 변환
+	        
+	        // 강수량
+	      	if(rain=="강수없음"){
+        		rain=0;
+        	}
+	        
+	        // 풍향
+	        windDir = Math.trunc((windDir + 22.5 * 0.5) / 22.5);
+	        
+	        // **값 입력
+	       
+	        // 풍향
+	        switch(windDir) {
+	        case 0:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북"); // 풍향
+                   break;
+	        case 1:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북북동"); // 풍향
+                   break;
+	        case 2:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북동"); // 풍향
+                   break;
+	        case 3:
+	        	document.getElementById("windDir").innerText = ("풍향 : 동북동"); // 풍향
+                   break;
+	        case 4:
+	        	document.getElementById("windDir").innerText = ("풍향 : 동"); // 풍향
+                   break;
+	        case 5:
+	        	document.getElementById("windDir").innerText = ("풍향 : 동남동"); // 풍향
+                   break;
+	        case 6:
+	        	document.getElementById("windDir").innerText = ("풍향 : 남동"); // 풍향
+                   break;
+	        case 7:
+	        	document.getElementById("windDir").innerText = ("풍향 : 남남동"); // 풍향
+                   break;
+	        case 8:
+	        	document.getElementById("windDir").innerText = ("풍향 : 남"); // 풍향
+                   break;
+	        case 9:
+	        	document.getElementById("windDir").innerText = ("풍향 : 남남서"); // 풍향
+                   break;
+	        case 10:
+	        	document.getElementById("windDir").innerText = ("풍향 : 남서"); // 풍향
+                   break;
+	        case 11:
+	        	document.getElementById("windDir").innerText = ("풍향 : 서남서"); // 풍향
+                   break;
+	        case 12:
+	        	document.getElementById("windDir").innerText = ("풍향 : 서"); // 풍향
+                   break;
+	        case 13:
+	        	document.getElementById("windDir").innerText = ("풍향 : 서북서"); // 풍향
+                   break;
+	        case 14:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북서"); // 풍향
+                   break;
+	        case 15:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북북서"); // 풍향
+                   break;
+	        case 16:
+	        	document.getElementById("windDir").innerText = ("풍향 : 북"); // 풍향
+                   break;
+	        }
+	        
+            if(rain_state != 0) {
+                switch(Number(rain_state)) {
+                    case 1:
+                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+                        $("#weather_sky").addClass("fa-cloud-rain");
+                        break;
+                    case 2:
+                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+                        $("#weather_sky").addClass("fa-cloud-showers-heavy");
+                        break;
+                    case 3:
+                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+                        $("#weather_sky").addClass("fa-snowflake");
+                        break;
+                }
+            }else {
+                switch(Number(sky)) {
+                    case 1:
+                    		if(06 <= hours && hours <= 18){
+	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+	                            $("#weather_sky").addClass("fa-sun");
+                    		}else{
+                    			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+                                $("#weather_sky").addClass("fa-moon");
+                    		}
+                        break;
+                    case 2:
+	                    	if(06 <= hours && hours <= 18){
+	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+	                            $("#weather_sky").addClass("fa-cloud-sun");
+	                		}else{
+	                			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+	                            $("#weather_sky").addClass("fa-cloud-moon");
+	                		}
+                        break;
+                    case 3:
+	                    	if(6 <= hours && hours <= 18){
+	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+	                            $("#weather_sky").addClass("fa-cloud-sun");
+	                		}else{
+	                			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+	                            $("#weather_sky").addClass("fa-cloud-moon");
+	                		}
+                        break;
+                    case 4:
+                           $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
+                           $("#weather_sky").addClass("fa-cloud");
+                        break;
+                    }    
+                } //if 종료
+                
+			document.getElementById("temperature").innerText = (temperature + ' ℃'); // 기온
+   	        document.getElementById("rain").innerText = ("강수량 : " + rain + " mm"); // 강수량
+   	        document.getElementById("humidity").innerText = ("습도 : " + humidity + " %"); // 습도
+   	        document.getElementById("windSpeed").innerText = ("풍속 : " + windSpeed + " m/s"); // 풍속
+                
+	       } 
+	    };
+	xhr.send('');
+	
+	alert(weather_json);
 </script>
 
 </body>
