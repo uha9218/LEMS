@@ -5,9 +5,6 @@
 
 <title></title>
 
-<!-- 달력 -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
 <head></head>
 
 <div align="center">

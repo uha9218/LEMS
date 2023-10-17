@@ -43,9 +43,11 @@
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>   
    <!-- Date range -->
    <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.js"></script>
+   
    <!-- uha -->
    <!-- toggle -->   
    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap-toggle.min.js"></script>
+   <!--dateandtimepicker  -->
     
    <!-- soon -->
    <!-- knob Chart-->

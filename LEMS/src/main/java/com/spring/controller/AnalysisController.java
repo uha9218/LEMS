@@ -10,15 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.command.SearchListCommand;
 import com.spring.service.HighwayService;
-import com.spring.service.PredictService;
 
 @Controller
 @RequestMapping("/analysis")
 public class AnalysisController {
 	
-	@Autowired
-	private PredictService service;
-
 	@GetMapping("/main")
 	   public String main()throws Exception{
 	      String url = "/analysis/predict";
@@ -27,10 +23,7 @@ public class AnalysisController {
    @GetMapping("/predict")
    public String predict(SearchListCommand command, Model model)throws Exception{
 	  String url = "/analysis/predict";
-	  
-	  Map<String,Object> dataMap = service.getPredictList(command);
-	  
-	  model.addAllAttributes(dataMap);
+
       return url;
    }
    @GetMapping("/compare")
