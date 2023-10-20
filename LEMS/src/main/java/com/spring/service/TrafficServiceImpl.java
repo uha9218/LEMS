@@ -22,10 +22,19 @@ public class TrafficServiceImpl implements TrafficService{
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
 		List<TrafficVO> trafficList = trafficDAO.selectsearchTrafficList(command);
-
-		for(int i=0;i<trafficList.size();i++) {
-			float tmp = Float.parseFloat(trafficList.get(i).getSpeedAvg());
-			trafficList.get(i).setSpeedAvg(String.format("%.1f", tmp));
+		
+		if(trafficList.size()>0) { 
+		
+			for (int i=0;i<trafficList.size();i++) {
+				//SpeedAvg
+				float satmp = Float.parseFloat(trafficList.get(i).getSpeedAvg());
+				trafficList.get(i).setSpeedAvg(String.format("%.1f", satmp));
+				
+				//occ
+				float occtmp = Float.parseFloat(trafficList.get(i).getOccupancy());
+				trafficList.get(i).setOccupancy(String.format("%.1f", occtmp));
+				
+			}
 		}
 		
 		dataMap.put("trafficList", trafficList);

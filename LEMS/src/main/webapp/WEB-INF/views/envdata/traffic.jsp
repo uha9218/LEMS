@@ -10,7 +10,9 @@
 
 <title>고속도로환경분석(교통)</title>
 
-<head></head>
+<head>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
 <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
 	<div class="card-header">
 		<h3 class="card-title">교통데이터 조회</h3>
@@ -28,7 +30,7 @@
 							</select>
 							<!-- sort num -->
 							 <select class="form-control col-md-3" name="searchType" id="searchType" >
-		                        <option>전체</option>
+		                        <option value="ALL">전체</option>
 		                        <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
 		                        <option value="B" ${command.searchType eq 'B' ? 'selected':'' }>B</option>
 		                        <option value="C" ${command.searchType eq 'C' ? 'selected':'' }>C</option>
@@ -51,9 +53,9 @@
 								</span>
 							</div>
 							<input type="text" class="form-control float-right"
-								style="width: 100px" id="datepicker" value="${command.fromDate }">
+								style="width: 100px" id="datepicker" name="datepicker" value="${command.fromDate }" placeholder="날짜 입력">
 							<input type="text" class="form-control float-right"
-							style="width: 100px" id="datepicker2" value="${command.toDate }">&nbsp;&nbsp;&nbsp;&nbsp;
+								style="width: 100px" id="datepicker2" name="datepicker2" value="${command.toDate }" placeholder="날짜 입력">&nbsp;&nbsp;&nbsp;&nbsp;
 							<!-- keyword -->
 								<button class="btn btn-primary" type="button" id="searchBtn"
 									data-card-widget="search" onclick="searchList_go(1);">조회</button>
@@ -62,112 +64,152 @@
 					</div>
 				</div>
 			</div>
-		
+		</section>
 		<div class="card-body">
-				<div class="row">
-					<div class="col-sm-12" style="text-align:center;">
-						<table class="table table-bordered table-striped" id="trafficList">
-							<thead>
-								<tr style="font-size:0.95em;">
-									<th style="width:20%;">No.</th>
-									<th style="width:20%;">날짜</th>
-									<th style="width:15%;">구간코드</th>
-									<th style="width:20%;">교통량</th>
-									<th>평균속도</th>
-								</tr>
-							</thead>
-							<c:if test="${empty trafficList }">
-								<tr>
-									<td colspan="5">
-										<strong>해당 내용이 없습니다.</strong>
-									</td>
-								</tr>
-							</c:if>
-							<tbody>
-								<c:forEach items="${trafficList }" var="traffic">
-									<tr style='font-size:1em;'>	
-										<td>${traffic.traffNum }</td>
-										<td>
-											<fmt:parseDate value="${traffic.traffDate }" var="traffDate" pattern="yyyyMMdd" />
-											<fmt:formatDate value="${traffDate }" pattern="yyyy-MM-dd"/>
-										</td>
-										<td>${traffic.hwCode }</td>
-										<td>${traffic.traff }</td>
-										<td>${traffic.speedAvg }</td>
-									<tr>	
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
+			<div class="" style="position: relative; display: inline-block;">
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadCSV();">CSV</button>
+	            </div>&nbsp;&nbsp;
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadExcel();">Excel</button>
+	            </div>
+	         </div>
+				<table class="table table-bordered table-striped" id="trafficList" style="text-align:center;">
+					<thead>
+						<tr style="font-size:0.95em;">
+							<th style="width:20%;">No.</th>
+							<th style="width:20%;">날짜</th>
+							<th style="width:15%;">구간코드</th>
+							<th style="width:20%;">교통량</th>
+							<th style="width:20%;">통행속도</th>
+							<th>점유율</th>
+						</tr>
+					</thead>
+					<c:if test="${empty trafficList }">
+						<tr>
+							<td colspan="5">
+								<strong>해당 내용이 없습니다.</strong>
+							</td>
+						</tr>
+					</c:if>
+					<tbody>
+						<c:forEach items="${trafficList }" var="traffic">
+							<tr style='font-size:1em;'>	
+								<td>${traffic.traffNum }</td>
+								<td>
+									<fmt:formatDate value="${traffic.traffDate }" pattern="yyyy-MM-dd"/>
+								</td>
+								<td>${traffic.hwCode }</td>
+								<td>${traffic.traff }</td>
+								<td>${traffic.speedAvg }</td>
+								<td>${traffic.occupancy }</td>
+							<tr>	
+						</c:forEach>
+					</tbody>
+				</table>
 			<div class="card-footer">
 				<%@ include file="/WEB-INF/views/envdata/pagination1.jsp" %>				
 			</div>
 		</div>
-	</section>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
-
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jszip/jszip.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 
 <script>
 //Date range picker
 
    $(function() {
-            //모든 datepicker에 대한 공통 옵션 설정
-            $.datepicker.setDefaults({
-                dateFormat: 'yy-mm-dd' //Input Display Format 변경
-                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-                ,changeYear: true //콤보박스에서 년 선택 가능
-                ,changeMonth: true //콤보박스에서 월 선택 가능                
-                ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-                ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-                ,minDate: "-2Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                ,maxDate: "+3M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
-            });
- 
-            //input을 datepicker로 선언
-            $("#datepicker").datepicker();                    
-            $("#datepicker2").datepicker();
-        });
+	 $.datepicker.setDefaults({
+	     dateFormat: 'yy-mm-dd' 
+	     ,showOtherMonths: true 
+	     ,showMonthAfterYear:true
+	     ,changeYear: true
+	     ,changeMonth: true               
+	     ,yearSuffix: "년" 
+	     ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
+	     ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+	     ,dayNamesMin: ['일','월','화','수','목','금','토']
+	     ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
+	     ,minDate: "-2Y" 
+	     ,maxDate: "+3M"               
+	 });
 
- //Download    
-   $("#trafficList").DataTable({
- 	"paging": false,
-     "searching": false,
-     "info": false,
-     "ordering": true,
-     "responsive": true, 
-     "lengthChange": false, 
-     "autoWidth": false,
-     "buttons": ["copy", 
-     	{
- 			extend: 'csv',
-        		charset: 'utf-8',
-        		bom: true
- 		},
-     	
-     	"excel", "pdf", "print"]
-   }).buttons().container().appendTo('#trafficList_wrapper .col-md-6:eq(0)');
+	 $("#datepicker").datepicker();                    
+	 $("#datepicker2").datepicker();
+	 
+	});
+	
+   //downloadCSV
+   function downloadCSV() {
+      const table = document.getElementById("trafficList"); // 테이블 설정
+      const rows = table.getElementsByTagName("tr"); // 행 저장
+       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 해봤음)
+
+       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+       const headerRowData = []; // 제목 행 데이터 저장 배열
+       for (const cell of headerCells) {
+           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+       }
+       csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+           if (cells.length > 0) {
+               const rowData = []; // 데이터 저장 배열
+               for (const cell of cells) {
+                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+               }
+               csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+           }
+       }
+
+       const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
+       const link = document.createElement("a");
+       link.setAttribute("href", encodedUri);
+       link.setAttribute("download", "trafficList.csv"); // .csv 다운로드하는 링크
+       document.body.appendChild(link);
+       link.click(); // <a> 클릭해서 다운로드 시작
+   }
+   
+ 	//downloadExcel
+ //downloadCSV
+   function downloadExcel() {
+      const table = document.getElementById("trafficList"); // 테이블 설정
+      const rows = table.getElementsByTagName("tr"); // 행 저장
+       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 해봤음)
+
+       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+       const headerRowData = []; // 제목 행 데이터 저장 배열
+       for (const cell of headerCells) {
+           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+       }
+       excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+           if (cells.length > 0) {
+               const rowData = []; // 데이터 저장 배열
+               for (const cell of cells) {
+                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+               }
+               excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+           }
+       }
+
+       const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
+       const link = document.createElement("a");
+       link.setAttribute("href", encodedUri);
+       link.setAttribute("download", "trafficList.xlsx"); // .csv 다운로드하는 링크
+       document.body.appendChild(link);
+       link.click(); // <a> 클릭해서 다운로드 시작
+   }
  	
-</script>
+   </script>
 </body>
 </html>

@@ -49,7 +49,7 @@
 <script>
 	function searchList_go(page,url){
 		//alert("click search btn");
-		if(!url) url="traffic.do";
+		if(!url) url="sunDetail.do";
 		
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
