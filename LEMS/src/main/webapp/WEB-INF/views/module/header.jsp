@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   <decorator:head />
 </head>
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse" style="height: auto;">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;">
 
 	<div class="wrapper">
 	
@@ -48,6 +48,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    <!-- Right navbar links -->
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
+	        <a class="nav-link" id="dark_mode" href="#" role="button">
+			  <i onclick="location.href='<%=request.getContextPath() %>/common/logout.do';" class="fas fa-sign-out-alt">&nbsp;LOGOUT</i>
+	        </a>
+	      </li>
+		  <li class="nav-item">
 	        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
 	          <i class="fas fa-expand-arrows-alt"></i>
 	        </a>
@@ -65,21 +70,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	  <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	    <!-- Brand Logo -->
 	    <a href="index.do" class="brand-link">
-	      <img src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/LEMS_LOGO.png" alt="AdminLTE Logo" class="brand-image img-circleelevation-3 " style="opacity: .8">
-	      <span class="brand-text font-weight-light">LEMS</span>
+	      <img src="<%=request.getContextPath() %>/resources/bootstrap/dist/img/LEMS_LOGO.png" alt="AdminLTE Logo" class="brand-image img-circleelevation-3 " style="opacity: .8; margin-left: 0;">
+	      <span class="brand-text font-weight-light">&nbsp;&nbsp;LEMS</span>
 	    </a>
 	  
 	    <!-- Sidebar -->
 	    <div class="sidebar">
 	    	<!-- Sidebar user panel (optional) -->
-	    	<div class="user-panel mt-3 pt-3 pb-3 mb-3 d-flex description-block border-bottom border-top">
+	    	<div class="user-panel mt-3 pt-3 pb-3 mb-3 d-flex border-bottom border-top">
 		        <div class="image">
 		           <img src="<%=request.getContextPath() %>/admin/getPicture.do?id=${loginUser.adminNum}" class="img-circle elevation-2" alt="User Image">
 		        </div>
 		        <div class="info">
 		          <div class="row">
-		         	  &nbsp;&nbsp;<a href="javascript:OpenWindow('<%=request.getContextPath() %>/admin/detail.do?id=${loginUser.adminNum}','내정보',700,800);" class="d-block">${loginUser.name }</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		              <button onclick="location.href='<%=request.getContextPath() %>/common/logout.do';" class="btn btn-xs btn-primary col-xs-3" type="button">LOGOUT</button>
+		         	<a class="d-block" href="javascript:OpenWindow('<%=request.getContextPath() %>/admin/detail.do?id=${loginUser.adminNum}','내정보',700,800);" class="d-block">&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.name }</a>
 		          </div>
 		        </div>
 	     	</div>

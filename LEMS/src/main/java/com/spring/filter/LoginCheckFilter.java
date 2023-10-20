@@ -63,8 +63,8 @@ public class LoginCheckFilter implements Filter {
 	}
 	public void init(FilterConfig fConfig) throws ServletException {
 		exURLs.add("/resources");
-		exURLs.add("/common/login");
-		exURLs.add("/common/logout");
+		exURLs.add("/common/login.do");
+		exURLs.add("/common/logout.do");
 	}
 
 	private boolean excludeCheck(String url) {
