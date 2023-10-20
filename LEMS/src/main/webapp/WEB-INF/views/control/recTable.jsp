@@ -26,8 +26,8 @@
                      <div class="card-header">
                         <h5 class="card-title" style="font-size: 1.2em;">Controller</h5>
                         <div class="card-tools">
-                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;">적용</button>
-                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;">복원</button>
+                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;" onclick="submit_form();">적용</button>
+                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;" onclick="location.reload();">복원</button>
                         </div>
                      </div>
                      <!-- /.card-header -->
@@ -60,7 +60,7 @@
                                     		<tr class="jsgrid-alt-row " style="height: 30px; text-align:center; font-size: 1.2em;" >
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${set.hwCode }</td>
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 200px;"><fmt:formatDate value="${set.setDate }" pattern="yyyy-MM-dd HH:mm"/></td>
-                                         		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;"><input id="lightToggle" type="checkbox" checked data-toggle="toggle" data-size="mini" onclick="alert(getToggleBtnState('lightToggle'));"></td>
+                                         		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;"><input class="light-check" data-hwCode="${set.hwCode }" data-reason="${set.reason }" id="lightToggle" type="checkbox"  <c:choose><c:when test="${set.lightState eq 0 }">unchecked</c:when> <c:when test="${set.lightState eq 1 }">checked</c:when> <c:when test="${set.lightState eq 2 }">disabled</c:when> <c:otherwise></c:otherwise> </c:choose>  data-toggle="toggle" data-size="mini"></td>
                                     		</tr> 
                                     	</c:forEach> 
                                     </tbody>
@@ -71,6 +71,7 @@
                      </div>
                   </div>
                </div>
+               
                <div class="col-md-5">
                   <div class="card" style="width: 100%; height: 100%; ">
                      <div class="card-header">
@@ -93,7 +94,7 @@
 												style="width: 100px; text-align:center;">근거</th>
 	                                 	</tr>
                                  </table>
-                                 </div>
+                              </div>
                               <div class="jsgrid-grid-body" style="height: 420px;">
                                  <table class="jsgrid-table" style="width: 100%;">
                                     <c:if test="${empty recList}" >
@@ -125,6 +126,7 @@
          </div>
         </div>
        </section>
+  
    <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
    <script>
       $(function() {
@@ -179,11 +181,47 @@
       });
    </script>
    <script>
-	   function getToggleBtnState(toggleBtnId){
-		    const left_px = parseInt( $('#'+toggleBtnId).css('left') );
-		 
-		    return (left_px > 0)? "on" : "off";
-		}
+
+
+   function submit_form() {
+	   var dataArray = new Array();		
+	   
+	   $("input.light-check").each(function() {
+		   var data = {
+			        
+			    	"hwCode": this.getAttribute("data-hwCode"),
+			    	"reason": this.getAttribute("data-reason"),
+	               };
+		   
+		   if(this.checked) {
+			   data.lightState=1;
+		   }else if(this.disabled){
+			   data.lightState=2;
+		   }else{
+			   data.lightState=0
+		   }
+		   
+		  // console.log(data);
+		  dataArray.push(data);
+	     });
+	
+	 	let jsonData = {"data":dataArray}
+	 	console.log(jsonData);
+	 	
+	 	$.ajax({
+	 		url:"update.do",
+	 		type:"post",	
+	 		data:JSON.stringify(jsonData),
+	 		contentType:'application/json',
+	 		success:function(data){
+	 			location.href=data;
+	 		},
+	 		error:function(){}	 		
+	 		
+	 	});
+	   
+	 }	
+ 
    </script>
 
 </body>

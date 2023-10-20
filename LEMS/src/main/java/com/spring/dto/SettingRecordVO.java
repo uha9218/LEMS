@@ -53,7 +53,6 @@ public class SettingRecordVO {
 	public void setStrState(String strState) {
 		this.strState = strState;
 	}
-	
-		
+
 }
 

@@ -1,6 +1,6 @@
 package com.spring.controller;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.command.SetRecordCommand;
 import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
 import com.spring.dto.StatVO;
@@ -70,11 +74,11 @@ public class ControlController {
 		return url;
 	}
 	@GetMapping("/setTableDetail")
-	public String setTableDetail(Date date, Model model) throws Exception{	
+	public String setTableDetail(String date, Model model) throws Exception{	
 		String url="/control/setTableList";
-		List<SettingRecordVO> setList = set.getRecordByTime(date);
+		List<SettingRecordVO> setList = set.getRecordByTime(new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(date));
 		model.addAttribute("setList",setList);
-		System.out.println(date);
+		//System.out.println(date);
 		return url;
 	}
 	@GetMapping("/basis")
@@ -84,4 +88,18 @@ public class ControlController {
 		model.addAttribute("st",st);		
 		return url;
 	}
+	
+	@PostMapping(value="/update")
+	@ResponseBody
+	public String update(@RequestBody SetRecordCommand command) throws Exception{
+		String url = "recTable.do";
+			
+		List<SettingRecordVO> record = command.getData();
+		// service 호출
+		set.saveSettingTable(record);
+		
+		return url;
+		
+	}
+	
 }

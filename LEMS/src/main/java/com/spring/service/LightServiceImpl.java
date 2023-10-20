@@ -16,7 +16,7 @@ public class LightServiceImpl implements LightService{
 	public void setLightDAO(LightDAO lightDAO) {
 		this.lightDAO = lightDAO;
 	}
-	
+	/*
 	@Override
 	public Map<String, Object> getLightList(SearchListCommand command) throws Exception {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
@@ -45,5 +45,6 @@ public class LightServiceImpl implements LightService{
 		LightVO light = lightDAO.selectLightByLstate(lstate);
 		return light;
 	}
+	*/
 
 }

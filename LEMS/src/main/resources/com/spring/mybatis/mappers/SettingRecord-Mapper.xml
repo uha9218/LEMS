@@ -8,7 +8,7 @@
 		*
 		from
 		settingRecord
-		<![CDATA[where setNum is not null]]>		  	
+		where setNum is not null	  	
 		order by setDate desc, hwCode
 	</select>
 	<select id="selectRecentRecordList" resultType="record">
@@ -17,9 +17,9 @@
 		from(
 			select *
 			from settingRecord
-			order by setDate desc, hwCode 
+			order by timeSet desc, hwCode, setDate desc 
 		)
-		where rownum<=14
+		where rownum<=14;
 		]]>
 	</select>
 	<select id="selectAdminRecordList" resultType="record">
@@ -27,12 +27,12 @@
         select *
         from(
             select *
-            from(
-                select *
-                from settingRecord
-                order by setDate desc, hwCode 
-        	)
-            where rownum<=14
+			from(
+				select *
+				from settingRecord
+				order by timeSet desc, hwCode, setDate desc 
+			)
+		where rownum<=14
         ) 
         where reason='admin';
 		]]>
@@ -46,18 +46,32 @@
 		order by setDate desc, hwCode  
 	</select>
 	<select id="selectRecordListBySetDate" resultType="record">
-		select *
-		from settingRecord
-		where <![CDATA[TO_CHAR(SETDATE, 'YYYY/MM/DD HH24:MI') = #{setDate} AND rownum<=14 ]]>
-		order by hwCode
+		<![CDATA[select *
+		from (
+			select *
+            from SETTINGRECORD
+			where TO_CHAR(setDate, 'YYYY/MM/DD HH24:MI') = #{setDate}
+			order by setDate desc, hwCode
+		)
+		where rownum<=14;]]>
+	</select>
+	<select id="selectRecordListByTimeSet" resultType="record">
+	<![CDATA[select *
+		from (
+			select *
+            from SETTINGRECORD
+			where TO_CHAR(TIMESET, 'YYYY/MM/DD HH24:MI') = #{timeSet}
+			order by timeSet desc, hwCode, setDate desc 
+		)
+		where rownum<=14;]]>
 	</select>
 	
 	<update id="insertRecordList" parameterType="record">
 		insert
 		into 
-		settingRecord(setNum,lightState,reason,hwCode)
+		settingRecord(setNum,lightState,reason,hwCode,setDate,timeSet)
 		values
-		(#{setNum},#{lightState},#{reason},#{hwCode)
+		(#{setNum},#{lightState},#{reason},#{hwCode},#{setDate},#{timeSet})
 	</update>
 	
 </mapper>

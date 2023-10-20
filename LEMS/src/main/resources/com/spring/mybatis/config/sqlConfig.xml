@@ -22,7 +22,7 @@
 	<typeAlias type="com.spring.dto.SunlightVO" alias="sunlight"/>
 	<typeAlias type="com.spring.dto.BrVO" alias="br"/>
 	<typeAlias type="com.spring.dto.StatVO" alias="stat"/>
-	
+	<typeAlias type="com.spring.dto.ElecUsingVO" alias="elec"/>
 
 </typeAliases>
 

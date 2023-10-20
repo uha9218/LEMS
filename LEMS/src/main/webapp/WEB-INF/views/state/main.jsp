@@ -511,7 +511,6 @@
 	            .map(item => item.fcstValue);
 	        	weather_json.push(weather_Values[0]);
 	        }
-	        alert(weather_json);
 	        // **현재 날씨 데이터 변수선언
 	        var temperature = weather_json[0];
 	        var sky = weather_json[1];
@@ -648,7 +647,6 @@
 	    };
 	xhr.send('');
 	
-	alert(weather_json);
 </script>
 
 
