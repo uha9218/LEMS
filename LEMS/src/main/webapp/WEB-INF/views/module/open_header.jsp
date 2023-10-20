@@ -24,11 +24,11 @@
   <!--kwang-->
   <!-- datepicker -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
-  <!--  jQuery UI CSS파일 --> 
+  <!-- jQuery UI CSS파일 --> 
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-   <!-- jQuery 기본 js파일  --> 
+  <!-- jQuery 기본 js파일  --> 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-  <!--   jQuery UI 라이브러리 js파일-->
+  <!-- jQuery UI 라이브러리 js파일 -->
   <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
   
   <!-- uha -->
@@ -44,11 +44,13 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/route.css" type="text/css">
   <!-- weather style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/weather.css" type="text/css">
+  <!-- chart style -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/chart.css" type="text/css">
 
 <decorator:head />
 </head>
 
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
+<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed" style="height: auto;">
 
 
 

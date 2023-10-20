@@ -4,12 +4,9 @@
 
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark" style="display: none; top: 56.8px;"></aside>
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-		<footer class="main-footer"> </footer>
-		<div id="sidebar-overlay"></div>
 <!-- ./wrapper -->
 
 
@@ -84,19 +81,19 @@ subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
 </script>
 
  <script>
-  $("#dark_mode").click(function(){
-      if($("body").hasClass("dark-mode")){
-          $("body").removeClass("dark-mode");
-          $("#darkmode_icon").removeClass("fa-sun");
-          $("#darkmode_icon").addClass("fa-moon");
-          
-      } else{
-          $("body").addClass("dark-mode");
-          $("#darkmode_icon").removeClass("fa-moon");
-          $("#darkmode_icon").addClass("fa-sun");
-          
-      }
-  });
+	  $("#dark_mode").click(function(){
+	      if ($("#ifr").contents().find("body").hasClass("dark-mode")){
+	    	  $("#ifr").contents().find("body").removeClass("dark-mode");
+	    	  $("body").removeClass("dark-mode");
+	          $("#darkmode_icon").removeClass("fa-sun");
+	          $("#darkmode_icon").addClass("fa-moon");
+	      } else{
+	    	  $("#ifr").contents().find("body").addClass("dark-mode");
+	    	  $("body").addClass("dark-mode");
+	          $("#darkmode_icon").removeClass("fa-moon");
+	          $("#darkmode_icon").addClass("fa-sun");
+	      }
+	  });
 </script>
 
 

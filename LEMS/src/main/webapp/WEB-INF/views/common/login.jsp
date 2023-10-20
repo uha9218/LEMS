@@ -1,75 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<style>
-	.login_back {
-        background-image: url( "<%=request.getContextPath() %>/resources/bootstrap/dist/img/login_background.png" );
-        }
-</style>
-<title>LOGIN</title>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- For google icons  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <!-- login style -->
+  <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/login.css" type="text/css">
+  <title>LEMS | Login</title>
+<Style>
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
 
-<head></head>
+.background {
+	background-image:
+		url("<%=request.getContextPath()%>/resources/img/login_background.png");
+	rgba (0, 0, 0, 0.61);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-blend-mode: darken;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	min-height: 800px;
+}
+</Style>
+</head>
+<body class="hold-transition login-page">
 
-<body>
-	<div class="hold-transition login-page">
-	   <div class="login-box">
-		<div class="login-logo">
-			<a href="#"><b>관리자 로그인</b></a>
-		</div>
-		<!-- /.login-logo -->
-		<div class="card">
-		 <div class="card-body login-card-body">
-			<p class="login-box-msg">Sign in to start your session</p>
+<div class="login-box">
+  <!-- for background -->
+  <div class="background"></div>
 
-			<form action="login.do"	method="post">
-				<input name="retUrl" value="${retUrl }" type="hidden" />
-				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="">
-					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-				</div>
-				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="pwd" placeholder="패스워드를 입력하세요."  value="">
-					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
-				<div class="row">
-					<div class="col-sm-8">
-						<div class="checkbox icheck">
-							<label> <input type="checkbox" name="rememberMe" value="check"> Remember Me
-							</label>
-						</div>
-					</div>
-					<!-- /.col -->
-					<div class="col-sm-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
-					</div>
-					<!-- /.col -->
-				</div>
-			</form>
-
-			
-
-			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
-			
-
-		</div>
-		<!-- /.login-box-body -->
-	  </div>	
-	</div>
-	<!-- /.login-box -->
+  <!-- for form container -->
+  <div class="container">
+    <h2><a href="login.do"><b style="font-size:1.5em">LEMS</b></a>  Login</h2>
+    <form action="login.do" method="post">
+	 <input name="retUrl" value="${retUrl }" type="hidden" />
+      <div class="form-item">
+        <span class="material-icons-outlined">
+          account_circle
+        </span>
+        <input type="text" name="id" id="id" placeholder="Email or Username" value="">
+      </div>
 	
-  </div>    
-<%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
-<c:if test="${not empty message }" >
-<script>
-	alert("${message}");
-</script>
-</c:if> 
-  
+      <div class="form-item">
+        <span class="material-icons-outlined">
+          lock
+        </span>
+        <input type="password" name="pwd" id="pwd" placeholder="password">
+      </div>
+
+      <button type="submit">LOGIN</button>
+
+
+    </form>
+  </div>
+</div>
 </body>
-  
-  
-  
-  
-  
-  
-  
+
+</html>
