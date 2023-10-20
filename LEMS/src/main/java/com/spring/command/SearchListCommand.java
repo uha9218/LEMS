@@ -3,12 +3,12 @@ package com.spring.command;
 
 public class SearchListCommand {
 	private int page = 1;
-	private int perPageNum = 10;
+	private int perPageNum = 14;
 	private String keyword = "";
 	private String searchType = "";
 	private int startRowNum = 0;
-	private String fromDate = "";
-	private String toDate = "";
+	private String fromDate;
+	private String toDate;
 	
 	public int getPage() {
 		return page;

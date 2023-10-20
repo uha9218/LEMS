@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="command" value="${pageMaker.command }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,8 @@
 <!-- Font Awesome Icons -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
@@ -32,7 +36,7 @@
 	<section class="content">
 		<div class="card">
 			<div class="card-header with-border">
-				<div id="keyword" class="card-tools" style="width: 650px;">
+				<div id="keyword" class="card-tools" style="width: 900px;">
 					<div class="input-group row">
 						<!-- search bar -->
 						<select class="form-control col-md-3" name="perPageNum"
@@ -70,11 +74,12 @@
 							</span>
 						</div>
 						<input type="text" class="form-control float-right"
-								style="width: 100px" id="reservation">&nbsp;&nbsp;&nbsp;&nbsp;
-							<!-- keyword -->
-							
-								<button class="btn btn-primary" type="button" id="searchBtn"
-									data-card-widget="search" onclick="searchList_go(1);">조회</button>
+							style="width: 100px" id="datepicker" name="datepicker" value="${command.fromDate }" placeholder="날짜 입력">
+						<input type="text" class="form-control float-right"
+							style="width: 100px" id="datepicker2" name="datepicker2" value="${command.toDate }" placeholder="날짜 입력">&nbsp;&nbsp;&nbsp;&nbsp;
+						<!-- keyword -->
+							<button class="btn btn-primary" type="button" id="searchBtn"
+								data-card-widget="search" onclick="searchList_go(1);">조회</button>
 						<!-- end : search bar -->
 					</div>
 				</div>
@@ -82,178 +87,148 @@
 		</div>
 	</section>
 	<div class="card-body">
-		<div class="dt-buttons btn-group flex-wrap">
-			<button class="btn btn-secondary buttons-excel buttons-html5"
-				tabindex="0" aria-controls="example1" type="button">
-				<span>PDF</span>
-			</button>
-		</div>
-		<div class="row my-2">
-          <div class="col-md-12">
+	<div id="pdfDiv">
+      <div class="row">
+          <section class="col-lg-8">
               <div class="card">
-                 <div class="sunCanvas">
-                   <canvas id="sunChart" height="65"></canvas>
-               </div>
-                  <div class="card-body text-center text-align-center">
-                    <h5>월</h5>
+                  <div class="card-body">
+                   <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
+		              <div class="sunCanvas">
+		                  <canvas id="sunChart" height="150%"></canvas>
+		              </div>
                   </div>
               </div>
-          </div>
-      </div>
-      <div class="col-sm-12" style="text-align:center;">
-              <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;">
+           </section>
+            <div class="col-lg-4" style="text-align:center;">
+               <table class="table table-bordered table-striped" id="sunList">
                   <thead>
-                     <tr>
-                        <th style="width:10%;">구분</th>
-                        <th style="width:6%;">월</th>
-                        <th style="width:6%;">9</th>
-                        <th style="width:6%;">10</th>
-                        <th style="width:6%;">11</th>
-                        <th style="width:6%;">12</th>
-                        <th style="width:6%;">1</th>
-                        <th style="width:6%;">2</th>
-                        <th style="width:6%;">3</th>
-                        <th style="width:6%;">4</th>
-                        <th style="width:6%;">5</th>
-                        <th style="width:6%;">6</th>
-                        <th style="width:6%;">7</th>
-                        <th style="width:6%;">8</th>
-                     </tr>
+					<tr style="font-size:0.90em;">
+						<th style="width:15%;">No.</th>
+						<th style="width:25%;">날짜</th>
+						<th style="width:15%;">구간</th>
+						<th style="width:25%;">밤의길이</th>
+						<th style="width:30%;">전력량(kW)</th>
+					</tr>
+                  </thead>
+                  <c:if test="${empty sunlightList }">
+					<tr>
+						<td colspan="5">
+							<strong>해당 내용이 없습니다.</strong>
+						</td>
+					</tr>
+				 </c:if>
+                  <tbody>
+					<c:forEach items="${sunlightList }" var="sunlight">
+				  			<tr style='font-size:1em;'>
+				  				<td>${sunlight.sunNum }</td>	
+				  			<td>
+								<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>
+							</td>
+							<td>${sunlight.hwCode }</td>
+							<td>
+								<fmt:parseDate value="${sunlight.fullLight }" var="fullLight" pattern="HHmm" />
+								<fmt:formatDate value="${fullLight }" pattern="HH:mm"/>
+							</td>
+							<td>${sunlight.sunRise }</td>
+				  			</tr>
+				  		</c:forEach>	
+				</tbody>
+               </table>
+               
+             <div class="card">
+               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;">
+                  <thead>
+					<tr style="font-size:0.95em;">
+						<th style="width:20%;">구분</th>
+						<th style="width:40%;">밤의길이</th>
+						<th style="width:40%;">전력량(kW)</th>
+					</tr>
                   </thead>
                   <tbody>
-                     <tr>
-                        <th rowspan="2">평균</th>
-                        <td>밤의길이</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                	<tr>
+                        <td>평균</td>
+                        <td>${staticMap.flAvg }</td>
+                        <td>${staticMap.euAvg }</td>
                      </tr>
                      <tr>
-                        <td>전력량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>표준편차</td>
+                        <td>${staticMap.flDevi }</td>
+                        <td>${staticMap.euDevi }</td>
+                     </tr>
+                    <tr>
+                        <td>최대값</td>
+                        <td>${staticMap.flMax }</td>
+                        <td>${staticMap.euMax }</td>
                      </tr>
                      <tr>
-                        <th rowspan="2">표준편차</th>
-                        <td>밤의길이</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>전력량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <th rowspan="2">최대값</th>
-                        <td>밤의길이</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>전력량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <th rowspan="2">최소값</th>
-                        <td>밤의길이</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>전력량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>최소값</td>
+                        <td>${staticMap.flMin }</td>
+                        <td>${staticMap.euMin }</td>
                      </tr>
                   </tbody>
-               </table>
+                </table>
+               </div>
+              <%@ include file="/WEB-INF/views/envdata/sunDetailpagination.jsp" %>	
             </div>
+          </div>
+          </div>
     </div>
+    
 <!-- jQuery -->
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
 <script>
 
+$(function() {
+	 $.datepicker.setDefaults({
+	     dateFormat: 'yy-mm-dd' 
+	     ,showOtherMonths: true 
+	     ,showMonthAfterYear:true
+	     ,changeYear: true
+	     ,changeMonth: true               
+	     ,yearSuffix: "년" 
+	     ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
+	     ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+	     ,dayNamesMin: ['일','월','화','수','목','금','토']
+	     ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
+	     ,minDate: "-2Y" 
+	     ,maxDate: "+3M"               
+	 });
+
+	 $("#datepicker").datepicker();                    
+	 $("#datepicker2").datepicker();
+	 
+	 //$('#datepicker').datepicker('setDate', 'today'); 
+	 //$('#datepicker2').datepicker('setDate', 'today'); 
+	});
+
+	var doc = new jsPDF();
+	var specialElementHandlers = {
+	    '#editor': function(element, renderer) {
+	        return true;
+	    }
+	}
+	 
+	$('#savePdfBtn').click(function() {
+	    html2canvas($("#pdfDiv"), {
+	        onrendered : function(canvas) {
+	            // 한글깨짐현상때문에 jpeg->jspdf 전환
+	            var imgData = canvas.toDataURL('image/jpeg');
+	            var pageWidth = 210;
+	            var pageHeight = pageWidth * 1.414;
+	            var imgWidth = pageWidth - 20;
+	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
+	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
+	            doc.save('화면.pdf');
+	        }
+	    });
+	});
 
 
     $(function(){
@@ -267,13 +242,13 @@
 
     // chart data and options
     var chartData = {
-        labels: ['9', '10', '11', '12', '1', '2', '3', '4', '5', '6', '7', '8'],
+        labels: [],
         datasets: [
             {
                 label: '밤의길이',
                 type:'line',
                 yAxisID: 'y-left',
-                data: [''],
+                data: [],
                 backgroundColor: [
                     'rgba(256, 0, 0, 0.4)'
                 ],
@@ -286,7 +261,7 @@
                 label: '전력량',
                 type:'bar',
                 yAxisID: 'y-right',
-                data: [60, 70, 80, 90, 100, 90, 80, 70, 60, 50, 70, 80],
+                data: [],
                 backgroundColor: [
                     'skyblue'
                 ],
@@ -305,7 +280,7 @@
             x: {
                 title: {
                     display: true,
-                    text: '월',
+                    text: '날짜',
                     color:'white'
                 }
             },
@@ -335,6 +310,12 @@
             }
         }
     }
+    <c:forEach items="${sunlightList}" var="sunlight">
+		chartData.labels.push('<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
+	 	chartData.datasets[0].data.push('<fmt:formatDate value="${fullLight }" pattern="HHmm"/>'); //데이터 배열에 추가
+	 	chartData.datasets[1].data.push(${sunlight.sunRise}); //데이터 배열에 추가
+	</c:forEach>
+	 	
 </script>
 </body>
 </html>

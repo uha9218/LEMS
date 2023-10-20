@@ -27,7 +27,7 @@
 </head>
 <body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
    <div class="card-header">
-      <h3 class="card-title">교통데이터 조회</h3>
+      <h3 class="card-title"></h3>
    </div>
    <section class="content">
       <div class="card">
@@ -36,25 +36,23 @@
                <div class="input-group row">
                   <!-- search bar -->
                   <!-- sort num -->
-                  <select class="form-control col-md-3" name="perPageNum"
-                     id="perPageNum" onchange="">
-                     <option value="10">구간코드</option>
-                     <option value="all">전체</option>
-                     <option value="A">A</option>
-                     <option value="B">B</option>
-                     <option value="C">C</option>
-                     <option value="D">D</option>
-                     <option value="E">E</option>
-                     <option value="F">F</option>
-                     <option value="G">G</option>
-                     <option value="H">H</option>
-                     <option value="I">I</option>
-                     <option value="J">J</option>
-                     <option value="K">K</option>
-                     <option value="L">L</option>
-                     <option value="M">M</option>
-                     <option value="N">N</option>
-                  </select>
+                  <select class="form-control col-md-3" name="searchType" id="searchType" >
+                        <option>전체</option>
+                        <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
+                        <option value="B" ${command.searchType eq 'B' ? 'selected':'' }>B</option>
+                        <option value="C" ${command.searchType eq 'C' ? 'selected':'' }>C</option>
+                        <option value="D" ${command.searchType eq 'D' ? 'selected':'' }>D</option>
+                        <option value="E" ${command.searchType eq 'E' ? 'selected':'' }>E</option>
+                        <option value="F" ${command.searchType eq 'F' ? 'selected':'' }>F</option>
+                        <option value="G" ${command.searchType eq 'G' ? 'selected':'' }>G</option>
+                        <option value="H" ${command.searchType eq 'H' ? 'selected':'' }>H</option>
+                        <option value="I" ${command.searchType eq 'I' ? 'selected':'' }>I</option>
+                        <option value="J" ${command.searchType eq 'J' ? 'selected':'' }>J</option>
+                        <option value="K" ${command.searchType eq 'K' ? 'selected':'' }>K</option>
+                        <option value="L" ${command.searchType eq 'L' ? 'selected':'' }>L</option>
+                        <option value="M" ${command.searchType eq 'M' ? 'selected':'' }>M</option>
+                        <option value="N" ${command.searchType eq 'N' ? 'selected':'' }>N</option>
+                     </select>
                   <!-- Date range as a button -->
                   <div class="input-group-prepend">
                      <span class="input-group-text"> <i
@@ -66,7 +64,7 @@
                   <!-- keyword -->
                   
                      <button class="btn btn-primary" type="button" id="searchBtn"
-                        data-card-widget="search" onclick="">조회</button>
+                        data-card-widget="search" onclick="searchList_go(1);">조회</button>
                   <!-- end : search bar -->
                </div>
             </div>
@@ -74,162 +72,46 @@
       </div>
    </section>
    <div class="card-body">
-      <div class="dt-buttons btn-group flex-wrap">
-         <button class="btn btn-secondary buttons-excel buttons-html5"
-            tabindex="0" aria-controls="example1" type="button">
-            <span>PDF</span>
-         </button>
-      </div>
-      <div class="row my-2">
-          <div class="col-md-12">
+     <div id="pdfDiv">
+      <div class="row">
+          <div class="col-lg-8">
+             <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
               <div class="card" >
                   <div class="card-body">
-               <div class="trafficCanvas">
-                   <canvas id="trafficChart" height="55"></canvas>
-               </div>
+	               <div class="Canvas">
+	                   <canvas id="Chart" height="165%"></canvas>
+	               </div>
                   </div>
               </div>
-             
-              <div class="card" style="height:250px">
-            <div class="col-sm-12" style="text-align:center;">
-               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;">
+           </div>
+            <div class="col-lg-4" style="text-align:center;">
+              <div class="card-body" style="height:250px">
+               <table class="table table-bordered table-striped" id="List" style="height:90%; text-align:center;">
                   <thead>
-                     <tr>
-                        <th style="width:10%;">구분</th>
-                        <th style="width:6%;">월</th>
-                        <th style="width:6%;">9</th>
-                        <th style="width:6%;">10</th>
-                        <th style="width:6%;">11</th>
-                        <th style="width:6%;">12</th>
-                        <th style="width:6%;">1</th>
-                        <th style="width:6%;">2</th>
-                        <th style="width:6%;">3</th>
-                        <th style="width:6%;">4</th>
-                        <th style="width:6%;">5</th>
-                        <th style="width:6%;">6</th>
-                        <th style="width:6%;">7</th>
-                        <th style="width:6%;">8</th>
+                     <tr style='font-size:1em;'>
+                        <th style="width:15%;">No.</th>
+                        <th style="width:10%;">구간</th>
+                        <th style="width:20%;">날짜</th>
+                        <th>실제소비량(kW)</th>
+                        <th>예측소비량(kW)</th>
                      </tr>
                   </thead>
+                  <c:if test="${empty List }" >
+					<tr>
+						<td colspan="5">
+							<strong>해당 내용이 없습니다.</strong>
+						</td>
+					</tr>
+				  </c:if>
                   <tbody>
                      <tr>
-                        <th rowspan="2">평균</th>
-                        <td>실제소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                      </tr>
-                     <tr>
-                        <td>예측소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <th rowspan="2">표준편차</th>
-                        <td>실제소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>예측소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <th rowspan="2">최대값</th>
-                        <td>실제소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>예측소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <th rowspan="2">최소값</th>
-                        <td>실제소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                     </tr>
-                     <tr>
-                        <td>예측소비량</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -240,7 +122,7 @@
                </table>
             </div>
             </div>
-          </div>
+    	</div>
     </div>
     </div>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
@@ -251,7 +133,7 @@
     //chart
     // var ctx = document.getElementById("myChart");
   $(function(){
-       var ctx = document.getElementById('trafficChart').getContext('2d');
+       var ctx = document.getElementById('Chart').getContext('2d');
        var chart = new Chart(ctx, {
            type: 'line',
            data: chartData,
