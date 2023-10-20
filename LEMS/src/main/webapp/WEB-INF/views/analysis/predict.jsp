@@ -34,17 +34,10 @@
       <h3 class="card-title">에너지 소비량 예측 조회</h3>
    </div>
    <section class="content">
-      <div class="container-fluid">
          <div class="card">
             <div class="card-header with-border">
                <div id="keyword" class="card-tools" style="width: 600px;">
                   <div class="input-group row">
-                     <!-- search bar -->
-                     <!-- <select class="form-control col-md-3" name="perPageNum" id="perPageNum"
-				  		onchange="searchList_go(1);">
-				  		<option value="10" >정렬</option>
-					 </select> -->
-                     <!-- sort num -->
                      <select class="form-control col-md-3" name="searchType" id="searchType" >
                         <option>전체</option>
                         <option value="A" ${command.searchType eq 'A' ? 'selected':'' }>A</option>
@@ -78,29 +71,22 @@
                </div>
             </div>
          </div>
-         <div class="dt-buttons btn-group flex-wrap">
-            <button class="btn btn-secondary buttons-excel buttons-html5"
-               tabindex="0" aria-controls="example1" type="button">
-               <span>Excel</span>
-            </button>
-            <button class="btn btn-secondary buttons-excel buttons-html5"
-               tabindex="0" aria-controls="example1" type="button">
-               <span>CSV</span>
-            </button>
-         </div>
-         <div class="row">
+        </section>
+         <div class="card-body">
+         <div id="pdfDiv">
+         	<div class="row">
             <section class="col-lg-7">
+                  <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
                <div class="card">
                   <div class="card-body">
                      <div class="predictCanvas">
-                        <canvas id="predictChart" height="190%"></canvas>
+                        <canvas id="predictChart" height="150%"></canvas>
                      </div>
                   </div>
                </div>
-            </section>
-            <section class="col-lg-5">
-            <div class="card-body" style="height:95%;">
-               <table class="table table-bordered table-striped" id="predictList" style="height:90%; text-align:center;">
+          </section>
+            <div class="col-lg-5">
+               <table class="table table-bordered table-striped" id="predictList" >
                   <thead>
                      <tr style='font-size:1em;'>
                         <th style="width:15%;">No.</th>
@@ -111,9 +97,7 @@
                   </thead>
                   <c:if test="${empty predictList }" >
 					<tr>
-						<td colspan="4">
-							<strong>해당 내용이 없습니다.</strong>
-						</td>
+						<td colspan="4"><strong>해당 내용이 없습니다.</strong></td>
 					</tr>
 				  </c:if>	
 				 <tbody>		  
@@ -129,17 +113,40 @@
                   </c:forEach>
                  </tbody>	
                </table>
-               </div>
-            </section>
+            </div>
          </div>
-	         <div class="card-footer">
-				<%@ include file="/WEB-INF/views/analysis/pagination.jsp" %>				
-			</div>
-      </div>
-   </section>
+         </div>
+         </div>
+   
    <%@ include file="/WEB-INF/views/module/footer_js.jsp"%>
 
-   <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
+<script>
+
+	var doc = new jsPDF();
+	var specialElementHandlers = {
+	    '#editor': function(element, renderer) {
+	        return true;
+	    }
+	}
+	 
+	$('#savePdfBtn').click(function() {
+	    html2canvas($("#pdfDiv"), {
+	        onrendered : function(canvas) {
+	            // 한글깨짐현상때문에 jpeg->jspdf 전환
+	            var imgData = canvas.toDataURL('image/jpeg');
+	            var pageWidth = 210;
+	            var pageHeight = pageWidth * 1.414;
+	            var imgWidth = pageWidth - 20;
+	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
+	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
+	            doc.save('화면.pdf');
+	        }
+	    });
+	});
       
 
       //chart

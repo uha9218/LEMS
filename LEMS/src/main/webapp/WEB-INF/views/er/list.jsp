@@ -15,6 +15,10 @@
 <!-- Font Awesome Icons -->
 <link rel="stylesheet"
    href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+   
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
 <link rel="stylesheet"
    href="<%=request.getContextPath()%>/resources/bootstrap/plugins/daterangepicker/daterangepicker.css">
@@ -62,12 +66,6 @@
       </div>
    </section>
    <div class="card-body">
-      <div class="dt-buttons btn-group flex-wrap">
-         <button class="btn btn-secondary buttons-excel buttons-html5"
-            tabindex="0" aria-controls="example1" type="button">
-            <span>PDF</span>
-         </button>
-      </div>
       <div class="row my-2">
           <div class="col-md-12">
               <div class="card">
@@ -77,11 +75,7 @@
                </div>
                   </div>
               </div>
-              <div class="row">
-            <div class="col-sm-12" style="text-align:center;">
-               <table id="example1"
-                  class="table table-bordered table-striped dataTable dtr-inline"
-                  aria-describedby="example1_info">
+               <table class="table table-bordered table-striped" id="List">
                   <thead>
                      <tr>
                         <th style="width:10%">구분</th>
@@ -147,12 +141,23 @@
                      </tr>
                   </tbody>
                </table>
-            </div>
-         </div>
           </div>
       </div>
     </div>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
+
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jszip/jszip.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
    //chart
@@ -252,6 +257,24 @@ const actual = [150, 146, 139, 141, 141, 140, 139, 119, 115, 92, 80, 80, 80, 80]
     
   //Date range picker
    $('#reservation').daterangepicker()
+   
+   $("#List").DataTable({
+		"paging": false,
+	    "searching": false,
+	    "info": false,
+	    "ordering": true,
+	    "responsive": true, 
+	    "lengthChange": false, 
+	    "autoWidth": false,
+	    "buttons": [ 
+	    	{
+				extend: 'pdf',
+	       		charset: 'utf-8',
+	       		bom: true
+			},
+	    	
+	    	]
+	  }).buttons().container().appendTo('#List_wrapper .col-md-6:eq(0)');
 </script>
 </body>
 </html>
