@@ -3,53 +3,62 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Admin-Mapper">
-	
+
 	<select id="selectAdminList" resultType="admin">
 		select
 		*
 		from
 		admin
-		where adminNum is not null  			  	
+		where
+		adminNum is not null
 	</select>
-	
+
 	<select id="selectSearchAdminListCount" resultType="int">
 		select
 		count(*)
 		from
 		admin
-		where adminNum is not null  			  	
+		where adminNum is not null
 	</select>
-	
-	<select id="selectAdminByAdminNum"  resultType="admin">
-		select * 
-		from admin 
+
+	<select id="selectAdminByAdminNum" resultType="admin">
+		select *
+		from admin
 		where adminNum=#{adminNum}
 	</select>
-	
+
+	<select id="selectAdminByEmail" resultType="admin">
+		select *
+		from admin
+		where email=#{email}
+	</select>
+
 	<update id="insertAdmin" parameterType="admin">
-		insert 
-		into 
+		insert
+		into
 		admin(adminNum, email, pwd, name, roll, phone, picture, enabled, address)
 		values
 		(#{adminNum},#{email},#{pwd},#{name},#{roll},#{phone},#{picture},#{enabled},#{address})
 	</update>
-	
+
 	<update id="updateAdmin" parameterType="admin">
-		update 
-		admin 
-		set 
-		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}, phone=#{phone}, picture=#{picture}, enabled=#{enabled}, address=#{address}  
+		update
+		admin
+		set
+		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}, phone=#{phone},
+		picture=#{picture}, enabled=#{enabled}, address=#{address}
 		where adminNum=#{adminNum}
 	</update>
-	
-	<update id="deleteAdmin" >
-		delete 
-		from admin 
+
+	<update id="deleteAdmin">
+		delete
+		from admin
 		where adminNum=#{adminNum}
 	</update>
-	
+
 	<select id="selectAdminNumSeqNext" resultType="int">
-		select adminNum_seq.nextval as adminNum from dual
+		select
+		adminNum_seq.nextval as adminNum from dual
 	</select>
 
 </mapper>

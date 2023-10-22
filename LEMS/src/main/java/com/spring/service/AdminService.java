@@ -11,7 +11,7 @@ import com.spring.exception.NotFoundIdException;
 
 public interface AdminService {
 	
-	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException;
+	public void login(String email, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException;
 	//목록 조회
 	Map<String, Object> getAdminList(SearchListCommand command) throws SQLException;
 	
