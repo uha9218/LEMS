@@ -31,6 +31,10 @@
 	    p:sqlSession-ref="sqlSession"/>
 	<bean id="statDAO" class="com.spring.dao.StatDAOImpl"
 	    p:sqlSession-ref="sqlSession"/>
+	<bean id="daydataDAO" class="com.spring.dao.DaydataDAOImpl"
+		p:sqlSession-ref="sqlSession"/>    
+	<bean id="elecUsingDAO" class="com.spring.dao.ElecUsingDAOImpl"
+		 p:sqlSession-ref="sqlSession"/>    
 		 
 	<!-- Service -->
 	<bean id="adminService" class="com.spring.service.AdminServiceImpl"
@@ -51,7 +55,12 @@
 	<bean id="recommandService" class="com.spring.service.RecommandServiceImpl"
 		p:recommandDAO-ref="recommandDAO"/>
 	<bean id="settingRecordService" class="com.spring.service.SettingRecordServiceImpl"
-		p:settingRecordDAO-ref="settingRecordDAO"/>
+		p:settingRecordDAO-ref="settingRecordDAO"
+		p:recommandDAO-ref="recommandDAO"
+		p:lightDAO-ref="lightDAO"
+		p:elecUsingDAO-ref="elecUsingDAO"/>
 	<bean id="statService" class="com.spring.service.StatServiceImpl"
-		p:statDAO-ref="statDAO"/>		
+		p:statDAO-ref="statDAO"/>
+	<bean id="daydataService" class="com.spring.service.DaydataServiceImpl"
+		p:daydataDAO-ref="daydataDAO"/>
 </beans>

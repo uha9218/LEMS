@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ElecUsing-Mapper">
+
+	<update id="insertElecUsingList" parameterType="elec">
+		insert
+		into 
+		ElecUsing(elecuseNum,elecUse,elecuseDate,hwCode)
+		values
+		(#{elecuseNum},#{elecUse},#{elecuseDate},#{hwCode})
+	</update>
+	<update id="updateElecUsingList" parameterType="elec">
+		update ElecUsing
+		set elecUse=#{elecUse}, elecAltDate=#{elecAltDate}
+		where elecuseNum=#{elecuseNum}
+	</update>
+	<select id="selectRecentElecUsingList" resultType="elec">
+		<![CDATA[
+        select *
+		from(
+			select *
+			from elecUsing
+			order by elecUseNum desc
+		)
+		where rownum<=14
+        order by hwCode
+		]]>
+	</select>
+	
+	
+</mapper>

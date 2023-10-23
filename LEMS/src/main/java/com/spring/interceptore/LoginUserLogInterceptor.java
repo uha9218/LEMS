@@ -25,6 +25,7 @@ public class LoginUserLogInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 		
 		String adminNum = request.getParameter("adminNum");
+		System.out.println("#######################"+adminNum);
 		String pwd = request.getParameter("pwd");
 		boolean flag=true;
 		

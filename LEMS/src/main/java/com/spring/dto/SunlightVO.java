@@ -1,9 +1,11 @@
 package com.spring.dto;
 
+import java.util.Date;
+
 public class SunlightVO {
 
 	private String sunNum;		//일조번호
-	private String sunDate;		//날짜
+	private Date sunDate;		//날짜
 	private String sunRise;		//일출시간
 	private String sunSet;		//일몰시간
 	private String fullLight;	//밤의길이
@@ -15,10 +17,10 @@ public class SunlightVO {
 	public void setSunNum(String sunNum) {
 		this.sunNum = sunNum;
 	}
-	public String getSunDate() {
+	public Date getSunDate() {
 		return sunDate;
 	}
-	public void setSunDate(String sunDate) {
+	public void setSunDate(Date sunDate) {
 		this.sunDate = sunDate;
 	}
 	public String getSunRise() {

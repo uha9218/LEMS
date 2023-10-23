@@ -1,10 +1,16 @@
 package com.spring.dao;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+
+import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
 
 public class SettingRecordDAOImpl implements SettingRecordDAO{
@@ -23,7 +29,8 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecentRecordList");
 		for(int i=0;i<srList.size();i++) {
 			if(srList.get(i).getLightState()==1) {srList.get(i).setStrState("on");}
-			else srList.get(i).setStrState("off");
+			else if(srList.get(i).getLightState()==0) {srList.get(i).setStrState("off");}
+			else {srList.get(i).setStrState("수리중");}
 		}
 		return srList;
 	}
@@ -40,12 +47,36 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 	@Override
 	public List<SettingRecordVO> selectRecordListBySetDate(Date SetDate) throws SQLException {
 		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListBySetDate",SetDate);
+		for(int i=0;i<srList.size();i++) {
+			if(srList.get(i).getLightState()==1) {srList.get(i).setStrState("on");}
+			else if(srList.get(i).getLightState()==0) {srList.get(i).setStrState("off");}
+			else {srList.get(i).setStrState("수리중");}
+		}
 		return srList;
 	}
 	@Override
-	public void insertRecordList(SettingRecordVO record) throws SQLException {
-		session.update("SettingRecord-Mapper.insertRecordList");
+	public List<SettingRecordVO> selectRecordListByTimeSet(Date timeSet) throws SQLException {
+		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListByTimeSet",timeSet);
+		for(int i=0;i<srList.size();i++) {
+			if(srList.get(i).getLightState()==1) {srList.get(i).setStrState("on");}
+			else if(srList.get(i).getLightState()==0) {srList.get(i).setStrState("off");}
+			else {srList.get(i).setStrState("수리중");}
+		}
+		return srList;
 	}
-	
+	@Override
+	public void insertRecordList(List<SettingRecordVO> record) throws SQLException, ParseException {
+		for(int i=0;i<record.size();i++) {
+			session.update("SettingRecord-Mapper.insertRecordList",record.get(i));
+		}
+		
+	}
+	@Override
+	public void updateRecordList(List<SettingRecordVO> record) throws SQLException, ParseException {
+		for(int i=0;i<record.size();i++) {
+			session.update("SettingRecord-Mapper.updateRecordList",record.get(i));
+		}
+	}
+  
 
 }

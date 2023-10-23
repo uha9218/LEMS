@@ -46,6 +46,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public AdminVO selectAdminByEmail(String email) throws SQLException {
 		AdminVO admin = session.selectOne("Admin-Mapper.selectAdminByEmail", email);
+
 		return admin;
 	}
 

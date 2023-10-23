@@ -21,8 +21,9 @@
               <div class="col-md-8">
                  <div class="card" style="width: 100%; height: 100%; ">
                     <div class="card-header" >
-						<input  type="text" id="datepicker" name="date"  placeholder="날짜 및 시간 선택">
-						<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em; margin: 0 0 5px 0" onclick="setTableDetail.do?date=${date}" >적용</button>
+						<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em; margin: 0 5px 5px 0px; height: 80%;  float: right;" onclick="history.go(-1);" >초기화</button>
+                    	<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em; margin: 0 5px 5px 5px; height: 80%; float: right;" onclick="date_search();" >검색</button>
+						<input  type="text" id="datepicker" name="date"  placeholder="날짜 및 시간 선택" style="float: right;">
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -118,7 +119,12 @@
 		locale: 'ko',            // 한국어로 지역화
 	});
 	
-
+	function date_search(){
+		let date_input = document.querySelector("#datepicker");
+		//alert(date_input.value);
+		let date_value = date_input.value;
+		location.href = "setTableDetail.do?date="+date_input.value;
+	}
 </script>
 
 </body>

@@ -3,14 +3,16 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
   
-<form id="jobForm">
+<form id="jobForm">	
 	<input type='hidden' name="page" value="" />
 	<!-- <input type='hidden' name="perPageNum" value=""/> -->
-	<input type='hidden' name="searchType" value="" />
-	<!-- <input type='hidden' name="keyword" value="" /> -->
+	
 	<input type='hidden' name="fromDate" value="" />
 	<input type='hidden' name="toDate" value="" />
+	<input type='hidden' name="searchType" value="" />
+	<!-- <input type='hidden' name="keyword" value="" /> -->
 </form>
+
 
 <nav aria-label="Navigation">
 	<ul class="pagination justify-content-center m-0">
@@ -49,18 +51,19 @@
 <script>
 	function searchList_go(page,url){
 		//alert("click search btn");
-		if(!url) url="traffic.do";
+		if(!url) url="compare.do";
 		
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
-	/* jobForm.perPageNum.value 
-		= document.querySelector("select[name='perPageNum']").value; */
- 		jobForm.searchType.value  			
- 			= document.querySelector("select[name='searchType']").value;
-	/* jobForm.keyword.value 
+		/* jobForm.perPageNum.value 
+			= document.querySelector("select[name='perPageNum']").value; */
+		jobForm.searchType.value 
+			= document.querySelector("select[name='searchType']").value;
+		jobForm.toDate.value = $('#datepicker').val();
+		jobForm.fromDate.value = $('#datepicker2').val();
+		/* jobForm.keyword.value 
 			= document.querySelector("input[name='keyword']").value; */
-		jobForm.fromDate.value = $('#datepicker').val();
-		jobForm.toDate.value = $('#datepicker2').val();
+		
 		jobForm.action=url;
 		jobForm.submit();
 	}

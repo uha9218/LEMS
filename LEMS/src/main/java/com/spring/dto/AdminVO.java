@@ -15,6 +15,7 @@ public class AdminVO {
 	private String picture; // 사진파일 경로/파일명
 	private int enabled; // 사용여부
 	private String address;// 주소
+	
 	public String getAdminNum() {
 		return adminNum;
 	}
