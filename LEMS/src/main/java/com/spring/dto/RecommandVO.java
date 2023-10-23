@@ -1,5 +1,6 @@
 package com.spring.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RecommandVO {
@@ -18,16 +19,12 @@ public class RecommandVO {
 		this.recNum = recNum;
 	}
 	public Date getRecDate() {
-		return recDate;
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		long tmpTime = recDate.getTime();
+		return new Date(tmpTime+(10*60*1000));
 	}
 	public void setRecDate(Date recDate) {
-		this.recDate = recDate;
-	}
-	public int getRecState() {
-		return recState;
-	}
-	public void setRecState(int recState) {
-		this.recState = recState;
+		 this.recDate = recDate;
 	}
 	public String getPredUse() {
 		return predUse;
@@ -54,4 +51,11 @@ public class RecommandVO {
 	public void setStrState(String StrState) {
 		this.strState= StrState;
 	}
+	public int getRecState() {
+		return recState;
+	}
+	public void setRecState(int recState) {
+		this.recState = recState;
+	}
+	
 }

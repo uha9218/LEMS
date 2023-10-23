@@ -34,6 +34,8 @@
 	<bean id="daydataDAO" class="com.spring.dao.DaydataDAOImpl"
 		p:sqlSession-ref="sqlSession"/>    
 	<bean id="elecUsingDAO" class="com.spring.dao.ElecUsingDAOImpl"
+		 p:sqlSession-ref="sqlSession"/>
+	<bean id="alarmDAO" class="com.spring.dao.AlarmDAOImpl"
 		 p:sqlSession-ref="sqlSession"/>    
 		 
 	<!-- Service -->
@@ -63,4 +65,6 @@
 		p:statDAO-ref="statDAO"/>
 	<bean id="daydataService" class="com.spring.service.DaydataServiceImpl"
 		p:daydataDAO-ref="daydataDAO"/>
+	<bean id="alarmService" class="com.spring.service.AlarmServiceImpl"
+		p:alarmDAO-ref="alarmDAO"/>
 </beans>

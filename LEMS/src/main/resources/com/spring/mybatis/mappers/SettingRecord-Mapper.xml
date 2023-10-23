@@ -46,9 +46,9 @@
 			select *
             from SETTINGRECORD
 			where TO_CHAR(setDate, 'YYYY/MM/DD HH24:MI:SS') = #{setDate}
-			order by timeset desc, setNum desc		
+			order by setNum desc		
 			)
-		where rownum<=14;
+		where rownum<=14
 		order by hwCode
 		]]>
 	</select>
@@ -60,7 +60,7 @@
 			where TO_CHAR(TIMESET, 'YYYY/MM/DD HH24:MI') = #{timeSet}
 			order by timeset desc, setNum desc
 		)
-		where rownum<=14;
+		where rownum<=14
 		order by hwCode
 		]]>
 	</select>

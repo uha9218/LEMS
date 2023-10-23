@@ -57,7 +57,21 @@
                                     		<tr class="jsgrid-alt-row " style="height: 30px; text-align:center; font-size: 1.2em;" >
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${set.hwCode }</td>
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;"><fmt:formatDate value="${set.setDate }" pattern="yyyy-MM-dd HH:mm"/></td>
-                                         		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;">${set.strState }</td>
+                                         		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;">
+                                         		<small 
+												        <c:choose>
+												            <c:when test="${set.strState eq 'on'}">
+												                class="badge badge-primary"
+												            </c:when >
+												            <c:when test="${set.strState eq 'off'}">
+												                class="badge badge-secondary"
+												            </c:when>
+												            <c:otherwise>
+												                class="badge badge-danger"
+												            </c:otherwise>
+												         </c:choose>
+												 >${set.strState }
+												 </small></td>
                                          		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;">${set.reason }</td>
                                     		</tr> 
                                     	</c:forEach> 

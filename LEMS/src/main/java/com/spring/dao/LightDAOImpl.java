@@ -25,13 +25,13 @@ public class LightDAOImpl implements LightDAO{
 		List<LightVO> lightList = sqlSession.selectList("Light-Mapper.selectsearchLightList", command, rowBounds);
 		return lightList;
 	}
-	
+	*/
 	@Override
 	public LightVO selectLightByLnum(String lnum) throws SQLException {
 		LightVO lightList=sqlSession.selectOne("Light-Mapper.selectLightByLnum", lnum);
 		return lightList;
 	}
-
+	/*
 	@Override
 	public LightVO selectLightByLstate(String lstate) throws SQLException {
 		LightVO lightList1=sqlSession.selectOne("Light-Mapper.selectLightByLstate", lstate);

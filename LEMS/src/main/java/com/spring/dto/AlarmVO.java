@@ -5,9 +5,10 @@ import java.util.Date;
 public class AlarmVO {
 
 	private String alarmNum;	//알림번호
-	private Date AlarmDate;		//알림날짜
+	private Date alarmDate;		//알림날짜
 	private String elecError;	//전력오차
 	private String hwCode;		//구간코드
+	private String alarmStrDate; 
 	
 	public String getAlarmNum() {
 		return alarmNum;
@@ -15,11 +16,18 @@ public class AlarmVO {
 	public void setAlarmNum(String alarmNum) {
 		this.alarmNum = alarmNum;
 	}
+	
 	public Date getAlarmDate() {
-		return AlarmDate;
+		return alarmDate;
 	}
 	public void setAlarmDate(Date alarmDate) {
-		AlarmDate = alarmDate;
+		this.alarmDate = alarmDate;
+	}
+	public String getAlarmStrDate() {
+		return alarmStrDate;
+	}
+	public void setAlarmStrDate(String alarmStrDate) {
+		this.alarmStrDate = alarmStrDate;
 	}
 	public String getElecError() {
 		return elecError;

@@ -6,7 +6,6 @@
 	<select id="selectStat" resultType="stat">
 		select
 		*
-		from stat		  	
-		where statNum=#{statNum}
+		from stat		 
 	</select>
 </mapper>

@@ -11,8 +11,8 @@ public class StatServiceImpl implements StatService{
 	}
 	
 	@Override
-	public StatVO getStat(String StatNum) throws Exception {
-		StatVO stat = dao.selectStat(StatNum);
+	public StatVO getStat() throws Exception {
+		StatVO stat = dao.selectStat();
 		return stat;
 	}
 
