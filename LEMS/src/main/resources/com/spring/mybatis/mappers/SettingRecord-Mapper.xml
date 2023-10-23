@@ -3,23 +3,17 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SettingRecord-Mapper">
-	<select id="selectRecordList" resultType="record">
-		select
-		*
-		from
-		settingRecord
-		where setNum is not null	  	
-		order by setDate desc, hwCode
-	</select>
+
 	<select id="selectRecentRecordList" resultType="record">
 		<![CDATA[
 		select *
 		from(
 			select *
 			from settingRecord
-			order by timeSet desc, hwCode, setDate desc 
+			order by timeset desc, setNum desc
 		)
-		where rownum<=14;
+		where rownum<=14
+		order by hwCode
 		]]>
 	</select>
 	<select id="selectAdminRecordList" resultType="record">
@@ -30,11 +24,12 @@
 			from(
 				select *
 				from settingRecord
-				order by timeSet desc, hwCode, setDate desc 
+				order by timeset desc, setNum desc
 			)
 		where rownum<=14
         ) 
-        where reason='admin';
+        where reason='admin'
+        order by hwCode
 		]]>
 	</select>
 	<select id="selectRecordListByHwcode" resultType="record">
@@ -43,17 +38,19 @@
 		from
 		settingRecord
 		<![CDATA[where hwCode=#{hwCode} AND rownum<=14]]>
-		order by setDate desc, hwCode  
+		order by timeset desc, setNum desc
 	</select>
 	<select id="selectRecordListBySetDate" resultType="record">
 		<![CDATA[select *
 		from (
 			select *
             from SETTINGRECORD
-			where TO_CHAR(setDate, 'YYYY/MM/DD HH24:MI') = #{setDate}
-			order by setDate desc, hwCode
-		)
-		where rownum<=14;]]>
+			where TO_CHAR(setDate, 'YYYY/MM/DD HH24:MI:SS') = #{setDate}
+			order by timeset desc, setNum desc		
+			)
+		where rownum<=14;
+		order by hwCode
+		]]>
 	</select>
 	<select id="selectRecordListByTimeSet" resultType="record">
 	<![CDATA[select *
@@ -61,9 +58,11 @@
 			select *
             from SETTINGRECORD
 			where TO_CHAR(TIMESET, 'YYYY/MM/DD HH24:MI') = #{timeSet}
-			order by timeSet desc, hwCode, setDate desc 
+			order by timeset desc, setNum desc
 		)
-		where rownum<=14;]]>
+		where rownum<=14;
+		order by hwCode
+		]]>
 	</select>
 	
 	<update id="insertRecordList" parameterType="record">
@@ -71,7 +70,7 @@
 		into 
 		settingRecord(setNum,lightState,reason,hwCode,setDate,timeSet)
 		values
-		(#{setNum},#{lightState},#{reason},#{hwCode},#{setDate},#{timeSet})
+		(#{setNum},#{lightState},#{reason},#{hwCode},TO_DATE(#{strSetDate},'YYYY/MM/DD HH24:MI:SS'),TO_DATE(#{strTimeSet},'YYYY/MM/DD HH24:MI'))
 	</update>
 	
 </mapper>

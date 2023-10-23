@@ -39,6 +39,7 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public AdminVO selectAdminByAdminNum(String adminNum) throws SQLException {
 		AdminVO admin = session.selectOne("Admin-Mapper.selectAdminByAdminNum",adminNum);
+		System.out.println("dao: "+adminNum);
 		return admin;
 	}
 

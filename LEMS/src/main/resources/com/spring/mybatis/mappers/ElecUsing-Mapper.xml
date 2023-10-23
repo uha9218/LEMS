@@ -13,18 +13,19 @@
 	</update>
 	<update id="updateElecUsingList" parameterType="elec">
 		update ElecUsing
-		set elecUse=#{elecUse}
+		set elecUse=#{elecUse}, elecAltDate=#{elecAltDate}
 		where elecuseNum=#{elecuseNum}
 	</update>
 	<select id="selectRecentElecUsingList" resultType="elec">
 		<![CDATA[
-		select *
+        select *
 		from(
 			select *
 			from elecUsing
-			order by elecAltDate desc, hwCode
+			order by elecUseNum desc
 		)
-		where rownum<=14;
+		where rownum<=14
+        order by hwCode
 		]]>
 	</select>
 	

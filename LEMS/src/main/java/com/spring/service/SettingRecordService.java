@@ -11,10 +11,7 @@ import com.spring.dto.SettingRecordVO;
 public interface SettingRecordService {
 	
 	//설정표 저장
-	void saveSettingTable(List<SettingRecordVO> record) throws SQLException, ParseException;
-	
-	//추천설정표 + 관리자 설정
-	void updateSettingTable(List<RecommandVO> recommand) throws SQLException, ParseException;
+	void saveSettingTable(List<SettingRecordVO> record) throws SQLException, ParseException, Exception;
 	
 	//가장 최근 설정 기록 조회
 	List<SettingRecordVO> getRecentRecord() throws SQLException;

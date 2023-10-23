@@ -188,7 +188,6 @@
 	   
 	   $("input.light-check").each(function() {
 		   var data = {
-			        
 			    	"hwCode": this.getAttribute("data-hwCode"),
 			    	"reason": this.getAttribute("data-reason"),
 	               };

@@ -35,7 +35,7 @@ public class ElecUsingDAOImpl implements ElecUsingDAO{
 		List<ElecUsingVO> recent = selectRecentElecUsingList();
 		if(elecList.size()>0) {
 			for(int i=0;i<elecList.size();i++) {
-				if(elecList.get(i).getElecUse()=="1") {	//이전 설정과 변함이 없으면 전력량 유지
+				if(elecList.get(i).getElecUse().equals("a")) {	//이전 설정과 변함이 없으면 전력량 유지
 					elecList.get(i).setElecUse(recent.get(i).getElecUse());
 				} else {	//이전설정과 변동시 전력사용량 수정
 					if(elecList.get(i).getElecUse().endsWith("1")) {	//off->on

@@ -6,9 +6,9 @@ public class ElecUsingVO {
 
 	private String elecuseNum;	//전력소비량번호
 	private String elecUse;		//구간전력량
-	private Date elecuseDate;	//구간전력량날짜
+	private String elecuseDate;	//구간전력량날짜
 	private String hwCode;		//구간코드
-	private Date elecAltDate;
+	private String elecAltDate;
 	
 	public String getElecuseNum() {
 		return elecuseNum;
@@ -22,10 +22,10 @@ public class ElecUsingVO {
 	public void setElecUse(String elecUse) {
 		this.elecUse = elecUse;
 	}
-	public Date getElecuseDate() {
+	public String getElecuseDate() {
 		return elecuseDate;
 	}
-	public void setElecuseDate(Date elecuseDate) {
+	public void setElecuseDate(String elecuseDate) {
 		this.elecuseDate = elecuseDate;
 	}
 	public String getHwCode() {
@@ -34,10 +34,10 @@ public class ElecUsingVO {
 	public void setHwCode(String hwCode) {
 		this.hwCode = hwCode;
 	}
-	public Date getElecAltDate() {
+	public String getElecAltDate() {
 		return elecAltDate;
 	}
-	public void setElecAltDate(Date elecAltDate) {
+	public void setElecAltDate(String elecAltDate) {
 		this.elecAltDate = elecAltDate;
 	}
 	

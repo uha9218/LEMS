@@ -15,6 +15,11 @@
     	where lnum is not null
     	<include refid="search" />
     </select>
+     <select id="selectLightList" resultType="light">
+    	select *
+    	from light
+    	where lnum is not null
+    </select>
     
 	<select id="selectSearchLightListCount" resultType="int">
     	select count(*)

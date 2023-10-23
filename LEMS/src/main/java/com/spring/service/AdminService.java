@@ -16,7 +16,7 @@ public interface AdminService {
 	Map<String, Object> getAdminList(SearchListCommand command) throws SQLException;
 	
 	//상세 보기
-	AdminVO getAdminDetail(String AdminNum) throws SQLException;
+	AdminVO getAdminDetail(String adminNum) throws SQLException;
 	
 	//등록
 	void registAdmin(AdminVO admin) throws SQLException;
@@ -25,5 +25,5 @@ public interface AdminService {
 	void modifyAdmin(AdminVO admin) throws SQLException;
 	
 	//삭제
-	void deleteAdmin(String AdminNum) throws SQLException;
+	void deleteAdmin(String adminNum) throws SQLException;
 }

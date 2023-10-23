@@ -18,6 +18,7 @@ import com.spring.command.SetRecordCommand;
 import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
 import com.spring.dto.StatVO;
+import com.spring.scheduler.RecommandTableScheduler;
 import com.spring.service.RecommandService;
 import com.spring.service.SettingRecordService;
 import com.spring.service.StatService;
@@ -43,14 +44,15 @@ public class ControlController {
 	      
 	      List<RecommandVO> recList= rec.getRecentRecommand();
 	      dataMap.put("recList", recList);
-	     
+	      
 	      List<SettingRecordVO> setList = set.getRecentRecord();
 	      dataMap.put("setList", setList);
+	      
 	      
 	      model.addAllAttributes(dataMap);
 	      return url;
 	}
-	
+
 	@GetMapping("/recTable")
    public String recTable(Model model) throws Exception{
       String url="/control/recTable";
@@ -62,6 +64,7 @@ public class ControlController {
      
       List<SettingRecordVO> setList = set.getRecentRecord();
       dataMap.put("setList", setList);
+
       
       model.addAllAttributes(dataMap);
       return url;
@@ -95,7 +98,6 @@ public class ControlController {
 		String url = "recTable.do";
 			
 		List<SettingRecordVO> record = command.getData();
-		// service 호출
 		set.saveSettingTable(record);
 		
 		return url;

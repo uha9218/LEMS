@@ -46,6 +46,12 @@ public class LightDAOImpl implements LightDAO{
 	*/
 	@Override
 	public List<LightVO> selectLightList() throws SQLException {
+		List<LightVO> light = sqlSession.selectList("Light-Mapper.selectLightList");
+		return light;
+	}
+	
+	@Override
+	public List<LightVO> selectsearchLightList() throws SQLException {
 		List<LightVO> light = sqlSession.selectList("Light-Mapper.selectsearchLightList");
 		return light;
 	}
@@ -61,14 +67,15 @@ public class LightDAOImpl implements LightDAO{
 		List<LightVO> lightList = selectLightList();
 		for(int i=0;i<lightList.size();i++) {
 			for(int j=0;j<light.size();j++) {
-				if(lightList.get(i).getHwCode()==light.get(j).getHwCode()) {
+				if(lightList.get(i).getHwCode().equals(light.get(j).getHwCode())) {
 					lightList.get(i).setlState(light.get(j).getlState());
 				}
 			}
 			sqlSession.update("Light-Mapper.updateLight",lightList.get(i));
+			//System.out.println(lightList.get(i).getlNum()+" "+lightList.get(i).getHwCode()+" "+lightList.get(i).getlState());
 		}
-	}
 
+	}
 
 
 }
