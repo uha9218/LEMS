@@ -8,55 +8,55 @@
 		<if test="searchType == 'A'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'B'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'C'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'D'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'E'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'F'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'I'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'J'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'K'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'L'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'M'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'N'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
@@ -88,4 +88,12 @@
     	from traffic
     	where traffnum=#{traffnum}
     </select>
+
+	<select id="selectTrafficByHwCode" resultType="traffic">
+		select *
+		from traffic
+		where hwCode=#{hwCode}
+		order by traffDate desc
+	</select>
+
 </mapper>

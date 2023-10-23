@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +19,6 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	color: white;
 }
-
 .background {
 	background-image:
 		url("<%=request.getContextPath()%>/resources/img/login_background.png");
@@ -34,11 +37,9 @@ body {
 </Style>
 </head>
 <body class="hold-transition login-page">
-
 <div class="login-box">
   <!-- for background -->
   <div class="background"></div>
-
   <!-- for form container -->
   <div class="container">
     <h2><a href="login.do"><b style="font-size:1.5em">LEMS</b></a>  Login</h2>
@@ -48,22 +49,22 @@ body {
         <span class="material-icons-outlined">
           account_circle
         </span>
-        <input type="text" name="id" id="id" placeholder="Email or Username" value="">
+        <input type="text" name="email" id="email" placeholder="Email">
       </div>
-	
       <div class="form-item">
         <span class="material-icons-outlined">
           lock
         </span>
-        <input type="password" name="pwd" id="pwd" placeholder="password">
+        <input type="password" name="pwd" id="pwd" placeholder="Password" value="">
       </div>
-
       <button type="submit">LOGIN</button>
-
-
     </form>
   </div>
 </div>
+<c:if test="${not empty message }" >
+<script>
+	alert("${message}");
+</script>
+</c:if> 
 </body>
-
 </html>

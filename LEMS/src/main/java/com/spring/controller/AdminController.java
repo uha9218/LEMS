@@ -91,8 +91,7 @@ public class AdminController {
    @PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
    public String modify(AdminModifyCommand modifyReq) throws Exception {
       
-      String url = "redirect:/admin/detail.do?id="+modifyReq.getAdminNum();
-      
+      String url = "redirect:/admin/detail.do?email="+modifyReq.getEmail();
       AdminVO admin = modifyReq.toAdmin();
       admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
       
@@ -131,10 +130,10 @@ public class AdminController {
    
    @GetMapping("/idCheck")
    @ResponseBody
-   public ResponseEntity<String> idCheck(String id) throws Exception {
+   public ResponseEntity<String> idCheck(String email) throws Exception {
       ResponseEntity<String> entity = null;
 
-      AdminVO admin = service.getAdminDetail(id);
+      AdminVO admin = service.getAdminDetail(email);
 
       if (admin != null) {
          entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);

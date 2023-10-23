@@ -10,13 +10,14 @@ import com.spring.command.SearchListCommand;
 import com.spring.dao.SunlightDAO;
 import com.spring.dto.SunlightVO;
 
-public class SunlightServiceImpl implements SunlightService{
+public class SunlightServiceImpl implements SunlightService {
 
 	private SunlightDAO sunlightDAO;
+
 	public void setSunlightDAO(SunlightDAO sunlightDAO) {
 		this.sunlightDAO = sunlightDAO;
 	}
-	
+
 	@Override
 	public Map<String, Object> getSunlightList(SearchListCommand command) throws SQLException {
 		Map<String, Object> dataMap = new HashMap<String ,Object>();
@@ -83,21 +84,22 @@ public class SunlightServiceImpl implements SunlightService{
 		
 		staticMap.put("flDevi", tmp+"");
 		staticMap.put("euDevi", String.format("%.1f", Math.sqrt(eudevi/sunlightList.size())));
-		
+
 		staticMap.replace("flMin", staticMap.get("flMin").substring(0,2) + ":" + staticMap.get("flMin").substring(2,4));
 		staticMap.replace("flMax", staticMap.get("flMax").substring(0,2) + ":" + staticMap.get("flMax").substring(2,4));
 		staticMap.replace("flAvg", staticMap.get("flAvg").substring(0,2) + ":" + staticMap.get("flAvg").substring(2,4));
 //		staticMap.replace("flDevi",staticMap.get("flDevi").substring(0,2) + ":" + staticMap.get("flDevi").substring(2,4));
 		
 		
+
 		dataMap.put("staticMap", staticMap);
 		dataMap.put("sunlightList", sunlightList);
-		
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCommand(command);
 		pageMaker.setTotalCount(sunlightDAO.selectSearchSunlightListCount(command));
 		dataMap.put("pageMaker", pageMaker);
-		
+
 		return dataMap;
 	}
 
@@ -105,7 +107,15 @@ public class SunlightServiceImpl implements SunlightService{
 	public SunlightVO getSunlight(String sunnum) throws SQLException {
 
 		SunlightVO sunlight = sunlightDAO.selectSunlightBySunnum(sunnum);
+
+		return sunlight;
+	}
+
+	@Override
+	public SunlightVO getSunlightByHwCode(String hwCode) throws SQLException {
 		
+		SunlightVO sunlight = sunlightDAO.selectSunlightByHwCode(hwCode);
+
 		return sunlight;
 	}
 

@@ -11,6 +11,7 @@ public interface AdminDAO {
 	List<AdminVO> selectAdminList(SearchListCommand command) throws SQLException;
 	int selectSearchAdminListCount(SearchListCommand command) throws SQLException;
 	AdminVO selectAdminByAdminNum(String adminNum) throws SQLException;
+	AdminVO selectAdminByEmail(String email) throws SQLException;
 	AdminVO selectAdminByPicture(String picture) throws SQLException;
 	void insertAdmin(AdminVO admin) throws SQLException;
 	void updateAdmin(AdminVO admin) throws SQLException;

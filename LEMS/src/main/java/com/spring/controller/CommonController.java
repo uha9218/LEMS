@@ -43,8 +43,8 @@ public class CommonController {
       List<MenuVO> menuList = menuService.getMainMenuList();
       MenuVO menu = menuService.getMenuByMcode(mCode);
       
-      String id = (String)session.getAttribute("loginUser");
-      AdminVO admin = adminService.getAdminDetail(id);
+      String email = (String)session.getAttribute("loginUser");
+      AdminVO admin = adminService.getAdminDetail(email);
       
       model.addAttribute("menuList", menuList);
       model.addAttribute("menu", menu);
@@ -75,18 +75,18 @@ public class CommonController {
    }
    
    @PostMapping("/common/login")
-   public String login(String id, String pwd,
+   public String login(String email, String pwd,
                   String retUrl, 
                   HttpSession session,
                   Model model) 
                                           throws Exception {
       String url = "redirect:/index.do";
       
-      if(retUrl!=null && !retUrl.isEmpty()) url="redirect:"+retUrl;
+      if(retUrl!=null && !retUrl.isEmpty()) url="redirect:" + retUrl;
       
       try {
-         adminService.login(id, pwd);
-         session.setAttribute("loginUser",id);
+         adminService.login(email, pwd);
+         session.setAttribute("loginUser",email);
          //session.setMaxInactiveInterval(6*60);
       } catch (NotFoundIdException | InvalidPasswordException e) {
          url = "/common/login_fail";

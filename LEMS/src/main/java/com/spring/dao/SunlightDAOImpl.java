@@ -44,5 +44,14 @@ public class SunlightDAOImpl implements SunlightDAO{
 		SunlightVO lightList = sqlSession.selectOne("Sunlight-Mapper.selectSunlightBySunnum", sunnum);
 		return lightList;
 	}
+	
+	@Override
+	public SunlightVO selectSunlightByHwCode(String hwCode) throws SQLException {
+		
+		List<SunlightVO> sunlightList = 
+				sqlSession.selectList("Sunlight-Mapper.selectSunlightByHwCode", hwCode);
+		
+		return sunlightList.get(0);
+	}
 
 }

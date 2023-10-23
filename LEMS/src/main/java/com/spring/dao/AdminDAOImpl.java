@@ -11,35 +11,42 @@ import org.apache.ibatis.session.SqlSession;
 import com.spring.command.SearchListCommand;
 import com.spring.dto.AdminVO;
 
-public class AdminDAOImpl implements AdminDAO{
-	
+public class AdminDAOImpl implements AdminDAO {
+
 	private SqlSession session;
+
 	public void setSqlSession(SqlSession session) {
 		this.session = session;
 	}
-	
+
 	@Override
 	public List<AdminVO> selectAdminList(SearchListCommand command) throws SQLException {
-		
-		//pagenation
+
+		// pagenation
 		int offset = command.getStartRowNum();
 		int limit = command.getPerPageNum();
-		RowBounds rowBounds = new RowBounds(offset,limit);
-		
-		List<AdminVO> adminList = session.selectList("Admin-Mapper.selectAdminList",command,rowBounds); 
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		List<AdminVO> adminList = session.selectList("Admin-Mapper.selectAdminList", command, rowBounds);
 		return adminList;
 	}
 
 	@Override
 	public int selectSearchAdminListCount(SearchListCommand command) throws SQLException {
-		int count = session.selectOne("Admin-Mapper.selectSearchAdminListCount",command);
+		int count = session.selectOne("Admin-Mapper.selectSearchAdminListCount", command);
 		return count;
 	}
 
 	@Override
 	public AdminVO selectAdminByAdminNum(String adminNum) throws SQLException {
-		AdminVO admin = session.selectOne("Admin-Mapper.selectAdminByAdminNum",adminNum);
-		System.out.println("dao: "+adminNum);
+		AdminVO admin = session.selectOne("Admin-Mapper.selectAdminByAdminNum", adminNum);
+		return admin;
+	}
+
+	@Override
+	public AdminVO selectAdminByEmail(String email) throws SQLException {
+		AdminVO admin = session.selectOne("Admin-Mapper.selectAdminByEmail", email);
+
 		return admin;
 	}
 
@@ -52,17 +59,17 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public void insertAdmin(AdminVO admin) throws SQLException {
-		session.update("Admin-Mapper.insertAdmin",admin);
+		session.update("Admin-Mapper.insertAdmin", admin);
 	}
 
 	@Override
 	public void updateAdmin(AdminVO admin) throws SQLException {
-		session.update("Admin-Mapper.updateAdmin",admin);
+		session.update("Admin-Mapper.updateAdmin", admin);
 	}
 
 	@Override
 	public void deleteAdmin(String adminNum) throws SQLException {
-		session.update("Admin-Mapper.deleteAdmin",adminNum);
+		session.update("Admin-Mapper.deleteAdmin", adminNum);
 	}
 
 	@Override
@@ -72,4 +79,3 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 }
-
