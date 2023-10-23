@@ -3,20 +3,20 @@
 .button_left {
 	width: 0;
 	height: 0;
-	border-bottom: 0.5vw solid transparent;
-	border-top: 0.5vw solid transparent;
-	border-left: 0.5vw solid transparent;
-	border-right: 0.5vw solid;
+	border-bottom: 0.7vw solid transparent;
+	border-top: 0.7vw solid transparent;
+	border-left: 0.7vw solid transparent;
+	border-right: 0.7vw solid;
 	display: inline-block;
 }
 
 .button_right {
 	width: 0;
 	height: 0;
-	border-bottom: 0.5vw solid transparent;
-	border-top: 0.5vw solid transparent;
-	border-left: 0.5vw solid;
-	border-right: 0.5vw solid transparent;
+	border-bottom: 0.7vw solid transparent;
+	border-top: 0.7vw solid transparent;
+	border-left: 0.7vw solid;
+	border-right: 0.7vw solid transparent;
 	display: inline-block;
 }
 
@@ -26,8 +26,9 @@
 }
 
 .weather_select {
-	font-size: 1.4vw;
+	font-size: 1.8vw;
 	width: 100%;
+	padding-top: 1.4vw;
 }
 
 .weather_text_div {

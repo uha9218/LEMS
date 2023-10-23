@@ -4,86 +4,99 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Traffic-Mapper">
 	<sql id="search">
+
+		<if test="searchType == ''.toString()">
+			and hwcode like '%'||#{searchType}||'%'
+		</if>
+
 		<if test="searchType == 'A'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'B'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'C'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'D'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'E'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'F'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'I'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'J'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'K'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'L'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'M'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'N'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
+		<if test="fromDate != null and toDate != null ">
+			and TO_CHAR(traffDate,'YYYY-MM-DD') BETWEEN #{fromDate} AND #{toDate}
+		</if>
 	</sql>
-	
-	<sql id="date">
-		and TO_CHAR(traffdate, 'YYYYMMDD') between #{fromDate} and #{toDate}
-	</sql>
-	
-    <select id="selectsearchTrafficList" resultType="traffic">
-    	select *
-    	from traffic
-    	where traffnum is not null
-    	<include refid="search" />
-    	order by traffDate desc
-    </select>
-    
-    <select id="selectSearchTrafficListCount" resultType="int">
-    	select count(*)
-    	from traffic
-    	where traffnum is not null
-    	<include refid="search" />
+
+	<select id="selectsearchTrafficList" resultType="traffic">
+		select traffNum, speedAvg, traff, hwCode, occupancy,
+		TO_CHAR(traffDate,'YYYY-MM-DD HH24:MI:SS') as traffDate
+		from traffic
+		where traffNum is not null
+		<include refid="search" />
+		order by traffDate desc, hwCode
+	</select>
+
+	<select id="selectSearchTrafficListCount" resultType="int">
+		select count(*)
+		from traffic
+		where traffNum is not null
+		<include refid="search" />
+		order by traffDate desc, hwCode
+	</select>
+
+	<select id="selectTrafficByTraffnum" resultType="traffic">
+		select *
+		from traffic
+		where traffnum=#{traffnum}
+	</select>
+
+	<select id="selectTrafficByHwCode" resultType="traffic">
+		select *
+		from traffic
+		where hwCode=#{hwCode}
 		order by traffDate desc
-    </select>
-    
-    <select id="selectTrafficByTraffnum" resultType="traffic">
-    	select *
-    	from traffic
-    	where traffnum=#{traffnum}
-    </select>
+	</select>
+
 </mapper>

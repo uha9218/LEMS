@@ -11,7 +11,7 @@
 
 <head></head>
 <body
-	class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"
+	class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed"
 	style="height: auto;">
 	<!-- Content Wrapper. Contains page content -->
 	<!-- Main content -->
