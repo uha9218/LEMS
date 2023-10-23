@@ -44,11 +44,11 @@
 							<option value="<%=request.getContextPath() %>/envdata/sunDetail.do">그래프</option>
 							<option value="<%=request.getContextPath() %>/envdata/sun.do">리스트</option>
 						</select>
-						<select class="form-control col-md-3" style="width:20px" name="perPageNum"
+						<%-- <select class="form-control col-md-3" style="width:20px" name="perPageNum"
 							id="perPageNum" onchange="if(this.value)location.href=(this.value);">
 							<option value="<%=request.getContextPath() %>/envdata/sunDetail.do">일조시간</option>
 							<option value="<%=request.getContextPath() %>/envdata/sunVariation.do">증감률</option>
-						</select>
+						</select> --%>
 						<!-- sort num -->
 						<select class="form-control col-md-3" name="searchType" id="searchType">
 	                     <option>전체</option>
@@ -87,9 +87,9 @@
 		</div>
 	</section>
 	<div class="card-body">
-	<div id="pdfDiv">
       <div class="row">
           <section class="col-lg-8">
+			<div id="pdfDiv">
               <div class="card">
                   <div class="card-body">
                    <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
@@ -97,10 +97,21 @@
 		                  <canvas id="sunChart" height="150%"></canvas>
 		              </div>
                   </div>
-              </div>
+           	 </div>
+            </div>
            </section>
-            <div class="col-lg-4" style="text-align:center;">
-               <table class="table table-bordered table-striped" id="sunList">
+            <div class="col-lg-4">
+            <div class="" style="position: relative; display: inline-block;">
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadCSV();">CSV</button>
+	            </div>&nbsp;&nbsp;
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadExcel();">Excel</button>
+	            </div>
+	         </div>
+               <table class="table table-bordered table-striped" id="sunList"  style="text-align:center;">
                   <thead>
 					<tr style="font-size:0.90em;">
 						<th style="width:15%;">No.</th>
@@ -125,18 +136,16 @@
 								<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>
 							</td>
 							<td>${sunlight.hwCode }</td>
-							<td>
-								<fmt:parseDate value="${sunlight.fullLight }" var="fullLight" pattern="HHmm" />
-								<fmt:formatDate value="${fullLight }" pattern="HH:mm"/>
+							<td>${sunlight.strFullLight }
 							</td>
-							<td>${sunlight.sunRise }</td>
+							<td>${sunlight.lightUse }</td>
 				  			</tr>
 				  		</c:forEach>	
 				</tbody>
                </table>
                
              <div class="card">
-               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;">
+               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;text-align:center;">
                   <thead>
 					<tr style="font-size:0.95em;">
 						<th style="width:20%;">구분</th>
@@ -170,7 +179,6 @@
                </div>
               <%@ include file="/WEB-INF/views/envdata/sunDetailpagination.jsp" %>	
             </div>
-          </div>
           </div>
     </div>
     
@@ -225,11 +233,73 @@ $(function() {
 	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
 	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
-	            doc.save('화면.pdf');
+	            doc.save('sunlightList.pdf');
 	        }
 	    });
 	});
+	 //downloadCSV
+	   function downloadCSV() {
+	      const table = document.getElementById("sunList"); // 테이블 설정
+	      const rows = table.getElementsByTagName("tr"); // 행 저장
+	       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
+	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+	       const headerRowData = []; // 제목 행 데이터 저장 배열
+	       for (const cell of headerCells) {
+	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+	       }
+	       csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+	           if (cells.length > 0) {
+	               const rowData = []; // 데이터 저장 배열
+	               for (const cell of cells) {
+	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+	               }
+	               csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+	           }
+	       }
+
+	       const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
+	       const link = document.createElement("a");
+	       link.setAttribute("href", encodedUri);
+	       link.setAttribute("download", "sunlightList.csv"); // .csv 다운로드하는 링크
+	       document.body.appendChild(link);
+	       link.click(); // <a> 클릭해서 다운로드 시작
+	   }
+	   
+	 //downloadExcel
+	   function downloadExcel() {
+	      const table = document.getElementById("sunList"); // 테이블 설정
+	      const rows = table.getElementsByTagName("tr"); // 행 저장
+	       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+
+	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+	       const headerRowData = []; // 제목 행 데이터 저장 배열
+	       for (const cell of headerCells) {
+	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+	       }
+	       excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+	           if (cells.length > 0) {
+	               const rowData = []; // 데이터 저장 배열
+	               for (const cell of cells) {
+	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+	               }
+	               excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+	           }
+	       }
+
+	       const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
+	       const link = document.createElement("a");
+	       link.setAttribute("href", encodedUri);
+	       link.setAttribute("download", "sunlightList.xls"); // .csv 다운로드하는 링크
+	       document.body.appendChild(link);
+	       link.click(); // <a> 클릭해서 다운로드 시작
+	   }
 
     $(function(){
         var ctx = document.getElementById('sunChart').getContext('2d');
@@ -250,10 +320,10 @@ $(function() {
                 yAxisID: 'y-left',
                 data: [],
                 backgroundColor: [
-                    'rgba(256, 0, 0, 0.4)'
+                    'rgba(255, 255, 051, 0.4)'
                 ],
                 borderColor: [
-                    'rgba(256, 0, 0, 0.4)'
+                	'rgba(255, 255, 051, 0.4)'
                 ],
                 borderWidth: 1
             },
@@ -274,14 +344,13 @@ $(function() {
     }
 
     var chartOptions = {
-        responsive:true,
-        // maintainAspectRatio: false,
+        responsive: true,
         scales: {
             x: {
                 title: {
                     display: true,
-                    text: '날짜',
-                    color:'white'
+                    text: '구간',
+                    color: 'white'
                 }
             },
             'y-left': {
@@ -290,10 +359,22 @@ $(function() {
                 title: {
                     display: true,
                     text: '밤의길이',
-                    color:'white'
+                    color: 'white',
+                    font: {
+	                    size: 20 
+	                },
                 },
                 grid: {
                     display: false
+                },
+                ticks: {
+                    stepSize: 1, // Y 축 간격 설정
+                    callback: function (value, index, values) {
+                        // Y 축 라벨에 시간 형식을 표시 (예: '01:00')
+                        var hours = Math.floor(value);
+                        var minutes = (value - hours) * 60;
+                        return hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                    }
                 }
             },
             'y-right': {
@@ -302,20 +383,22 @@ $(function() {
                 title: {
                     display: true,
                     text: '전력량(kW)',
-                    color:'white'
+                    color: 'white',
+                    font: {
+	                    size: 20 
+	                },
                 },
                 grid: {
                     display: false
                 }
             }
         }
-    }
+    };
     <c:forEach items="${sunlightList}" var="sunlight">
-		chartData.labels.push('<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
-	 	chartData.datasets[0].data.push('<fmt:formatDate value="${fullLight }" pattern="HHmm"/>'); //데이터 배열에 추가
-	 	chartData.datasets[1].data.push(${sunlight.sunRise}); //데이터 배열에 추가
+		chartData.labels.push('${sunlight.hwCode }'); //레이블 배열에 추가
+	 	chartData.datasets[0].data.push(${sunlight.fullLight }); //데이터 배열에 추가
+	 	chartData.datasets[1].data.push(${sunlight.lightUse }); //데이터 배열에 추가
 	</c:forEach>
-	 	
 </script>
 </body>
 </html>
