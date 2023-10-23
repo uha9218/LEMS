@@ -67,10 +67,10 @@
             <div style="position: relative; display: inline-block;">
                <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn"
                   onclick="downloadCSV();">CSV</button>
-            </div>
+            </div>&nbsp;&nbsp;
             <div style="position: relative; display: inline-block;">
-               <button id="" value="" class="btn btn-block btn-secondary btn"
-                  onclick="">Excel</button>
+               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn"
+                  onclick="downloadExcel();">Excel</button>
             </div>
          </div>					
 	         <table class="table table-bordered table-striped" id="sunList" style="text-align:center;">
@@ -152,36 +152,69 @@ $(function() {
 	 
 	});
 
+//downloadCSV
 function downloadCSV() {
-    const table = document.getElementById("trafficList"); // 테이블 설정
-    const rows = table.getElementsByTagName("tr"); // 행 저장
-     let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 해봤음)
+   const table = document.getElementById("sunList"); // 테이블 설정
+   const rows = table.getElementsByTagName("tr"); // 행 저장
+    let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
-     const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
-     const headerRowData = []; // 제목 행 데이터 저장 배열
-     for (const cell of headerCells) {
-         headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
-     }
-     csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+    const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+    const headerRowData = []; // 제목 행 데이터 저장 배열
+    for (const cell of headerCells) {
+        headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+    }
+    csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
 
-     for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
-         const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
-         if (cells.length > 0) {
-             const rowData = []; // 데이터 저장 배열
-             for (const cell of cells) {
-                 rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
-             }
-             csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
-         }
-     }
+    for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+        const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+        if (cells.length > 0) {
+            const rowData = []; // 데이터 저장 배열
+            for (const cell of cells) {
+                rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+            }
+            csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+        }
+    }
 
-     const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
-     const link = document.createElement("a");
-     link.setAttribute("href", encodedUri);
-     link.setAttribute("download", "trafficList.csv"); // alarmLog.csv 다운로드하는 링크
-     document.body.appendChild(link);
-     link.click(); // <a> 클릭해서 다운로드 시작
- }
+    const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "sunList.csv"); // .csv 다운로드하는 링크
+    document.body.appendChild(link);
+    link.click(); // <a> 클릭해서 다운로드 시작
+}
+
+//downloadExcel
+function downloadExcel() {
+   const table = document.getElementById("sunList"); // 테이블 설정
+   const rows = table.getElementsByTagName("tr"); // 행 저장
+    let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+
+    const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+    const headerRowData = []; // 제목 행 데이터 저장 배열
+    for (const cell of headerCells) {
+        headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+    }
+    excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+    for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+        const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+        if (cells.length > 0) {
+            const rowData = []; // 데이터 저장 배열
+            for (const cell of cells) {
+                rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+            }
+            excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+        }
+    }
+
+    const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "sunList.xls"); // .csv 다운로드하는 링크
+    document.body.appendChild(link);
+    link.click(); // <a> 클릭해서 다운로드 시작
+}
 
 </script>
 </body>

@@ -5,10 +5,6 @@
 <mapper namespace="Traffic-Mapper">
 	<sql id="search">
 	
-		<if test="searchType == ''.toString()">
-			and hwcode like '%'||#{searchType}||'%'
-		</if>
-	
 		<if test="searchType == 'A'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
@@ -64,25 +60,27 @@
 		<if test="searchType == 'N'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		<if test ="fromDate != null and toDate != null ">
+		
+		<if test ="fromDate != null and fromDate !='' and toDate != null and toDate !='' ">
 			 and TO_CHAR(traffDate,'YYYY-MM-DD') BETWEEN #{fromDate} AND #{toDate}
 		</if>
 	</sql>
+	
+	
 	
     <select id="selectsearchTrafficList" resultType="traffic">
     	select traffNum, speedAvg, traff, hwCode, occupancy, TO_CHAR(traffDate,'YYYY-MM-DD HH24:MI:SS') as traffDate
     	from traffic
     	where traffNum is not null
-	 	<include refid="search" />
-	 	 order by traffDate desc, hwCode
+    	<include refid="search" />
+    	order by traffDate desc, hwCode
     </select>
     
     <select id="selectSearchTrafficListCount" resultType="int">
     	select count(*)
     	from traffic
     	where traffNum is not null
-	 	<include refid="search" />
-	 	 order by traffDate desc, hwCode
+    	<include refid="search" />
     </select>
     
     <select id="selectTrafficByTraffnum" resultType="traffic">

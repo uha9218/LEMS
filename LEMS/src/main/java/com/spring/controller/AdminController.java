@@ -214,13 +214,11 @@ public class AdminController {
       InputStream in = null;
       ResponseEntity<byte[]> entity = null;
       
-      try {
-         in = new FileInputStream(new File(imgPath, picture));
-         entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.OK);
-      }finally {
-         if(in != null)
-            in.close();
-      }
+		/*
+		 * try { in = new FileInputStream(new File(imgPath, picture)); entity = new
+		 * ResponseEntity<byte[]>(IOUtils.toByteArray(in), HttpStatus.OK); }finally {
+		 * if(in != null) in.close(); }
+		 */
       return entity;
    }
 }
