@@ -92,7 +92,6 @@ public class AdminController {
    public String modify(AdminModifyCommand modifyReq) throws Exception {
       
       String url = "redirect:/admin/detail.do?email="+modifyReq.getEmail();
-      
       AdminVO admin = modifyReq.toAdmin();
       admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
       
@@ -203,8 +202,8 @@ public class AdminController {
    }
    
    @GetMapping("/getPicture")
-   public ResponseEntity<byte[]> getPicture(String email) throws Exception{
-      AdminVO admin = service.getAdminDetail(email);
+   public ResponseEntity<byte[]> getPicture(String id) throws Exception{
+      AdminVO admin = service.getAdminDetail(id);
       
       if(admin==null) return new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
       

@@ -48,9 +48,9 @@ public class AdminServiceImpl implements AdminService{
 		return dataMap;
 	}
 	@Override
-	public AdminVO getAdminDetail(String email) throws SQLException {
+	public AdminVO getAdminDetail(String adminNum) throws SQLException {
 		
-		AdminVO admin = dao.selectAdminByEmail(email);
+		AdminVO admin = dao.selectAdminByAdminNum(adminNum);
 		return admin;
 	}
 	@Override

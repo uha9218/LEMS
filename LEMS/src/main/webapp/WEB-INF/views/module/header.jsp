@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
-    
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   <decorator:head />
 </head>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse" style="height: auto;">
+<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed sidebar-collapse">
 
 	<div class="wrapper">
 	

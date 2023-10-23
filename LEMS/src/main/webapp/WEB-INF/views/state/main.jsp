@@ -9,7 +9,7 @@
 
     <!-- Main content -->
     <!-- /.content -->
-       <div style="padding-top:5px;"></div>
+       <div style="padding-top:1.5vw;"></div>
        <section class="content">
          <div class="content">
             <div class="container-fluid">
@@ -29,7 +29,7 @@
                                  </font>
                               </small>
                         </div>
-                        <div class="card-body" style="padding-top: 5vw; padding-bottom: 5vw;">
+                        <div class="card-body" style="padding-top: 3vw; padding-bottom: 4.1vw;">
                            <!-- 노선도 시작 -->
                            <div class="route_map">
                              <div class="route_map_left">
@@ -114,7 +114,7 @@
                               </font>
                            </small>
                         </div>
-                        <div class="card-body" style="padding-top:3vw; padding-bottom:3vw;">
+                        <div class="card-body" style="padding-top:1vw; padding-bottom:1vw;">
                            <div class="row">
                               <!-- 전력량 차트 시작 -->
                               <div class="chart col-lg-7">
@@ -142,12 +142,12 @@
                <div class="row">
                   <!-- 날씨 현황 레이아웃 시작 -->
                   <div class="col-lg-4">
-                     <div class="card">
+                     <div class="card"  style="padding-bottom: 0.8vw;">
                         <div class="card-header border-0">
                            <h5 class="text-center" style="font-weight: bold;">날씨 현황</h5>
                         </div>
-                        <div class="card-body" style="padding-top:4vw; padding-bottom:2vw;">
-                           <div style="padding-bottom: 8.2%;">
+                        <div class="card-body" style="padding-top:2vw;">
+                           <div>
                            <div>
                               <div class="weather_time float-left weather-date"></div>
                               <div class="weather_time float-right">
@@ -162,15 +162,14 @@
                               <i id="weather_sky" class="weather_text_2 col-lg-2 fas"></i>
                               <div id="temperature" class="weather_text_3 col-lg-4 float-left"></div>
                               <div class="weather_text_4 col-lg-6 float-right">
-	                             <div id="sunList">
-	                                    <i class="fas fa-sun" id="sunlightList">
-		                                   	<fmt:parseDate value="${sunlight.sunRise }" var="sunRise" pattern="Hmm" />
-	                        				<fmt:formatDate value="${sunRise }" pattern="HH:mm"/>
-	                                    </i>
-	                                    <i class="fas fa-moon" id="sunlightList">
-	                                     	<fmt:parseDate value="${sunlight.sunSet }" var="sunSet" pattern="HHmm" />
-                        					<fmt:formatDate value="${sunSet }" pattern="HH:mm"/>
-	                                    </i>
+	                             <div id="sunlightList">	                             
+	                               <i class="fas fa-sun" id="sunRise">
+		                            
+	                               </i>
+	                               <i class="fas fa-moon" id="sunSet" style="margin-top: 0.5vw;">
+	                               		                                
+	                               </i>
+	                             
 	                             </div>
                               </div>
                               <div class="weather_text_div">
@@ -203,7 +202,7 @@
                               </font>
                            </small>
                         </div>
-                        <div class="card-body" style="padding-top:4vw; padding-bottom:2vw;">
+                        <div class="card-body" style="padding-top:2vw; padding-bottom: 2vw;">
                         <!-- 교통량 그래프 시작 -->
                         <div class="row" style="padding-top: 2vw; padding-bottom: 2vw;">
 	                       <div class="col-6 col-md-6 text-center">	
@@ -235,7 +234,7 @@
                               </font>
                            </small>
                         </div>
-                        <div class="card-body" style="padding-top:4vw; padding-bottom:2vw;">
+                        <div class="card-body" style="padding-top:2.9vw; padding-bottom:2vw;">
                         <!-- 사고량 그래프 시작 -->
 						<div class="chart">
 							<canvas id="donutChart" style="min-height: 15.8vw; height: 15.8vw; max-height: 15.8vw; max-width: 100%;"></canvas>
@@ -293,10 +292,10 @@
   	];
     
     // 사고량 위치
- 	var location_minX = '127.0408';
-    var location_maxX = '129.1304';
-    var location_minY = '37.4064';
-    var location_maxY = '35.5703';
+ 	var location_minX = '127.415700';
+    var location_maxX = '127.554500';
+    var location_minY = '36.319400';
+    var location_maxY = '36.410400';
     var accident_location_Array = [
   	  ['127.036200', '127.092800', ' 37.410000', '37.466300'], // 양재
    	  ['127.088400', '127.110600', ' 37.224400', '37.410000'], // 판교
@@ -350,7 +349,7 @@
  
     today = year + "" + month + "" + day;
     
-    // 구간 설정
+ // 구간 설정
     $("#A").click(function(){
     	location_x = location_Array[0][0];
    		location_y = location_Array[0][1];
@@ -361,6 +360,8 @@
    	    location_maxY = accident_location_Array[0][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('A');
+   		trafficData('A')
     });
     $("#B").click(function(){
     	location_x = location_Array[1][0];
@@ -372,6 +373,8 @@
    	    location_maxY = accident_location_Array[1][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('B');
+   		trafficData('B')
     });
     $("#C").click(function(){
     	location_x = location_Array[2][0];
@@ -383,6 +386,8 @@
    	    location_maxY = accident_location_Array[2][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('C');
+   		trafficData('C')
     });
     $("#D").click(function(){
     	location_x = location_Array[3][0];
@@ -394,6 +399,8 @@
    	    location_maxY = accident_location_Array[3][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('D');
+   		trafficData('D')
     });
     $("#E").click(function(){
     	location_x = location_Array[4][0];
@@ -405,6 +412,8 @@
    	    location_maxY = accident_location_Array[4][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('E');
+   		trafficData('E')
     });
     $("#F").click(function(){
     	location_x = location_Array[5][0];
@@ -416,6 +425,8 @@
    	    location_maxY = accident_location_Array[5][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('F');
+   		trafficData('F')
     });
     $("#G").click(function(){
     	location_x = location_Array[6][0];
@@ -427,6 +438,8 @@
    	    location_maxY = accident_location_Array[6][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('G');
+   		trafficData('G')
     });
     $("#H").click(function(){
     	location_x = location_Array[7][0];
@@ -438,6 +451,8 @@
    	    location_maxY = accident_location_Array[7][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('H');
+   		trafficData('H')
     });
     $("#I").click(function(){
     	location_x = location_Array[8][0];
@@ -449,6 +464,8 @@
    	    location_maxY = accident_location_Array[8][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('I');
+   		trafficData('I')
     });
     $("#J").click(function(){
     	location_x = location_Array[9][0];
@@ -460,6 +477,8 @@
    	    location_maxY = accident_location_Array[9][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('J');
+   		trafficData('J')
     });
     $("#K").click(function(){
     	location_x = location_Array[10][0];
@@ -471,6 +490,8 @@
    	    location_maxY = accident_location_Array[10][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('K');
+   		trafficData('K')
     });
     $("#L").click(function(){
     	location_x = location_Array[11][0];
@@ -482,6 +503,8 @@
    	    location_maxY = accident_location_Array[11][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('L');
+   		trafficData('L')
     });
     $("#M").click(function(){
     	location_x = location_Array[12][0];
@@ -493,6 +516,8 @@
    	    location_maxY = accident_location_Array[12][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('M');
+   		trafficData('M')
     });
     $("#N").click(function(){
     	location_x = location_Array[13][0];
@@ -504,6 +529,8 @@
    	    location_maxY = accident_location_Array[13][3];
    		load_API_weather();
    		load_API_accident();
+   		sunData('N');
+   		trafficData('N')
     });
     
     //API 데이터 가져오기
@@ -733,7 +760,8 @@ load_API_accident();
 </script>
 
 <script>
-/** 통행속도
+function traffChart() {
+/** 통행량
  * ---------------------------------------
  * This demo was created using amCharts 5.
  * 
@@ -832,11 +860,11 @@ bullet.get("sprite").on("rotation", function () {
 setInterval(function () {
   axisDataItem.animate({
     key: "value",
-    to: 89, //데이터
+    to: traff, //데이터
     duration: 500,
     easing: am5.ease.out(am5.ease.cubic)
   });
-}, 5000)
+}, 1000)
 
 chart.bulletsContainer.set("mask", undefined);
 
@@ -886,10 +914,13 @@ am5.array.each(bandsData, function (data) {
 
 // Make stuff animate on load
 chart.appear(1000, 100);
+}
+traffChart();
 </script>
 
 <script>
-/** 통행량
+function speedAvgChart() {
+/** 통행속도
  * ---------------------------------------
  * This demo was created using amCharts 5.
  * 
@@ -988,11 +1019,11 @@ bullet.get("sprite").on("rotation", function () {
 setInterval(function () {
   axisDataItem.animate({
     key: "value",
-    to: 178, //데이터
+    to: speedAvg, //데이터
     duration: 500,
     easing: am5.ease.out(am5.ease.cubic)
   });
-}, 5000)
+}, 1000)
 
 chart.bulletsContainer.set("mask", undefined);
 
@@ -1042,6 +1073,8 @@ am5.array.each(bandsData, function (data) {
 
 // Make stuff animate on load
 chart.appear(1000, 100);
+}
+speedAvgChart();
 </script>
 
 
@@ -1133,6 +1166,53 @@ function accidentChart() {
   })
 }
 accidentChart();
+</script>
+
+<script>
+function sunData(hwCode){
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/state/sun?hwCode="+hwCode,
+		method:"get",
+		success:function(data){
+			
+			var sunRise = (data.sunRise);
+			var sunSet = (data.sunSet);
+			
+			var sunRise_start = sunRise.substr(0, 1);
+		    var sunRise_end = sunRise.substr(1, 2);
+		    
+			var sunSet_start = sunSet.substr(0, 2);
+		    var sunSet_end = sunSet.substr(2, 2);
+		    
+		    sunRise = (" 0" + sunRise_start + ":" + sunRise_end);
+		    sunSet = (" " + sunSet_start + ":" + sunSet_end);
+		    
+		    $("#sunRise").text(sunRise);
+		    $("#sunSet").text(sunSet);
+		}		
+	});
+}
+sunData('F');
+</script>
+
+<script>
+function trafficData(hwCode){
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/state/traffic?hwCode="+hwCode,
+		method:"get",
+		success:function(data){
+		    
+	    var traff = parseInt(data.traff);
+	    var sppedAvg = parseInt(data.speedAvg);
+	    
+	    traffChart();
+	    speedAvgChart();
+		}		
+	});
+}
+trafficData('F');
 </script>
 
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>

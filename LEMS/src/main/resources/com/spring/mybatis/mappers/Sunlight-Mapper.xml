@@ -7,79 +7,93 @@
 		<if test="searchType == 'A'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'B'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'C'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'D'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'E'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'F'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'G'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'I'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'J'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'K'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'L'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'M'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		
+
 		<if test="searchType == 'N'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
+
+		<if test="fromDate != null and toDate != null ">
+			and TO_CHAR(sunDate,'YYYY-MM-DD') BETWEEN #{fromDate} AND
+			#{toDate}
+			order by sunDate desc
+		</if>
 	</sql>
-	
-    <select id="selectSearchSunlightList" resultType="sunlight">
-    	select *
-    	from sunlight
-    	where sunnum is not null
-    	<include refid="search" />
-    	order by sunDate desc
-    </select>
-    
-    <select id="selectSearchSunlightListCount" resultType="int">
-    	select count(*)
-    	from sunlight
-    	where sunnum is not null
-    	<include refid="search" />
+
+	<select id="selectSearchSunlightList" resultType="sunlight">
+		select sunNum, sunRise, sunSet, fullLight, hwCode, TO_CHAR(sunDate,
+		'YYYY-MM-DD HH24:MI:SS') as sunDate
+		from sunlight
+		where sunNum is not
+		null
+		<include refid="search" />
+	</select>
+
+	<select id="selectSearchSunlightListCount" resultType="int">
+		select count(*)
+		from sunlight
+		where sunNum is not null
+		<include refid="search" />
+	</select>
+
+	<select id="selectSunlightBySunnum" resultType="sunlight">
+		select *
+		from sunlight
+		where sunnum=#{sunnum}
+	</select>
+
+	<select id="selectSunlightByHwCode" resultType="sunlight">
+		select *
+		from sunlight
+		where hwCode=#{hwCode}
 		order by sunDate desc
-    </select>
-    
-    <select id="selectSunlightBySunnum" resultType="sunlight">
-    	select *
-    	from sunlight
-    	where sunnum=#{sunnum}
-    </select>
+	</select>
+	
 </mapper>

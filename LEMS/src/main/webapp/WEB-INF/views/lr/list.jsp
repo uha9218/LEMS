@@ -21,7 +21,7 @@
 <style>
 </style>
 </head>
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
+<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed" style="height: auto;">
 	<div class="card-header">
 		<h3 class="card-title">가로등 추가 설치 권고</h3>
 		</div>

@@ -24,9 +24,19 @@ public class TrafficDAOImpl implements TrafficDAO{
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
 		List<TrafficVO> trafficList = sqlSession.selectList("Traffic-Mapper.selectsearchTrafficList", command, rowBounds);
+
+		if(trafficList.size() > 0 ) {
+			for(int i=0;i<trafficList.size();i++) {
+				//교통량 형식 맞추기
+				if(trafficList.get(i).getTraff().contains(".")) {
+					trafficList.get(i).setTraff(trafficList.get(i).getTraff().substring(0, trafficList.get(i).getTraff().indexOf(".")));
+				}
+			}
+		}
+
 		return trafficList;
 	}
-
+	
 	@Override
 	public int selectSearchTrafficListCount(SearchListCommand command) throws Exception {
 		int count = sqlSession.selectOne("Traffic-Mapper.selectSearchTrafficListCount", command);
@@ -37,6 +47,15 @@ public class TrafficDAOImpl implements TrafficDAO{
 	public TrafficVO selectTrafficByTraffnum(String traffnum) throws SQLException {
 		TrafficVO tarfficList=sqlSession.selectOne("Traffic-Mapper.selectTrafficByTraffnum", traffnum);
 		return tarfficList;
+	}
+	
+	@Override
+	public TrafficVO selectTrafficByHwCode(String hwCode) throws SQLException {
+		
+		List<TrafficVO> trafficList = 
+				sqlSession.selectList("Traffic-Mapper.selectTrafficByHwCode", hwCode);
+		
+		return trafficList.get(0);
 	}
 
 }

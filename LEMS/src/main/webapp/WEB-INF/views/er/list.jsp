@@ -25,7 +25,7 @@
 <style>
 </style>
 </head>
-<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" style="height: auto;">
+<body class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed" style="height: auto;">
    <div class="card-header">
       <h3 class="card-title">전력량 오차 범위 조회</h3>
    </div>

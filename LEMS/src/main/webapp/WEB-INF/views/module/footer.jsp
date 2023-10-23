@@ -30,7 +30,7 @@
 {{#each .}}		
 <li class="nav-item subMenu" >
 	<a href="javascript:goPage('<%=request.getContextPath() %>{{murl}}','{{mcode}}');"	class="nav-link">
-		<i class="{{micon}}"></i>
+		<i class="{{micon}}" style="margin-left:0.2vw;"></i>
 		<p>{{mname}}</p>
 	</a>
 </li>
@@ -95,7 +95,6 @@ subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
 	      }
 	  });
 </script>
-
 
 </body>
 </html>
