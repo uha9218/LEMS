@@ -60,17 +60,17 @@
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
 		
-		<if test ="fromDate != null and toDate != null ">
+		<if test ="fromDate != null and fromDate !='' and toDate != null and toDate !='' ">
 			 and TO_CHAR(sunDate,'YYYY-MM-DD') BETWEEN #{fromDate} AND #{toDate}
-    		 order by sunDate desc
 		</if>
 	</sql>
 	
     <select id="selectSearchSunlightList" resultType="sunlight">
-    	select sunNum, sunRise, sunSet, fullLight, hwCode, TO_CHAR(sunDate, 'YYYY-MM-DD HH24:MI:SS') as sunDate
+    	select sunNum, sunRise, sunSet, fullLight, hwCode, lightUse, TO_CHAR(sunDate, 'YYYY-MM-DD HH24:MI:SS') as sunDate
     	from sunlight
     	where sunNum is not null
     	<include refid="search" />
+    	 order by sunDate desc, hwCode
     </select>
     
     <select id="selectSearchSunlightListCount" resultType="int">

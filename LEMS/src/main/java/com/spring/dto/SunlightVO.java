@@ -10,7 +10,15 @@ public class SunlightVO {
 	private String sunSet;		//일몰시간
 	private String fullLight;	//밤의길이
 	private String hwCode;		//구간코드
+	private String lightUse; 	//밤길이전력량
+	private String strFullLight;
 	
+	public String getLightUse() {
+		return lightUse;
+	}
+	public void setLightUse(String lightUse) {
+		this.lightUse = lightUse;
+	}
 	public String getSunNum() {
 		return sunNum;
 	}
@@ -47,5 +55,12 @@ public class SunlightVO {
 	public void setHwCode(String hwCode) {
 		this.hwCode = hwCode;
 	}
+	public String getStrFullLight() {
+		return strFullLight;
+	}
+	public void setStrFullLight(String fullLight) {
+		this.strFullLight= fullLight.substring(0,2)+":"+fullLight.substring(2,4);
+	}
+	
 	
 }

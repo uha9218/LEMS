@@ -1,5 +1,6 @@
 package com.spring.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DaydataVO {
@@ -11,6 +12,12 @@ public class DaydataVO {
 	private String dayTrf;
 	private String daySpd;
 	private String dayOcc;
+	private String dayPre;
+	private String dayDlu;
+	private String strDate;
+	
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+
 	
 	public String getDayNum() {
 		return dayNum;
@@ -54,6 +61,25 @@ public class DaydataVO {
 	public void setDayOcc(String dayOcc) {
 		this.dayOcc = dayOcc;
 	}
-	
+	public String getStrDate() {
+		if(this.strDate==null) {
+			return formatter.format(this.dayDate);}
+		return strDate;
+	}
+	public void setStrDate(String strDate) {
+		this.strDate = strDate;
+	}
+	public String getDayDlu() {
+		return dayDlu;
+	}
+	public void setDayDlu(String dayDlu) {
+		this.dayDlu = dayDlu;
+	}
+	public String getDayPre() {
+		return dayPre;
+	}
+	public void setDayPre(String dayPre) {
+		this.dayPre = dayPre;
+	}
 	
 }
