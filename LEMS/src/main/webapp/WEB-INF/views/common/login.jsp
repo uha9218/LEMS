@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +49,7 @@ body {
         <span class="material-icons-outlined">
           account_circle
         </span>
-        <input type="text" name="email" id="email" placeholder="Email" value="">
+        <input type="text" name="email" id="email" placeholder="Email">
       </div>
       <div class="form-item">
         <span class="material-icons-outlined">
@@ -57,5 +61,10 @@ body {
     </form>
   </div>
 </div>
+<c:if test="${not empty message }" >
+<script>
+	alert("${message}");
+</script>
+</c:if> 
 </body>
 </html>

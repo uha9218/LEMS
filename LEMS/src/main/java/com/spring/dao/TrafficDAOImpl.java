@@ -48,6 +48,15 @@ public class TrafficDAOImpl implements TrafficDAO{
 		TrafficVO tarfficList=sqlSession.selectOne("Traffic-Mapper.selectTrafficByTraffnum", traffnum);
 		return tarfficList;
 	}
+	
+	@Override
+	public TrafficVO selectTrafficByHwCode(String hwCode) throws SQLException {
+		
+		List<TrafficVO> trafficList = 
+				sqlSession.selectList("Traffic-Mapper.selectTrafficByHwCode", hwCode);
+		
+		return trafficList.get(0);
+	}
 
 
 }

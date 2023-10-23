@@ -9,6 +9,8 @@ import com.spring.dto.SunlightVO;
 public interface SunlightService {
 
 	public Map<String, Object> getSunlightList(SearchListCommand command) throws SQLException;
-	
+
 	public SunlightVO getSunlight(String sunnum) throws SQLException;
+
+	public SunlightVO getSunlightByHwCode(String hwCode) throws SQLException;
 }

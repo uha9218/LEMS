@@ -1,6 +1,5 @@
 package com.spring.controller;
 
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +16,22 @@ import com.spring.service.TrafficService;
 @Controller
 @RequestMapping("/envdata")
 public class EnvdataController {
-	
+
 	@Autowired
 	private TrafficService trafficService;
-	
+
 	@Autowired
 	private DaydataService daydataService;
+
 	
 	@Autowired
 	private SunlightService sunlightService;
-	
+
 	@GetMapping("/main")
 	public void main(SearchListCommand command, Model model) throws Exception{
 		
 	}
-	
+
 	@GetMapping("/traffic")
 	public String traffic(SearchListCommand command, Model model)throws Exception{
 		String url = "/envdata/traffic";
@@ -39,29 +39,33 @@ public class EnvdataController {
 		Map<String, Object> dataMap = trafficService.getTrafficList(command);
 		
 		model.addAllAttributes(dataMap);
-		
+
 		return url;
 	}
+
 	@GetMapping("/trafficDetail")
-	public String trafficDetail(SearchListCommand command, Model model)throws Exception{
+
+	public String trafficDetail(SearchListCommand command, Model model) throws Exception {
 		String url = "/envdata/trafficDetail";
-		
+
 		Map<String, Object> dataMap = daydataService.getDaydataList(command);
-		
+
 		model.addAllAttributes(dataMap);
-		
+
 		return url;
 	}
+
 	@GetMapping("/sun")
-	public String sun(SearchListCommand command, Model model)throws Exception{
+	public String sun(SearchListCommand command, Model model) throws Exception {
 		String url = "/envdata/sun";
-		
+
 		Map<String, Object> dataMap = sunlightService.getSunlightList(command);
-		
+
 		model.addAllAttributes(dataMap);
-		
+
 		return url;
 	}
+
 	@GetMapping("/sunDetail")
 	public String sunDetail(SearchListCommand command, Model model)throws Exception{
 		String url = "/envdata/sunDetail";
@@ -69,13 +73,14 @@ public class EnvdataController {
 		Map<String, Object> dataMap = sunlightService.getSunlightList(command);
 		
 		model.addAllAttributes(dataMap);
-		
+
 		return url;
 	}
+
 	@GetMapping("/sunVariation")
-	public String sunVariation()throws Exception{
+	public String sunVariation() throws Exception {
 		String url = "/envdata/sunVariation";
-		
+
 		return url;
 	}
 }
