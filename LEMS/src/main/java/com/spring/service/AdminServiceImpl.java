@@ -21,8 +21,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public void login(String id, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException {
-		AdminVO admin = dao.selectAdminByAdminNum(id);
+	public void login(String email, String pwd) throws NotFoundIdException, InvalidPasswordException, SQLException {
+		AdminVO admin = dao.selectAdminByEmail(email);
 		if (admin == null)
 			throw new NotFoundIdException();
 		if (!pwd.equals(admin.getPwd()))
@@ -48,9 +48,9 @@ public class AdminServiceImpl implements AdminService{
 		return dataMap;
 	}
 	@Override
-	public AdminVO getAdminDetail(String AdminNum) throws SQLException {
+	public AdminVO getAdminDetail(String email) throws SQLException {
 		
-		AdminVO admin = dao.selectAdminByAdminNum(AdminNum);
+		AdminVO admin = dao.selectAdminByEmail(email);
 		return admin;
 	}
 	@Override
