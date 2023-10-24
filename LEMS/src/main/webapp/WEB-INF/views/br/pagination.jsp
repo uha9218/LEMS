@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-  
-<form id="jobForm">	
-	<input type='hidden' name="page" value="" />
-	<!-- <input type='hidden' name="perPageNum" value=""/> -->
-	<input type='hidden' name="searchType" value="" />
-	<!-- <input type='hidden' name="keyword" value="" /> -->
-</form>
+ 
 
 
 <nav aria-label="Navigation">
@@ -44,22 +38,20 @@
 	</ul>
 </nav>
 
+ 
+<form id="jobForm">	
+	<input type='hidden' name="page" value="" />
+	<input type='hidden' name="perPageNum" value="10"/>
+<!-- 	<input type='hidden' name="searchType" value="" />
+	<input type='hidden' name="keyword" value="" /> -->
+</form>
 
 <script>
 	function searchList_go(page,url){
-		//alert("click search btn");
-		if(!url) url="sun.do";
-		
+		url="list.do";
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
-		/* jobForm.perPageNum.value 
-			= document.querySelector("select[name='perPageNum']").value; */
-		jobForm.searchType.value 
-			= document.querySelector("select[name='searchType']").value;
-		/* jobForm.keyword.value 
-			= document.querySelector("input[name='keyword']").value; */
-		
-		jobForm.action=url;
+	
 		jobForm.submit();
 	}
 </script>

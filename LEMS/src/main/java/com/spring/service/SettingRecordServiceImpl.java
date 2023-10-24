@@ -137,6 +137,17 @@ public class SettingRecordServiceImpl implements SettingRecordService{
 	@Override
 	public List<SettingRecordVO> getRecentRecord() throws SQLException {
 		List<SettingRecordVO> setList = set.selectRecentRecordList();
+		String[] LNum = {"131","5540","1160","979","96","71","553","10000","8","984","4950","999","649","2899"};
+/*
+		for(int i=0;i<LNum.length;i++) {
+			LightVO li = light.selectLightByLnum(LNum[i]);
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^LNum"+LNum[i]+" "+li.getlState());
+			if(li.getlState()==2) {
+				setList.get(i).setStrState("고장");
+				setList.get(i).setLightState(2);
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+setList.get(i).getLightState()+" "+setList.get(i).getHwCode()+" "+li.getlState());
+			}
+		}*/
 		return setList;
 	}
 

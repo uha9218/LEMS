@@ -32,9 +32,10 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public Map<String, Object> getAdminList(SearchListCommand command) throws SQLException {
-
+		
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		
+		command.setPerPageNum(10);
 		List<AdminVO> adminList = dao.selectAdminList(command);
 		
 		int adminCount = dao.selectSearchAdminListCount(command);

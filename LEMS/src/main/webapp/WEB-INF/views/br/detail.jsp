@@ -17,29 +17,26 @@
 			<div class="mailbox-read-info">
 				<div class="card-body" align="center">
 					<div class="form-group row">
-						<label for="inputID" class="col-sm-6 col-form-label">아이디</label>
-						<div class="col-sm-6">${admin.adminNum }</div>
+						<label for="inputID" class="col-sm-6 col-form-label">고장 번호</label>
+						<div class="col-sm-6">${br.brNum }</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputID" class="col-sm-6 col-form-label">이름</label>
-						<div class="col-sm-6">${admin.name }</div>
+						<label for="inputID" class="col-sm-6 col-form-label">고장 구간</label>
+						<div class="col-sm-6">${br.hwCode }</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputEmail" class="col-sm-6 col-form-label">이메일</label>
-						<div class="col-sm-6">${admin.email }</div>
+						<label for="inputEmail" class="col-sm-6 col-form-label">고장 내용</label>
+						<div class="col-sm-6">${br.brContent }</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputPassword" class="col-sm-6 col-form-label">패스워드</label>
-						<div class="col-sm-6">${admin.pwd }</div>
+						<label for="inputPassword" class="col-sm-6 col-form-label">고장 등록일</label>
+						<div class="col-sm-6"><fmt:formatDate value="${br.brDate }" pattern="yyyy-MM-dd"/></div>
 					</div>
 					<div class="form-group row">
-						<label for="inputPassword3" class="col-sm-6 col-form-label">전화번호</label>
-						<div class="col-sm-6">${admin.phone }</div>
+						<label for="inputPassword3" class="col-sm-6 col-form-label">처리 여부</label>
+						<div class="col-sm-6">${br.strState }</div>
 					</div>
-					<div class="form-group row">
-						<label for="inputPassword3" class="col-sm-6 col-form-label">관리자 등록일</label>
-						<div class="col-sm-6"><fmt:formatDate value="${admin.regDate }" pattern="yyyy-MM-dd"/></div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -56,7 +53,7 @@
 </section>
 
 <form role="form">
-	<input type="hidden" name="adminNum" value="${admin.adminNum }" />
+	<input type="hidden" name="brNum" value="${br.brNum }" />
 </form>
 
 

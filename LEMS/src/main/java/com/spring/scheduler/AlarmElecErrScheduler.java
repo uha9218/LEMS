@@ -36,6 +36,7 @@ public class AlarmElecErrScheduler {
 		int alarmCount=0;
 		LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
 
 		for(int i=0;i<sr.size();i++){
@@ -47,7 +48,7 @@ public class AlarmElecErrScheduler {
 				//신뢰구간 95퍼 미만
 				if(Math.abs(realUse-preUse)>elecAmount[i]*10*0.05) {
 					alarm.add(new AlarmVO());
-					alarm.get(alarmCount).setAlarmNum(al.selectAlarmNumSeqNext()+"");
+					alarm.get(alarmCount).setAlarmNum(sr.get(i).getHwCode()+now.format(formatter1));
 					alarm.get(alarmCount).setAlarmStrDate(now.format(formatter));
 					alarm.get(alarmCount).setHwCode(sr.get(i).getHwCode());
 					alarm.get(alarmCount).setElecError(Math.abs(realUse-preUse)+"");

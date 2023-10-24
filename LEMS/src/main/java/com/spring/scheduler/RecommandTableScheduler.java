@@ -55,10 +55,9 @@ public class RecommandTableScheduler {
 		SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		SimpleDateFormat formatter3 = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat formatter4 = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-		System.out.println(now);
 		int alarmCount=0;
 
-		if(now.format(DateTimeFormatter.ofPattern("HHmm")).equals("12:00")) {	//12시에 관리자 설정 전체 초기화
+		if(now.format(DateTimeFormatter.ofPattern("HH:mm")).equals("12:00")) {	//12시에 관리자 설정 전체 초기화
 			adminList.clear();
 		}
 		
@@ -95,9 +94,11 @@ public class RecommandTableScheduler {
 				if(light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState()==10) {	//on->off
 					lightList.get(i).setlState(10);
 					elecList.get(i).setElecUse("0");
+					record.get(i).setReason("sys");
 				}else if(light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState()==11) { //off->on
 					lightList.get(i).setlState(11);
 					elecList.get(i).setElecUse("10");
+					record.get(i).setReason("sys");
 				}else {
 					lightList.get(i).setHwCode(record.get(i).getHwCode());
 					lightList.get(i).setlState(record.get(i).getLightState());

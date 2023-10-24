@@ -64,11 +64,6 @@ public class AdminController {
    @PostMapping("/regist")
    public String regist(AdminVO admin) throws Exception{
 	   String url="/admin/registSuccess";
-     
-      if(admin.getPicture().split("\\$\\$").length > 1) {
-         admin.setPicture(admin.getPicture().split("\\$\\$")[1]);
-      }
-      
 	   service.registAdmin(admin);
 	   return url;
    }
@@ -78,33 +73,16 @@ public class AdminController {
       String url="/admin/modify";
       
       AdminVO admin = service.getAdminDetail(adminNum);
-      
-      if(admin.getPicture().split("\\$\\$").length > 1) {
-         admin.setPicture(admin.getPicture().split("\\$\\$")[1]);
-      }
-      
+
       model.addAttribute("admin", admin);
       
       return url;
    }
    
    @PostMapping(value = "/modify", produces = "text/plain;charset=utf-8")
-   public String modify(AdminModifyCommand modifyReq) throws Exception {
+   public String modify(AdminVO admin) throws Exception {
       
-      String url = "redirect:/admin/detail.do?email="+modifyReq.getEmail();
-      AdminVO admin = modifyReq.toAdmin();
-      admin.setName(HTMLInputFilter.htmlSpecialChars(admin.getName()));
-      
-      // 신규 파일 변경 및 기존 파일 삭제
-      String oldPicture = service.getAdminDetail(admin.getAdminNum()).getPicture();
-      
-      if(modifyReq.getPicture() != null && modifyReq.getPicture().getSize() > 0) {
-         String fileName = savePicture(oldPicture, modifyReq.getPicture());
-         admin.setPicture(fileName);
-      }else {
-         admin.setPicture(oldPicture);
-      }
-      
+      String url = "redirect:/admin/detail.do?adminNum="+admin.getAdminNum();
       // DB 내용 수정
       service.modifyAdmin(admin);
       

@@ -48,7 +48,8 @@
 
 <script>
 	function searchList_go(page,url){
-
+		
+		
 		var jobFormn = document.querySelector("form#jobForm");
 		jobForm.page.value = page;
 	

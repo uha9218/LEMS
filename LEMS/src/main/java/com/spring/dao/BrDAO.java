@@ -12,13 +12,13 @@ public interface BrDAO {
 	
 	int selectSearchBrListCount(SearchListCommand command) throws SQLException;
 	
-	BrVO selectBrByBrNum (int brNum) throws SQLException;
+	BrVO selectBrByBrNum (String brNum) throws SQLException;
 	
 	void insertBr(BrVO br) throws SQLException;
 	
 	void updateBr(BrVO br) throws SQLException;
 	
-	void deleteBr(int brNum) throws  SQLException;
+	void deleteBr(String brNum) throws  SQLException;
 	
 	int selectBrSeqNext() throws SQLException;
 	

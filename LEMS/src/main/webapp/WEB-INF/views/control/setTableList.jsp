@@ -19,11 +19,11 @@
           <div class="row">
           <div class="col-md-2"></div>
               <div class="col-md-8">
-                 <div class="card" style="width: 100%; height: 100%; ">
-                    <div class="card-header" >
-						<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em; margin: 0 5px 5px 0px; height: 80%;  float: right;" onclick="history.go(-1);" >초기화</button>
-                    	<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em; margin: 0 5px 5px 5px; height: 80%; float: right;" onclick="date_search();" >검색</button>
-						<input  type="text" id="datepicker" name="date"  placeholder="날짜 및 시간 선택" style="float: right;">
+                 <div class="card" style="width: 100%; height: 103%; ">
+                    <div class="card-header" style="width: 100%; height: 10%;">
+						<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1.5em; margin: 0 5px 5px 0px; height: 80%;  float: right;" onclick="history.go(-1);" >초기화</button>
+                    	<button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1.5em; margin: 0 5px 5px 5px; height: 80%; float: right;" onclick="date_search();" >검색</button>
+						<input  type="text" id="datepicker" name="date"  placeholder="날짜 및 시간 선택" style="float: right; margin:0 5px 0 0 ; height:80%">
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -43,7 +43,7 @@
                                    </tr>   
                                 </table>
                              </div>
-                             <div class="jsgrid-grid-body" style="height: 420px;">
+                             <div class="jsgrid-grid-body" style="height: 100%;">
                                  <table class="jsgrid-table" style="width: 100%;">
                                      <c:if test="${empty setList}" >
 										<tr>
@@ -54,7 +54,7 @@
 									</c:if>	
                                     <tbody>
                                       <c:forEach items="${setList }" var="set">
-                                    		<tr class="jsgrid-alt-row " style="height: 30px; text-align:center; font-size: 1.2em;" >
+                                    		<tr class="jsgrid-alt-row " style="height: 38px; text-align:center; font-size: 1.5em;" >
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${set.hwCode }</td>
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;"><fmt:formatDate value="${set.setDate }" pattern="yyyy-MM-dd HH:mm"/></td>
                                          		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;">

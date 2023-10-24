@@ -15,7 +15,7 @@
 			<div class="mailbox-read-info">
 				<form role="form" method="post" action="regist.do" name="registForm">
 					<div class="card-body" align="center">
-						<input type="hidden" class="form-control" name="regDate" id="regDate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" />" />
+						<input type="hidden" class="form-control" name="regDate" id="regDate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm" />" />
 						<input type="hidden" class="form-control" name="adminNum" id="adminNum" value="1"/>
 						
 						<div class="form-group row">
@@ -37,13 +37,9 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputPassword3" class="col-sm-6 col-form-label">권한</label>
+							<label for="inputPassword" class="col-sm-6 col-form-label">전화번호</label>
 							<div class="col-sm-6">
-								<select class="custom-select rounded-0" id="authority" name="roll">
-									<option value="super">최고 관리자</option>
-									<option value="admin">관리자</option>
-									<option value="user">사용자</option>
-								</select>
+								<input type="text" class="form-control" id="phone" name="phone" value="${admin.phone }" placeholder="숫자 11자리 입력하세요(예: 01000000000)"/>
 							</div>
 						</div>
 					</div>

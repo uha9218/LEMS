@@ -53,7 +53,9 @@
 	<bean id="SunlightService" class="com.spring.service.SunlightServiceImpl"
 		 p:sunlightDAO-ref="SunlightDAO"/>
 	<bean id="brService" class="com.spring.service.BrServiceImpl"
-		p:brDAO-ref="brDAO"/>
+		p:brDAO-ref="brDAO"
+		p:lightDAO-ref="lightDAO"
+		p:settingRecordDAO-ref="settingRecordDAO"/>
 	<bean id="recommandService" class="com.spring.service.RecommandServiceImpl"
 		p:recommandDAO-ref="recommandDAO"/>
 	<bean id="settingRecordService" class="com.spring.service.SettingRecordServiceImpl"
@@ -66,5 +68,9 @@
 	<bean id="daydataService" class="com.spring.service.DaydataServiceImpl"
 		p:daydataDAO-ref="daydataDAO"/>
 	<bean id="alarmService" class="com.spring.service.AlarmServiceImpl"
-		p:alarmDAO-ref="alarmDAO"/>
+		p:alarmDAO-ref="alarmDAO"
+		p:settingRecordDAO-ref="settingRecordDAO"
+		p:elecUsingDAO-ref="elecUsingDAO"/>
+	<bean id="elecUsingService" class="com.spring.service.ElecUsingServiceImpl"
+		p:elecUsingDAO-ref="elecUsingDAO"/>
 </beans>
