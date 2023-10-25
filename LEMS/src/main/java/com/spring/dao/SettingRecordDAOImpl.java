@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.spring.dto.ElecUsingVO;
 import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
+import com.spring.dto.SunlightVO;
 
 public class SettingRecordDAOImpl implements SettingRecordDAO{
 
@@ -58,8 +60,8 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 	public List<SettingRecordVO> selectRecordListByTimeSet(Date timeSet) throws SQLException {
 		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListByTimeSet",timeSet);
 		for(int i=0;i<srList.size();i++) {
-			if(srList.get(i).getLightState()==1) {srList.get(i).setStrState("on");}
-			else if(srList.get(i).getLightState()==0) {srList.get(i).setStrState("off");}
+			if(srList.get(i).getLightState()==1 || srList.get(i).getLightState()==10) {srList.get(i).setStrState("on");}
+			else if(srList.get(i).getLightState()==0 || srList.get(i).getLightState()==11) {srList.get(i).setStrState("off");}
 			else {srList.get(i).setStrState("수리중");}
 		}
 		return srList;
@@ -77,6 +79,10 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 			session.update("SettingRecord-Mapper.updateRecordList",record.get(i));
 		}
 	}
-  
+	@Override
+	public List<SettingRecordVO> selectRecordListByHwCode(String hwCode) throws SQLException {
+		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListByHwCode",hwCode);
+		return srList;
+	}
 
 }

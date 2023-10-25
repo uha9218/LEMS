@@ -149,7 +149,7 @@
    function downloadCSV() {
       const table = document.getElementById("trafficList"); // 테이블 설정
       const rows = table.getElementsByTagName("tr"); // 행 저장
-       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 해봤음)
+       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
        const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
        const headerRowData = []; // 제목 행 데이터 저장 배열
@@ -177,12 +177,11 @@
        link.click(); // <a> 클릭해서 다운로드 시작
    }
    
- 	//downloadExcel
- //downloadCSV
+ //downloadExcel
    function downloadExcel() {
       const table = document.getElementById("trafficList"); // 테이블 설정
       const rows = table.getElementsByTagName("tr"); // 행 저장
-       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 해봤음)
+       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
        const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
        const headerRowData = []; // 제목 행 데이터 저장 배열
@@ -205,7 +204,7 @@
        const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
        const link = document.createElement("a");
        link.setAttribute("href", encodedUri);
-       link.setAttribute("download", "trafficList.xlsx"); // .csv 다운로드하는 링크
+       link.setAttribute("download", "trafficList.xls"); // .csv 다운로드하는 링크
        document.body.appendChild(link);
        link.click(); // <a> 클릭해서 다운로드 시작
    }

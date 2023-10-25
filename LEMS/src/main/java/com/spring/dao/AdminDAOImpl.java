@@ -59,6 +59,8 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public void insertAdmin(AdminVO admin) throws SQLException {
+		String phone = admin.getPhone().substring(0,3)+"-"+admin.getPhone().substring(3,7)+"-"+admin.getPhone().substring(7,11);
+		admin.setPhone(phone);
 		session.update("Admin-Mapper.insertAdmin", admin);
 	}
 

@@ -28,6 +28,19 @@
         order by hwCode
 		]]>
 	</select>
+	<select id="selectRecentElecUsingListByHwCode" resultType="elec">
+		<![CDATA[
+        select *
+		from(
+			select *
+			from elecUsing
+            where hwCode BETWEEN 'A' AND 'N'
+			order by elecUseNum desc
+		)
+		where rownum<=336
+        order by hwCode
+		]]>
+	</select>
 	
 	
 </mapper>

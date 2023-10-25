@@ -8,6 +8,8 @@
 	<!-- <input type='hidden' name="perPageNum" value=""/> -->
 	<input type='hidden' name="searchType" value="" />
 	<!-- <input type='hidden' name="keyword" value="" /> -->
+	<input type='hidden' name="fromDate" value="">
+	<input type='hidden' name="toDate" value="">
 </form>
 
 
@@ -58,7 +60,8 @@
 			= document.querySelector("select[name='searchType']").value;
 		/* jobForm.keyword.value 
 			= document.querySelector("input[name='keyword']").value; */
-		
+		jobForm.fromDate.value = $('#datepicker').val();
+		jobForm.toDate.value = $('#datepicker2').val();
 		jobForm.action=url;
 		jobForm.submit();
 	}

@@ -60,13 +60,13 @@
 		<if test="searchType == 'N'.toString()">
 			and hwcode like '%'||#{searchType}||'%'
 		</if>
-		<if test ="fromDate != null and toDate != null ">
+		<if test ="fromDate != null and fromDate !='' and toDate != null and toDate !='' ">
 			 and TO_CHAR(dayDate,'YYYY-MM-DD') BETWEEN #{fromDate} AND #{toDate}
 		</if>
 	</sql>
 	
     <select id="selectSearchDaydataList" resultType="daydata">
-    	select dayNum, hwCode, dayEle, dayTrf, daySpd, TO_CHAR(dayDate,'YYYY-MM-DD HH24:MI:SS') as dayDate
+    	select dayNum, hwCode, dayEle, dayTrf, daySpd, dayPre, dayDlu, TO_CHAR(dayDate,'YYYY-MM-DD HH24:MI:SS') as dayDate
     	from dayData
     	where dayNum is not null
 	 	<include refid="search" />
@@ -78,7 +78,6 @@
     	from dayData
     	where dayNum is not null
 	 	<include refid="search" />
-	 	 order by dayDate desc, hwCode
     </select>
     
     <select id="selectDaydataBydaynum" resultType="daydata">

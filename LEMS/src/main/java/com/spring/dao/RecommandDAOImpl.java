@@ -27,6 +27,7 @@ public class RecommandDAOImpl implements RecommandDAO{
 		for(int i=0;i<recList.size();i++) {
 			if(recList.get(i).getRecState()==1) {recList.get(i).setStrState("on");}
 			else recList.get(i).setStrState("off");
+			recList.get(i).setPredUse(String.format("%.1f",Float.parseFloat(recList.get(i).getPredUse())));
 		}
 		
 		return recList;

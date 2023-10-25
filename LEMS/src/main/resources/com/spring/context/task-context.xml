@@ -49,6 +49,19 @@ cron : 정기적로 반복
 		<scheduled ref="RecommandTableTask" 
 				   method="updateSettingTable"
 				   cron="10 0/10 * * * *" />
-	</scheduled-tasks>	
+	</scheduled-tasks>
+	
+	<beans:bean id="AlarmTask"
+		class="com.spring.scheduler.AlarmElecErrScheduler"
+		p:settingRecordDAO-ref="settingRecordDAO"
+		p:alarmDAO-ref="alarmDAO"
+		p:elecUsingDAO-ref="elecUsingDAO" />
+		
+	<scheduler id="AlarmElecErrScheduler"/>
+	<scheduled-tasks scheduler="AlarmElecErrScheduler">
+		<scheduled ref="AlarmTask" 
+				   method="alarmSchduler"
+				   cron="40 1/10 * * * *" />
+	</scheduled-tasks>		
 	
 </beans:beans>

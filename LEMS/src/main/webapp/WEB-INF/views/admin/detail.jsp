@@ -33,8 +33,8 @@
 						<div class="col-sm-6">${admin.pwd }</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputPassword3" class="col-sm-6 col-form-label">권한</label>
-						<div class="col-sm-6">${admin.roll }</div>
+						<label for="inputPassword3" class="col-sm-6 col-form-label">전화번호</label>
+						<div class="col-sm-6">${admin.phone }</div>
 					</div>
 					<div class="form-group row">
 						<label for="inputPassword3" class="col-sm-6 col-form-label">관리자 등록일</label>

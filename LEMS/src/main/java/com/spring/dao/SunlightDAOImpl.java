@@ -26,6 +26,10 @@ public class SunlightDAOImpl implements SunlightDAO{
 		List<SunlightVO> sunlightList = 
 				sqlSession.selectList("Sunlight-Mapper.selectSearchSunlightList", command, rowBounds);
 		
+		for(int i=0;i<sunlightList.size();i++) {
+			sunlightList.get(i).setStrFullLight(sunlightList.get(i).getFullLight());
+		}
+		
 		return sunlightList;
 	}
 

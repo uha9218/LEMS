@@ -46,6 +46,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/weather.css" type="text/css">
   <!-- chart style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/chart.css" type="text/css">
+  
 
 <decorator:head />
 </head>

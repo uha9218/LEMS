@@ -38,13 +38,19 @@
 	<section class="content">
 		<div class="card">
 			<div class="card-header with-border">
-				<div id="keyword" class="card-tools" style="width: 650px;">
+				<div id="keyword" class="card-tools" style="width: 750px;">
 					<div class="input-group row">
 						<!-- search bar -->
+						
 						<select class="form-control col-md-3" name="perPageNum"
 							id="perPageNum" onchange="location.href=this.value">
 							<option value="<%=request.getContextPath() %>/envdata/trafficDetail.do">그래프</option>
 							<option value="<%=request.getContextPath() %>/envdata/traffic.do">리스트</option>
+						</select>
+						<select class="form-control col-md-3" name="perPageNum"
+							id="perPageNum" onchange="location.href=this.value">
+							<option value="<%=request.getContextPath() %>/envdata/trafficDetail.do">일</option>
+							<option value="<%=request.getContextPath() %>/envdata/trafficDetailMonth.do">월</option>
 						</select>
 						<!-- sort num -->
 						<select class="form-control col-md-3" name="searchType"
@@ -85,9 +91,9 @@
 		</div>
 	</section>
 	<div class="card-body">
-	<div id="pdfDiv">
 		<div class="row">
 			<section class="col-lg-8">
+				<div id="pdfDiv">
 				<div class="card">
 					<div class="card-body">
 					 <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
@@ -96,9 +102,20 @@
 						</div>
 					</div>
 				</div>
+				</div>
 			</section>
-			<div class="col-lg-4" style="text-align: center;">
-				<table class="table table-bordered table-striped" id="daydataList">
+		<div class="col-lg-4" >
+			<div class="" style="position: relative; display: inline-block;">
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadCSV();">CSV</button>
+	            </div>&nbsp;&nbsp;
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadExcel();">Excel</button>
+	            </div>
+	         </div>
+				<table class="table table-bordered table-striped" id="daydataList" style="text-align: center;">
 					<thead>
 						<tr style="font-size: 0.95em;">
 							<th style="width: 10%;">No.</th>
@@ -108,11 +125,11 @@
 							<th style="width: 30%;">통행속도</th>
 						</tr>
 					</thead>
-					<c:if test="${empty daydataList }">
-						<tr>
-							<td colspan="5"><strong>해당 내용이 없습니다.</strong></td>
-						</tr>
-					</c:if>
+						<c:if test="${empty daydataList }">
+							<tr>
+								<td colspan="5"><strong>해당 내용이 없습니다.</strong></td>
+							</tr>
+						</c:if>
 					<tbody>
 						<c:forEach items="${daydataList }" var="daydata">
 							<tr style='font-size: 1em;'>
@@ -127,10 +144,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-
 				<div class="card">
-					<table class="table-s table-bordered dataTable dtr-inline"
-						style="width: 100%; height: 90%;">
+					<table class="table-s table-bordered dataTable dtr-inline" id="daydataList" 
+						style="width: 100%; height: 90%; text-align: center;">
 						<thead>
 							<tr style="font-size: 0.95em;">
 								<th style="width: 20%;">구분</th>
@@ -165,17 +181,17 @@
 				<%@ include file="/WEB-INF/views/envdata/trafficDetailpagination.jsp" %>				
 			</div>
 		</div>
-		</div>
 	</div>
-
 	<%@ include file="/WEB-INF/views/module/footer_js.jsp"%>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-	<script>
+<script>
 	
 	$(function() {
 		 $.datepicker.setDefaults({
@@ -217,11 +233,73 @@
 	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
 	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
 	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
-	            doc.save('화면.pdf');
+	            doc.save('traffic.pdf');
 	        }
 	    });
 	});
-	
+	 //downloadCSV
+	   function downloadCSV() {
+	      const table = document.getElementById("daydataList"); // 테이블 설정
+	      const rows = table.getElementsByTagName("tr"); // 행 저장
+	       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+
+	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+	       const headerRowData = []; // 제목 행 데이터 저장 배열
+	       for (const cell of headerCells) {
+	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+	       }
+	       csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+	           if (cells.length > 0) {
+	               const rowData = []; // 데이터 저장 배열
+	               for (const cell of cells) {
+	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+	               }
+	               csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+	           }
+	       }
+
+	       const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
+	       const link = document.createElement("a");
+	       link.setAttribute("href", encodedUri);
+	       link.setAttribute("download", "trafficList.csv"); // .csv 다운로드하는 링크
+	       document.body.appendChild(link);
+	       link.click(); // <a> 클릭해서 다운로드 시작
+	   }
+	   
+	 //downloadExcel
+	   function downloadExcel() {
+	      const table = document.getElementById("daydataList"); // 테이블 설정
+	      const rows = table.getElementsByTagName("tr"); // 행 저장
+	       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+
+	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+	       const headerRowData = []; // 제목 행 데이터 저장 배열
+	       for (const cell of headerCells) {
+	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+	       }
+	       excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+
+	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+	           if (cells.length > 0) {
+	               const rowData = []; // 데이터 저장 배열
+	               for (const cell of cells) {
+	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+	               }
+	               excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+	           }
+	       }
+
+	       const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
+	       const link = document.createElement("a");
+	       link.setAttribute("href", encodedUri);
+	       link.setAttribute("download", "trafficList.xls"); // .csv 다운로드하는 링크
+	       document.body.appendChild(link);
+	       link.click(); // <a> 클릭해서 다운로드 시작
+	   }
 
     //chart
     // var ctx = document.getElementById("myChart");
@@ -240,18 +318,6 @@
        datasets: [
           
            {
-               label: '통행속도',
-               yAxisID: 'y-right',
-               data: [],
-               backgroundColor: [
-                   '#6699FF'
-               ],
-               borderColor: [
-                   '#6699FF'
-               ],
-               borderWidth: 2
-           },
-           {
                label: '교통량',
                type:'bar',
                yAxisID: 'y-left',
@@ -262,51 +328,77 @@
                borderColor: [
             	   'rgba(255, 204, 153, 0.4)'
                ],
-               borderWidth: 2
+               borderWidth: 2,
+               font: {
+                   size: 100
+               }
+           },
+           {
+               label: '통행속도',
+               yAxisID: 'y-right',
+               data: [],
+               backgroundColor: [
+                   '#6699FF'
+               ],
+               borderColor: [
+                   '#6699FF'
+               ],
+               borderWidth: 2,
+               font: {
+                   size: 100
+               }
            }
        ]
    }
 
    var chartOptions = {
-       responsive:true,
-       // maintainAspectRatio: false,
-       scales: {
-           x: {
-               title: {
-                   display: true,
-                   text: '구간',
-                   color:'white'
-               }
-           },
-           'y-left': {
-               type: 'linear',
-               position: 'left',
-               title: {
-                   display: true,
-                   text: '교통량',
-                   color:'white'
-               },
-               grid: {
-                   display: false
-               }
-           },
-           'y-right': {
-               type: 'linear',
-               position: 'right',
-               title: {
-                   display: true,
-                   text: '주행속도',
-                   color:'white'
-               },
-               grid: {
-                   display: false
-               }
-           }
-       }
-   }
+		    responsive: true,
+		    scales: {
+		        x: {
+		            title: {
+		                display: true,
+		                text: '구간',
+		                color: 'white',
+		                font: {
+		                    size: 20 // X-축 레이블의 글자 크기를 16px로 설정
+		                }
+		            }
+		        },
+		        'y-left': {
+		            type: 'linear',
+		            position: 'left',
+		            title: {
+		                display: true,
+		                text: '교통량',
+		                color: 'white',
+		                font: {
+		                    size: 20 // Y-축(왼쪽) 레이블의 글자 크기를 16px로 설정
+		                },
+		                grid: {
+		                    display: false
+		                }
+		            }
+		        },
+		        'y-right': {
+		            type: 'linear',
+		            position: 'right',
+		            title: {
+		                display: true,
+		                text: '주행속도',
+		                color: 'white',
+		                font: {
+		                    size: 20 // Y-축(오른쪽) 레이블의 글자 크기를 16px로 설정
+		                },
+		                grid: {
+		                    display: false
+		                }
+		            }
+		        }
+		    }
+		}
  	<c:forEach items="${daydataList}" var="daydata">
- 		chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
- 		//chartData.labels.push(${daydata.hwCode});
+ 		//chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
+ 		chartData.labels.push('${daydata.dayNum}');
  		chartData.datasets[0].data.push(${daydata.dayTrf}); //데이터 배열에 추가
  	 	chartData.datasets[1].data.push(${daydata.daySpd}); //데이터 배열에 추가
 	</c:forEach>

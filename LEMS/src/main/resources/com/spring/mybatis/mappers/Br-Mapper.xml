@@ -5,11 +5,12 @@
 <mapper namespace="Br-Mapper">
 
 	<select id="selectSearchBrList"	resultType="br">
-		select
+   		select
 		*
 		from
 		br
-		where brNum is not null  			  	
+		where brNum is not null 
+        order by BRdate desc		  	
 	</select>
 	
 	<select id="selectSearchBrListCount" resultType="int">
@@ -29,27 +30,27 @@
 	<update id="insertBr" parameterType="br">
 		insert 
 		into 
-		br(brnum,brcontent,brDate,brState)
+		br(brNum,brContent,brDate,brState,hwCode)
 		values
-		(#{brNum},#{brContent},#{brDate},#{brState})
+		(#{brNum},#{brContent},#{brDate},#{brState},#{hwCode})
 	</update>
 	
 	<update id="updateBr" parameterType="br">
 		update 
 		br 
 		set 
-		brnum=#{brNum}, brcontent=#{brContent}, brDate=#{brDate}, brState=#{brState}
-		where brnum=#{brNum}
+		brNum=#{brNum}, brContent=#{brContent}, brDate=#{brDate}, brState=#{brState}
+		where brNum=#{brNum}
 	</update>
 	
-	<update id="deleteBr" parameterType="int">
+	<update id="deleteBr" parameterType="str">
 		delete 
 		from br 
-		where brnum=#{brNum}
+		where brNum=#{brNum}
 	</update>
 
 	<select id="selectBrSeqNext" resultType="int">
-		select br_seq.nextval as brNum from dual
+		select brnum_seq.nextval as brNum from dual
 	</select>
 	
 </mapper>

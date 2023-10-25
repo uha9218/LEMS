@@ -49,7 +49,7 @@ public class AdminVO {
 	public Date getRegDate() {
 		return regDate;
 	}
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}

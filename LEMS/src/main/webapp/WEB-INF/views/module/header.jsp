@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    <!-- Right navbar links -->
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
-	        <a class="nav-link" id="dark_mode" href="#" role="button">
+	        <a class="nav-link" href="#" role="button">
 			  <i onclick="location.href='<%=request.getContextPath() %>/common/logout.do';" class="fas fa-sign-out-alt">&nbsp;LOGOUT</i>
 	        </a>
 	      </li>

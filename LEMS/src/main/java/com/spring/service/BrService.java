@@ -10,12 +10,12 @@ public interface BrService {
 	
 	Map<String,Object> getBrList(SearchListCommand command)throws SQLException;
 	
-	BrVO getBr(int brNum)throws SQLException;
+	BrVO getBr(String brNum)throws SQLException;
 	
-	void regist(BrVO br) throws SQLException;
+	void regist(BrVO br) throws SQLException, Exception;
 	
-	void modify(BrVO br) throws SQLException;
+	void modify(BrVO br) throws SQLException, Exception;
 	
-	void remove(int brNum) throws SQLException;
+	void remove(String brNum) throws SQLException;
 	
 }

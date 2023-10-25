@@ -36,17 +36,16 @@
 	<update id="insertAdmin" parameterType="admin">
 		insert
 		into
-		admin(adminNum, email, pwd, name, roll, phone, picture, enabled, address)
+		admin(adminNum, email, pwd, name, phone)
 		values
-		(#{adminNum},#{email},#{pwd},#{name},#{roll},#{phone},#{picture},#{enabled},#{address})
+		(#{adminNum},#{email},#{pwd},#{name},#{phone})
 	</update>
 
 	<update id="updateAdmin" parameterType="admin">
 		update
 		admin
 		set
-		email=#{email}, pwd=#{pwd}, name=#{name}, roll=#{roll}, phone=#{phone},
-		picture=#{picture}, enabled=#{enabled}, address=#{address}
+		email=#{email}, pwd=#{pwd}, name=#{name}, phone=#{phone}
 		where adminNum=#{adminNum}
 	</update>
 

@@ -11,7 +11,6 @@
 	<typeAlias type="java.util.Date" alias="date" />
 	
 	<typeAlias type="com.spring.command.SearchListCommand" alias="searchCommand"/>
-	<typeAlias type="com.spring.dto.AdminVO" alias="admin"/>
 	<typeAlias type="com.spring.dto.MenuVO" alias="menu"/>
 	<typeAlias type="com.spring.dto.AdminVO" alias="admin"/>
 	<typeAlias type="com.spring.dto.SettingRecordVO" alias="record"/>
@@ -24,6 +23,7 @@
 	<typeAlias type="com.spring.dto.StatVO" alias="stat"/>
 	<typeAlias type="com.spring.dto.ElecUsingVO" alias="elec"/>
 	<typeAlias type="com.spring.dto.DaydataVO" alias="daydata"/>
+	<typeAlias type="com.spring.dto.AlarmVO" alias="alarm"/>
 
 
 </typeAliases>

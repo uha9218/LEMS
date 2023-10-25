@@ -17,4 +17,5 @@ public interface LightDAO {
 	List<LightVO> selectsearchLightList() throws SQLException;
 	List<LightVO> selectLightByHwCode(String hwCode) throws SQLException;
 	void updateLight(List<LightVO> light) throws Exception;
+	LightVO selectLightByLnum(String lnum) throws SQLException;
 }

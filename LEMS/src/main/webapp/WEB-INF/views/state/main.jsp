@@ -9,7 +9,7 @@
 
     <!-- Main content -->
     <!-- /.content -->
-       <div style="padding-top:1.5vw;"></div>
+       <div style="padding-top:2.3vw;"></div>
        <section class="content">
          <div class="content">
             <div class="container-fluid">
@@ -104,6 +104,7 @@
                      <div class="card">
                         <div class="card-header border-0">
                            <h3 class="card-title">
+                             
                               <font style="vertical-align: inherit;">
                                  <font style="vertical-align: inherit; font-weight: bold;">전력 소비량 현황</font>
                               </font>
@@ -114,24 +115,13 @@
                               </font>
                            </small>
                         </div>
-                        <div class="card-body" style="padding-top:1vw; padding-bottom:1vw;">
+                        <div class="card-body" style="padding-top:1.4vw; padding-bottom:1.4vw;">
                            <div class="row">
                               <!-- 전력량 차트 시작 -->
-                              <div class="chart col-lg-7">
+                              <div class="chart col-lg-12">
                             <canvas id="barChart" style="min-height: 18.7vw; height: 18.7vw; max-height: 18.7vw; max-width: 100%;"></canvas>
                         </div>
                               <!-- 전력량 차트 끝 -->
-                              <!-- 원인 내용 레이아웃 시작 -->
-                              <div class="col-lg-5 text-right" style="padding: 0;" >
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                                 <div style="vertical-align: inherit; font-weight: bold; font-size: 1vw; margin-bottom: 0.5vw;">2023-10-08 | 10% | 교통량 증가, 온도 감소</div>
-                              </div>
-                              <!-- 원인 내용 레이아웃 끝 -->
                            </div>
                         </div>
                      </div>
@@ -234,7 +224,7 @@
                               </font>
                            </small>
                         </div>
-                        <div class="card-body" style="padding-top:2.9vw; padding-bottom:2vw;">
+                        <div class="card-body" style="padding-top:2.1vw; padding-bottom:2.2vw;">
                         <!-- 사고량 그래프 시작 -->
 						<div class="chart">
 							<canvas id="donutChart" style="min-height: 15.8vw; height: 15.8vw; max-height: 15.8vw; max-width: 100%;"></canvas>
@@ -257,6 +247,8 @@
 <!-- ./wrapper -->
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>
+
 <script>
 	// **API 데이터 입력 JS
 	
@@ -275,20 +267,20 @@
     var location_x = '68';
     var location_y = '101';
     var location_Array = [
-  	  ['61', '125', ' 서울특별시 '], // 양재
+  	  ['61', '125', ' 서울특별시 '],  // 양재
   	  ['62', '123', ' 경기 성남시 '], // 판교
   	  ['62', '120', ' 경기 용인시 '], // 기흥
   	  ['63', '110', ' 충남 천안시 '], // 천안
-  	  ['68', '105', ' 충북 청주시 '],  // 남이
-  	  ['68', '101', ' 대전광역시 '], // 회덕
+  	  ['68', '105', ' 충북 청주시 '], // 남이
+  	  ['68', '101', ' 대전광역시 '],  // 회덕
   	  ['68', '126', ' 충북 옥천군 '], // 옥천
-  	  ['71', '99', ' 충북 옥천군 '], // 금강
-  	  ['75', '99', ' 충북 영동군 '], // 영동
-  	  ['80', '96', ' 경북 김천시 '], // 김천
-  	  ['93', '91', ' 경북 경산시 '], // 경산
-  	  ['94', '92', ' 경북 영천시 '], // 영천
+  	  ['71', '99', ' 충북 옥천군 '],  // 금강
+  	  ['75', '99', ' 충북 영동군 '],  // 영동
+  	  ['80', '96', ' 경북 김천시 '],  // 김천
+  	  ['93', '91', ' 경북 경산시 '],  // 경산
+  	  ['94', '92', ' 경북 영천시 '],  // 영천
   	  ['100', '88', ' 경북 경주시 '], // 경주
-  	  ['98', '84', ' 울산 울주군 '], // 언양
+  	  ['98', '84', ' 울산 울주군 '],  // 언양
   	];
     
     // 사고량 위치
@@ -312,6 +304,11 @@
       ['129.124600', '129.220200', ' 35.570500', '35.809100'], // 경주
       ['129.020400', '129.147200', ' 35.246300', '35.570500'], // 언양~부산
   	];
+    
+    
+    // 전력량 구간
+    var hwCode_array = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"];
+    var hwCode_select = 5;
     
     // 사고량 데이터
     var accident_eventType = ["교통사고", "공사", "기상", "기타돌발", "재난", "기타"];
@@ -361,7 +358,10 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('A');
-   		trafficData('A')
+   		trafficData('A');
+   		hwCode_select = 0;
+   		elecData(hwCode_select);
+   		
     });
     $("#B").click(function(){
     	location_x = location_Array[1][0];
@@ -374,7 +374,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('B');
-   		trafficData('B')
+   		trafficData('B');
+   		hwCode_select = 1;
+   		elecData(hwCode_select);
     });
     $("#C").click(function(){
     	location_x = location_Array[2][0];
@@ -387,7 +389,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('C');
-   		trafficData('C')
+   		trafficData('C');
+   		hwCode_select = 2;
+   		elecData(hwCode_select);
     });
     $("#D").click(function(){
     	location_x = location_Array[3][0];
@@ -400,7 +404,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('D');
-   		trafficData('D')
+   		trafficData('D');
+   		hwCode_select = 3;
+   		elecData(hwCode_select);
     });
     $("#E").click(function(){
     	location_x = location_Array[4][0];
@@ -413,7 +419,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('E');
-   		trafficData('E')
+   		trafficData('E');
+   		hwCode_select = 4;
+   		elecData(hwCode_select);
     });
     $("#F").click(function(){
     	location_x = location_Array[5][0];
@@ -426,7 +434,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('F');
-   		trafficData('F')
+   		trafficData('F');
+   		hwCode_select = 5;
+   		elecData(hwCode_select);
     });
     $("#G").click(function(){
     	location_x = location_Array[6][0];
@@ -439,7 +449,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('G');
-   		trafficData('G')
+   		trafficData('G');
+   		hwCode_select = 6;
+   		elecData(hwCode_select);
     });
     $("#H").click(function(){
     	location_x = location_Array[7][0];
@@ -452,7 +464,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('H');
-   		trafficData('H')
+   		trafficData('H');
+   		hwCode_select = 7;
+   		elecData(hwCode_select);
     });
     $("#I").click(function(){
     	location_x = location_Array[8][0];
@@ -465,7 +479,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('I');
-   		trafficData('I')
+   		trafficData('I');
+   		hwCode_select = 8;
+   		elecData(hwCode_select);
     });
     $("#J").click(function(){
     	location_x = location_Array[9][0];
@@ -478,7 +494,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('J');
-   		trafficData('J')
+   		trafficData('J');
+   		hwCode_select = 9;
+   		elecData(hwCode_select);
     });
     $("#K").click(function(){
     	location_x = location_Array[10][0];
@@ -491,7 +509,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('K');
-   		trafficData('K')
+   		trafficData('K');
+   		hwCode_select = 10;
+   		elecData(hwCode_select);
     });
     $("#L").click(function(){
     	location_x = location_Array[11][0];
@@ -504,7 +524,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('L');
-   		trafficData('L')
+   		trafficData('L');
+   		hwCode_select = 11;
+   		elecData(hwCode_select);
     });
     $("#M").click(function(){
     	location_x = location_Array[12][0];
@@ -517,7 +539,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('M');
-   		trafficData('M')
+   		trafficData('M');
+   		hwCode_select = 12;
+   		elecData(hwCode_select);
     });
     $("#N").click(function(){
     	location_x = location_Array[13][0];
@@ -530,7 +554,9 @@
    		load_API_weather();
    		load_API_accident();
    		sunData('N');
-   		trafficData('N')
+   		trafficData('N');
+   		hwCode_select = 13;
+   		elecData(hwCode_select);
     });
     
     //API 데이터 가져오기
@@ -730,7 +756,7 @@ function load_API_accident(){
 	    if (this.readyState == 4) {
 	    	
 	    	// 사고량 초기화
-	    	accident_eventType_count = [0, 0, 0, 0, 0, 0];
+        	accident_eventType_count = [0, 0, 0, 0, 0, 0];
 	    	
 	        // 데이터 추출
 	    	var accident_jsonData = JSON.parse(xhr.responseText);
@@ -738,20 +764,21 @@ function load_API_accident(){
 	        
 	        // 데이터 파싱
         	var accident_Values = accident_jsonData.body.items
-            .filter(items => items.roadName == "경부선")
-            .map(items => items.eventType);
-        	accident_json.push(accident_Values);
-	        
-	        // 사고 이벤트 유형을 비교
-	        for (var i = 0; i < accident_json.length; i++) {
-	          for (var j = 0; j < accident_eventType.length; j++) {
-	            if (accident_json[i] == accident_eventType[j]) {
-	              accident_eventType_count[j]++;
-	              
-	            }
-	          }
-	        }
-	        accidentChart();
+   	 		.filter(item => item.roadName === "경부선" || item.roadName === "경부고속도로")
+    		.map(item => item.eventType);
+			accident_json.push(accident_Values);
+
+			// 사고량 카운트
+			for (var i = 0; i < accident_json.length; i++) {
+    		for (var j = 0; j < accident_eventType.length; j++) {
+        	for (var k = 0; k < accident_json[i].length; k++) {
+            if (accident_json[i][k] === accident_eventType[j]) {
+                accident_eventType_count[j]++;
+		            }
+		        }
+		    }
+		}
+	    accidentChart();
 	    }
     }
 xhr.send('');
@@ -761,6 +788,7 @@ load_API_accident();
 
 <script>
 function traffChart() {
+	
 /** 통행량
  * ---------------------------------------
  * This demo was created using amCharts 5.
@@ -810,7 +838,7 @@ axisRenderer.grid.template.setAll({
 var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
   maxDeviation: 0,
   min: 0,
-  max: 200,
+  max: 4000,
   strictMinMax: true,
   renderer: axisRenderer
 }));
@@ -840,7 +868,7 @@ var label = chart.radarContainer.children.push(am5.Label.new(root, {
   fontSize: "1em"
 }));
 
-axisDataItem.set("value", 50);
+axisDataItem.set("value", 2000);
 bullet.get("sprite").on("rotation", function () {
   var value = axisDataItem.get("value");
   var text = Math.round(axisDataItem.get("value")).toString();
@@ -857,14 +885,8 @@ bullet.get("sprite").on("rotation", function () {
   clockHand.hand.animate({ key: "fill", to: fill, duration: 500, easing: am5.ease.out(am5.ease.cubic) })
 });
 
-setInterval(function () {
-  axisDataItem.animate({
-    key: "value",
-    to: traff, //데이터
-    duration: 500,
-    easing: am5.ease.out(am5.ease.cubic)
-  });
-}, 1000)
+
+ 
 
 chart.bulletsContainer.set("mask", undefined);
 
@@ -872,20 +894,20 @@ chart.bulletsContainer.set("mask", undefined);
 // Create axis ranges bands
 // https://www.amcharts.com/docs/v5/charts/radar-chart/gauge-charts/#Bands
 var bandsData = [{
-  title: "정체",
-  color: "#ff3333",
+  title: "원활",
+  color: "#33ff33",
   lowScore: 0,
-  highScore: 40
+  highScore: 800
 }, {
   title: "서행",
   color: "#ffff33",
-  lowScore: 40,
-  highScore: 80
+  lowScore: 800,
+  highScore: 2000
 }, {
-  title: "원활",
-  color: "#33ff33",
-  lowScore: 80,
-  highScore: 200
+  title: "정체",
+  color: "#ff3333",
+  lowScore: 2000,
+  highScore: 4000
 }];
 
 am5.array.each(bandsData, function (data) {
@@ -914,8 +936,9 @@ am5.array.each(bandsData, function (data) {
 
 // Make stuff animate on load
 chart.appear(1000, 100);
+return axisDataItem;
 }
-traffChart();
+
 </script>
 
 <script>
@@ -999,7 +1022,7 @@ var label = chart.radarContainer.children.push(am5.Label.new(root, {
   fontSize: "1em"
 }));
 
-axisDataItem.set("value", 50);
+axisDataItem.set("value", 100);
 bullet.get("sprite").on("rotation", function () {
   var value = axisDataItem.get("value");
   var text = Math.round(axisDataItem.get("value")).toString();
@@ -1016,14 +1039,8 @@ bullet.get("sprite").on("rotation", function () {
   clockHand.hand.animate({ key: "fill", to: fill, duration: 500, easing: am5.ease.out(am5.ease.cubic) })
 });
 
-setInterval(function () {
-  axisDataItem.animate({
-    key: "value",
-    to: speedAvg, //데이터
-    duration: 500,
-    easing: am5.ease.out(am5.ease.cubic)
-  });
-}, 1000)
+
+ 
 
 chart.bulletsContainer.set("mask", undefined);
 
@@ -1073,13 +1090,15 @@ am5.array.each(bandsData, function (data) {
 
 // Make stuff animate on load
 chart.appear(1000, 100);
+
+return axisDataItem;
 }
-speedAvgChart();
+
 </script>
 
 
 <script>
-function accidentChart() {
+function accidentChart(label, date) {
   $(function () {
     /* ChartJS
      * -------
@@ -1091,10 +1110,10 @@ function accidentChart() {
      //-------------
      var barChartCanvas = $('#barChart').get(0).getContext('2d')
      var barChartData = {
-    	      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    	      labels  : label,
     	      datasets: [
     	        {
-    	          label               : 'Digital Goods',
+    	          label               : '전력사용량',
     	          backgroundColor     : 'rgba(60,141,188,0.9)',
     	          borderColor         : 'rgba(60,141,188,0.8)',
     	          pointRadius          : false,
@@ -1102,18 +1121,7 @@ function accidentChart() {
     	          pointStrokeColor    : 'rgba(60,141,188,1)',
     	          pointHighlightFill  : '#fff',
     	          pointHighlightStroke: 'rgba(60,141,188,1)',
-    	          data                : [28, 48, 40, 19, 86, 27, 90]
-    	        },
-    	        {
-    	          label               : 'Electronics',
-    	          backgroundColor     : 'rgba(210, 214, 222, 1)',
-    	          borderColor         : 'rgba(210, 214, 222, 1)',
-    	          pointRadius         : false,
-    	          pointColor          : 'rgba(210, 214, 222, 1)',
-    	          pointStrokeColor    : '#c1c7d1',
-    	          pointHighlightFill  : '#fff',
-    	          pointHighlightStroke: 'rgba(220,220,220,1)',
-    	          data                : [65, 59, 80, 81, 56, 55, 40]
+    	          data                : date // 데이터
     	        },
     	      ]
     	    }
@@ -1164,349 +1172,8 @@ function accidentChart() {
      })
     
   })
-
-</script>
-
-<script>
-	// **API 데이터 입력 JS
-	
-	// **API 불러올 변수 설정
-	// 날씨
-    var today = new Date();
-    var week = new Array('일','월','화','수','목','금','토');
-    var year = today.getFullYear();
-    var month = today.getMonth()+1;
-    var day = today.getDate();
-    var hours = today.getHours();
-    var minutes = today.getMinutes();
-    
-    // 위치
-    var location_x = '61';
-    var location_y = '125';
-    var location_Array = [
-  	  ['61', '125', ' 서울특별시 '], // 양재
-  	  ['62', '123', ' 경기 성남시 '], // 판교
-  	  ['62', '120', ' 경기 용인시 '], // 기흥
-  	  ['63', '110', ' 충남 천안시 '], // 천안
-  	  ['68', '105', ' 충북 청주시 '],  // 남이
-  	  ['68', '101', ' 대전광역시 '], // 회덕
-  	  ['68', '126', ' 충북 옥천군 '], // 옥천
-  	  ['71', '99', ' 충북 옥천군 '], // 금강
-  	  ['75', '99', ' 충북 영동군 '], // 영동
-  	  ['80', '96', ' 경북 김천시 '], // 김천
-  	  ['93', '91', ' 경북 경산시 '], // 경산
-  	  ['94', '92', ' 경북 영천시 '], // 영천
-  	  ['100', '88', ' 경북 경주시 '], // 경주
-  	  ['98', '84', ' 울산 울주군 '], // 언양
-  	];
- 	
-    $('.weather-date').html(year + "년 " + month + "월 " + day + "일 " + "(" + week[today.getDay()] + ")");
-    
-    /*
-     * 기상청 30분마다 발표
-     * 30분보다 작으면, 한시간 전 hours 값
-     */
-    if(minutes < 30){
-        hours = hours - 1;
-        if(hours < 0){
-            // 자정 이전은 전날로 계산
-            today.setDate(today.getDate() - 1);
-            day = today.getDate();
-            month = today.getMonth() + 1;
-            year = today.getFullYear();
-            hours = 23;
-        }
-    }
-    
-    //9시 -> 09시 변경 필요
-    if(hours < 10) {
-        hours = '0'+ hours;
-    }
-    if(month < 10) {
-        month = '0' + month;
-    }    
-    if(day < 10) {
-        day = '0' + day;
-    } 
- 
-    today = year + "" + month + "" + day;
-    
-    // 구간 설정
-    $("#A").click(function(){
-    	location_x = location_Array[0][0];
-   		location_y = location_Array[0][1];
-   		document.getElementById("location_name").innerText = location_Array[0][2]; // 양재~판교
-   		load_API();
-    });
-    $("#B").click(function(){
-    	location_x = location_Array[1][0];
-   		location_y = location_Array[1][1];
-   		document.getElementById("location_name").innerText = location_Array[1][2]; // 판교~기흥
-   		load_API();
-    });
-    $("#C").click(function(){
-    	location_x = location_Array[2][0];
-   		location_y = location_Array[2][1];
-   		document.getElementById("location_name").innerText = location_Array[2][2]; // 기흥~천안
-   		load_API();
-    });
-    $("#D").click(function(){
-    	location_x = location_Array[3][0];
-   		location_y = location_Array[3][1];
-   		document.getElementById("location_name").innerText = location_Array[3][2]; // 천안
-   		load_API();
-    });
-    $("#E").click(function(){
-    	location_x = location_Array[4][0];
-   		location_y = location_Array[4][1];
-   		document.getElementById("location_name").innerText = location_Array[4][2]; // 남이
-   		load_API();
-    });
-    $("#F").click(function(){
-    	location_x = location_Array[5][0];
-   		location_y = location_Array[5][1];
-   		document.getElementById("location_name").innerText = location_Array[5][2]; // 회덕
-   		load_API();
-    });
-    $("#G").click(function(){
-    	location_x = location_Array[6][0];
-   		location_y = location_Array[6][1];
-   		document.getElementById("location_name").innerText = location_Array[6][2]; // 옥천
-   		load_API();
-    });
-    $("#H").click(function(){
-    	location_x = location_Array[7][0];
-   		location_y = location_Array[7][1];
-   		document.getElementById("location_name").innerText = location_Array[7][2]; // 금강
-   		load_API();
-    });
-    $("#I").click(function(){
-    	location_x = location_Array[8][0];
-   		location_y = location_Array[8][1];
-   		document.getElementById("location_name").innerText = location_Array[8][2]; // 영동
-   		load_API();
-    });
-    $("#J").click(function(){
-    	location_x = location_Array[9][0];
-   		location_y = location_Array[9][1];
-   		document.getElementById("location_name").innerText = location_Array[9][2]; // 김천
-   		load_API();
-    });
-    $("#K").click(function(){
-    	location_x = location_Array[10][0];
-   		location_y = location_Array[10][1];
-   		document.getElementById("location_name").innerText = location_Array[10][2]; // 경산
-   		load_API();
-    });
-    $("#L").click(function(){
-    	location_x = location_Array[11][0];
-   		location_y = location_Array[11][1];
-   		document.getElementById("location_name").innerText = location_Array[11][2]; // 영천
-   		load_API();
-    });
-    $("#M").click(function(){
-    	location_x = location_Array[12][0];
-   		location_y = location_Array[12][1];
-   		document.getElementById("location_name").innerText = location_Array[12][2]; // 경주
-   		load_API();
-    });
-    $("#N").click(function(){
-    	location_x = location_Array[13][0];
-   		location_y = location_Array[13][1];
-   		document.getElementById("location_name").innerText = location_Array[13][2]; // 언양
-   		load_API();
-    });
-    
-    //API 데이터 가져오기
-    function load_API(){
-    var xhr = new XMLHttpRequest();
-	var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst'; /*URL*/
-	var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'41HzN/rkQU/HYJDT0ItPwZb5y8B88MImTBmGgxnJCGSg3PoEnqMbbFrpkhTePg0iJoOgzfNQvHeFNdii1VbthQ=='; /*Service Key*/
-	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
-	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1000');
-	queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON');
-	queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(today);
-	queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(hours +'00');
-	queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent(location_x);
-	queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(location_y);
-	xhr.open('GET', url + queryParams);
-	xhr.onreadystatechange = function () {
-	    if (this.readyState == 4) {
-	    	
-	    	var jsonData = JSON.parse(xhr.responseText);
-			
-	        // **원하는 데이터 추출 [기온, 하늘상태, 1시간강수량, 습도, 강수형태, 풍향, 풍속]
-	        var weather_category = ['T1H', 'SKY', 'RN1', 'REH', 'PTY', 'VEC', 'WSD'];
-	        var weather_json = [];
-	        
-	        for (let i = 0; i < weather_category.length; i++) {
-	        	var weather_Values = jsonData.response.body.items.item
-	            .filter(item => item.category === weather_category[i])
-	            .map(item => item.fcstValue);
-	        	weather_json.push(weather_Values[0]);
-	        }
-	        // **현재 날씨 데이터 변수선언
-	        var temperature = weather_json[0];
-	        var sky = weather_json[1];
-	        var rain = weather_json[2];
-	        var humidity = weather_json[3];
-	        var rain_state = weather_json[4];
-	        var windDir = parseFloat(weather_json[5]);
-	        var windSpeed = weather_json[6];
-	        
-	        // **데이터 변환
-	        // 강수량
-	      	if(rain == "강수없음"){
-        		rain= 0 +" mm";
-        	}
-	      	rain = rain.replace("mm", "");
-	        
-	        // 풍향
-	        windDir = Math.trunc((windDir + 22.5 * 0.5) / 22.5);
-	        
-	        // **값 입력	
-	        // 풍향
-	        switch(windDir) {
-	        case 0:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북"); // 풍향
-                   break;
-	        case 1:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북북동"); // 풍향
-                   break;
-	        case 2:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북동"); // 풍향
-                   break;
-	        case 3:
-	        	document.getElementById("windDir").innerText = ("풍향 : 동북동"); // 풍향
-                   break;
-	        case 4:
-	        	document.getElementById("windDir").innerText = ("풍향 : 동"); // 풍향
-                   break;
-	        case 5:
-	        	document.getElementById("windDir").innerText = ("풍향 : 동남동"); // 풍향
-                   break;
-	        case 6:
-	        	document.getElementById("windDir").innerText = ("풍향 : 남동"); // 풍향
-                   break;
-	        case 7:
-	        	document.getElementById("windDir").innerText = ("풍향 : 남남동"); // 풍향
-                   break;
-	        case 8:
-	        	document.getElementById("windDir").innerText = ("풍향 : 남"); // 풍향
-                   break;
-	        case 9:
-	        	document.getElementById("windDir").innerText = ("풍향 : 남남서"); // 풍향
-                   break;
-	        case 10:
-	        	document.getElementById("windDir").innerText = ("풍향 : 남서"); // 풍향
-                   break;
-	        case 11:
-	        	document.getElementById("windDir").innerText = ("풍향 : 서남서"); // 풍향
-                   break;
-	        case 12:
-	        	document.getElementById("windDir").innerText = ("풍향 : 서"); // 풍향
-                   break;
-	        case 13:
-	        	document.getElementById("windDir").innerText = ("풍향 : 서북서"); // 풍향
-                   break;
-	        case 14:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북서"); // 풍향
-                   break;
-	        case 15:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북북서"); // 풍향
-                   break;
-	        case 16:
-	        	document.getElementById("windDir").innerText = ("풍향 : 북"); // 풍향
-                   break;
-	        }
-	        
-            if(rain_state != 0) {
-                switch(Number(rain_state)) {
-                    case 1:
-                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-                        $("#weather_sky").addClass("fa-cloud-rain");
-                        break;
-                    case 2:
-                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-                        $("#weather_sky").addClass("fa-cloud-showers-heavy");
-                        break;
-                    case 3:
-                    	$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-                        $("#weather_sky").addClass("fa-snowflake");
-                        break;
-                }
-            }else {
-                switch(Number(sky)) {
-                    case 1:
-                    		if(06 <= hours && hours <= 18){
-	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-	                            $("#weather_sky").addClass("fa-sun");
-                    		}else{
-                    			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-                                $("#weather_sky").addClass("fa-moon");
-                    		}
-                        break;
-                    case 2:
-	                    	if(06 <= hours && hours <= 18){
-	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-	                            $("#weather_sky").addClass("fa-cloud-sun");
-	                		}else{
-	                			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-	                            $("#weather_sky").addClass("fa-cloud-moon");
-	                		}
-                        break;
-                    case 3:
-	                    	if(6 <= hours && hours <= 18){
-	                            $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-	                            $("#weather_sky").addClass("fa-cloud-sun");
-	                		}else{
-	                			$("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-	                            $("#weather_sky").addClass("fa-cloud-moon");
-	                		}
-                        break;
-                    case 4:
-                           $("#weather_sky").removeClass("fa-sun", "fa-moon", "fa-cloud-sun", "fa-cloud-moon", "fa-cloud-rain", "fa-cloud", "fa-cloud-showers-heavy", "snowflake");
-                           $("#weather_sky").addClass("fa-cloud");
-                        break;
-                    }    
-                } //if 종료
-                
-			document.getElementById("temperature").innerText = (temperature + ' ℃'); // 기온
-   	        document.getElementById("rain").innerText = ("강수량 : " + rain + " mm"); // 강수량
-   	        document.getElementById("humidity").innerText = ("습도 : " + humidity + " %"); // 습도
-   	        document.getElementById("windSpeed").innerText = ("풍속 : " + windSpeed + " m/s"); // 풍속
-	       }
-	    }
-	xhr.send('');
-    }
-    
-    load_API();
-
-</script>
-
-<script>
-function load_API2(){
-    var xhr = new XMLHttpRequest();
-	var url = 'https://openapi.its.go.kr:9443/eventInfo'; /*URL*/
-	var queryParams = '?' + encodeURIComponent('apiKey') + '='+'138dcdf3013b4cc1a337778398fa2317'; /*Service Key*/
-	queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('ex');
-	queryParams += '&' + encodeURIComponent('eventType') + '=' + encodeURIComponent('all');
-	queryParams += '&' + encodeURIComponent('minX') + '=' + encodeURIComponent('126.800000');
-	queryParams += '&' + encodeURIComponent('maxX') + '=' + encodeURIComponent('127.890000');
-	queryParams += '&' + encodeURIComponent('minY') + '=' + encodeURIComponent('34.900000');
-	queryParams += '&' + encodeURIComponent('maxY') + '=' + encodeURIComponent('35.100000');
-	queryParams += '&' + encodeURIComponent('getType') + '=' + encodeURIComponent('json');
-	xhr.open('GET', url + queryParams);
-	xhr.onreadystatechange = function () {
-	    if (this.readyState == 4) {
-
-	    	var jsonData = JSON.parse(xhr.responseText);
-	    }
-    }
-xhr.send('');
-
 }
-accidentChart();
+accidentChart()
 </script>
 
 <script>
@@ -1538,25 +1205,198 @@ sunData('F');
 </script>
 
 <script>
+var traffAxisDataItem =  traffChart();
+var speedAxisDataItem = speedAvgChart();
+
+let chartInterval = setInterval(chartInterFunc,1000,'F');
+
 function trafficData(hwCode){
 	
+	if(chartInterval){
+		 clearInterval(chartInterval);
+		 chartInterval = null;
+	}
+
+	if(!chartInterval ){
+		chartInterval = setInterval(chartInterFunc,1000,hwCode);
+	}
+}
+
+function chartInterFunc(hwCode){
 	$.ajax({
 		url:"<%=request.getContextPath()%>/state/traffic?hwCode="+hwCode,
 		method:"get",
 		success:function(data){
-		    
-	    var traff = parseInt(data.traff);
-	    var sppedAvg = parseInt(data.speedAvg);
-	    
-	    traffChart();
-	    speedAvgChart();
+			
+			 traffAxisDataItem.animate({
+				    key: "value",
+				    to: data.traff, //데이터
+				    duration: 500,
+				    easing: am5.ease.out(am5.ease.cubic)
+				  });
+			 speedAxisDataItem.animate({
+				    key: "value",
+				    to: data.speedAvg, //데이터
+				    duration: 500,
+				    easing: am5.ease.out(am5.ease.cubic)
+				  });
 		}		
 	});
 }
-trafficData('F');
+
 </script>
 
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/chart.js/Chart.min.js"></script>
+
+<script>
+function elecData(hwCode){
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/state/elec?hwCode="+hwCode,
+		method:"get",
+		success:function(data){
+			
+            let dataArray = new Array(24);
+
+            // 반복문을 사용하여 각 "hwCode"에 대한 사용전력량 데이터를 처리
+            for (let i = 0; i < hwCode_array.length; i++) {
+                let currentCode = hwCode_array[i];
+
+                // "hwCode"에 해당하는 데이터 필터링
+                let elecUse = data.filter(item => item.hwCode === currentCode);
+
+                // "elecUse" 배열을 순회하며 데이터 처리
+                let elecUseArray = elecUse.map(item => parseFloat(item.elecUse));
+
+                // "dataArray" 배열에 추가
+                dataArray[i] = elecUseArray;
+            }
+            
+            let dataArray_label = [];
+
+            // 반복문을 사용하여 각 "hwCode"에 대한 date라벨 데이터를 처리
+            for (let i = 0; i < hwCode_array.length; i++) {
+                let currentCode = hwCode_array[i];
+                
+                
+                // "hwCode"에 해당하는 데이터 필터링
+                let elecDate = data.filter(item => item.hwCode === currentCode);
+                
+                console.log(elecDate);
+                
+                // "elecUse" 배열을 순회하며 데이터 처리
+                let elecDateArray = elecDate.map(item => extractTime(item.elecuseDate));
+              
+
+                // "dataArray" 배열에 추가
+                dataArray_label[i] = elecDateArray;
+            }
+            
+            function extractTime(dateString) {
+            	  return dateString.slice(-5);
+            	}
+            
+            // 새로운 차트 그리기
+            accidentChart(dataArray_label[hwCode_select].reverse(), dataArray[hwCode_select].reverse());
+        }
+    });
+}
+elecData('F');
+</script>
+
+<script>
+let routeInterval = setInterval(routeInterFunc,1000,'F');
+
+function setData(hwCode){
+	
+	if(routeInterval){
+		routeInterval(routeInterval);
+		routeInterval = null;
+	}
+
+	if(!routeInterval ){
+		routeInterval = setInterval(routeInterval,2000,hwCode);
+	}
+}
+
+function routeInterFunc(hwCode){
+	$.ajax({
+		url:"<%=request.getContextPath()%>/state/set?hwCode="+hwCode,
+		method:"get",
+		success:function(data){
+			
+			// 각 JSON 항목을 순회하면서 클래스 변경
+			data.forEach(function(item) {
+			    var hwCode = item.hwCode;
+			    var lightState = item.lightState;
+			    
+			    // id가 hwCode에 해당하는 div 요소를 찾음
+			    var element = document.getElementById(hwCode);
+			    
+			    if (element.classList.contains("line2")) {
+			        if (lightState === 1) {
+			            // lightState가 1인 경우 "active_line2" 클래스 추가, "inactive_line2" 클래스 제거
+			            element.classList.add("line2");
+			            element.classList.remove("line2-off");
+			        } else {
+			            // lightState가 0인 경우 "inactive_line2" 클래스 추가, "active_line2" 클래스 제거
+			            element.classList.add("line2-off");
+			            element.classList.remove("line2");
+			        }
+			    } else if (element.classList.contains("line3")) {
+			        if (lightState === 1) {
+			            // lightState가 1인 경우 "active_line3" 클래스 추가, "inactive_line3" 클래스 제거
+			            element.classList.add("line3");
+			            element.classList.remove("line3-off");
+			        } else {
+			            // lightState가 0인 경우 "inactive_line3" 클래스 추가, "active_line3" 클래스 제거
+			            element.classList.add("line3-off");
+			            element.classList.remove("line3");
+			        }
+			    } else if (element.classList.contains("line1")) {
+			        if (lightState === 1) {
+			            // lightState가 1인 경우 "active" 클래스 추가, "inactive" 클래스 제거
+			            element.classList.add("line1");
+			            element.classList.remove("line1-off");
+			        } else {
+			            // lightState가 0인 경우 "inactive" 클래스 추가, "active" 클래스 제거
+			            element.classList.add("line1-off");
+			            element.classList.remove("line1");
+			        }
+			    }
+			});
+			
+		}		
+	});
+}
+
+</script>
+<%-- <script>
+function setData(hwCode){
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/state/set?hwCode="+hwCode,
+		method:"get",
+		success:function(data){
+			
+			data.lightState
+			
+			  $("a#dark_mode").click(function(){
+				  
+			      if (!$("body").hasClass("dark-mode")){
+			    	  $("body").addClass("dark-mode");
+			          $("#darkmode_icon").removeClass("fa-sun");
+			          $("#darkmode_icon").addClass("fa-moon");
+			      } else{
+			    	  $("body").removeClass("dark-mode");
+			          $("#darkmode_icon").removeClass("fa-moon");
+			          $("#darkmode_icon").addClass("fa-sun");
+			      }
+			  });
+		}		
+	});
+}
+setData('F');
+</script> --%>
 
 </body>
 </html>

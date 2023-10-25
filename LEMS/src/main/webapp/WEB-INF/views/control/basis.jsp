@@ -24,25 +24,25 @@
           
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>정밀도</b> <a class="float-right">${st.precision }</a>
+                <b style="margin: 0 0 0 5px ">정밀도</b> <a class="float-right" style="margin: 0 50px 0 0">${st.precision }</a>
               </li>
               <li class="list-group-item">
-                <b>재현률</b> <a class="float-right">${st.recall }</a>
+                <b style="margin: 0 0 0 5px ">재현률</b> <a class="float-right" style="margin: 0 50px 0 0 ">${st.recall }</a>
               </li>
               <li class="list-group-item">
-                <b>민감도</b> <a class="float-right">${st.specificity }</a>
+                <b style="margin: 0 0 0 5px ">민감도</b> <a class="float-right" style="margin: 0 50px 0 0 ">${st.specificity }</a>
               </li>
               <li class="list-group-item">
-                <b>정확도</b> <a class="float-right">${st.accuracy }</a>
+                <b style="margin: 0 0 0 5px ">정확도</b> <a class="float-right" style="margin: 0 50px 0 0 ">${st.accuracy }</a>
               </li>
               <li class="list-group-item">
-                <b>F1-점수</b> <a class="float-right">${st.f1score }</a>
+                <b style="margin: 0 0 0 5px ">F1-점수</b> <a class="float-right" style="margin: 0 50px 0 0">${st.f1score }</a>
               </li>
               <li class="list-group-item">
-                <b>평균 절대 오차</b> <a class="float-right">${st.mae }</a>
+                <b style="margin: 0 0 0 5px ">평균 절대 오차</b> <a class="float-right" style="margin: 0 50px 0 0 ">${st.mae }</a>
               </li>
               <li class="list-group-item">
-                <b>평균 제곱 오차</b> <a class="float-right">${st.mse }</a>
+                <b style="margin: 0 0 0 5px ">평균 제곱 오차</b> <a class="float-right" style="margin: 0 50px 0 0 ">${st.mse }</a>
               </li>
             </ul>
 

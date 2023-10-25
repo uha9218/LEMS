@@ -1,7 +1,6 @@
 package com.spring.service;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -65,55 +64,62 @@ public class SettingRecordServiceImpl implements SettingRecordService{
 			elecList.get(i).setElecAltDate(strSetDate);
 			String elecSub=(strSetDate.substring(15,16));
 			
-			
-			if(record.get(i).getReason().equals("sys")) {
-				//시스템 설정 변동 안됨
-				if(recList.get(i).getRecState()==record.get(i).getLightState()) {
-					record.get(i).setReason("sys");
-					record.get(i).setStrSetDate(formatter.format(recList.get(i).getRecDate()));
-
-					elecList.get(i).setElecUse("a");
-					
-				}else {
-					//시스템 설정을 관리자가 변경
-					record.get(i).setReason("admin");
-					record.get(i).setStrSetDate(strSetDate);
-					//light 정보 수정
-					lightList.get(i).setlState(record.get(i).getLightState());
-					
-					//elecUse 정보 수정
-					elecList.get(i).setElecUse(elecSub+" "+record.get(i).getLightState());
-
-				}
+			//이상 가로등인 경우
+			if(light.selectLightByHwCode(record.get(i).getHwCode()).get(0).getlState()==10) {	//on->off
+				lightList.get(i).setlState(10);
+				elecList.get(i).setElecUse("0");
+			}else if(light.selectLightByHwCode(record.get(i).getHwCode()).get(0).getlState()==11) { //off->on
+				lightList.get(i).setlState(11);
+				elecList.get(i).setElecUse("10");
 			}else {
-				if(adminList.size()>0) {
-					for(int j=0;j<adminList.size();j++) {
-						if(record.get(i).getHwCode().equals(adminList.get(j).getHwCode())) {
-							//admin 설정 변동 안됨
-							if(record.get(i).getLightState()==adminList.get(j).getLightState()){
-								record.get(i).setStrSetDate(formatter.format(adminList.get(j).getSetDate()));
-								elecList.get(i).setElecUse("a");
-
-							}
-							else {	//admin 설정 변동
-								record.get(i).setStrSetDate(strSetDate);
-								elecList.get(i).setElecUse(elecSub+" "+record.get(i).getLightState());
-
-
+				if(record.get(i).getReason().equals("sys")) {
+					//시스템 설정 변동 안됨
+					if(recList.get(i).getRecState()==record.get(i).getLightState()) {
+						record.get(i).setReason("sys");
+						record.get(i).setStrSetDate(formatter.format(recList.get(i).getRecDate()));
+	
+						elecList.get(i).setElecUse("a");
+						
+					}else {
+						//시스템 설정을 관리자가 변경
+						record.get(i).setReason("admin");
+						record.get(i).setStrSetDate(strSetDate);
+						//light 정보 수정
+						lightList.get(i).setlState(record.get(i).getLightState());
+						
+						//elecUse 정보 수정
+						elecList.get(i).setElecUse(elecSub+" "+record.get(i).getLightState());
+	
+					}
+				}else {
+					if(adminList.size()>0) {
+						for(int j=0;j<adminList.size();j++) {
+							if(record.get(i).getHwCode().equals(adminList.get(j).getHwCode())) {
+								//admin 설정 변동 안됨
+								if(record.get(i).getLightState()==adminList.get(j).getLightState()){
+									record.get(i).setStrSetDate(formatter.format(adminList.get(j).getSetDate()));
+									elecList.get(i).setElecUse("a");
+	
+								}
+								else {	//admin 설정 변동
+									record.get(i).setStrSetDate(strSetDate);
+									elecList.get(i).setElecUse(elecSub+" "+record.get(i).getLightState());
+	
+	
+								}
 							}
 						}
 					}
+					record.get(i).setReason("admin");
 				}
-				record.get(i).setReason("admin");
+				String tmpDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+				String timeSet=tmpDate.substring(0,tmpDate.length() - 1)+"0";
+				record.get(i).setStrTimeSet(timeSet);
+				lightList.get(i).setlState(record.get(i).getLightState());
+	//			
+				//elecUse 정보 수정
+				elecList.get(i).setElecAltDate(tmpDate);
 			}
-			String tmpDate = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-			String timeSet=tmpDate.substring(0,tmpDate.length() - 1)+"0";
-			record.get(i).setStrTimeSet(timeSet);
-			lightList.get(i).setlState(record.get(i).getLightState());
-//			
-			//elecUse 정보 수정
-			elecList.get(i).setElecAltDate(tmpDate);
-			
 			System.out.println("#########################################################################");
 			System.out.println(record.get(i).getHwCode()+" "+record.get(i).getLightState()+" "+record.get(i).getReason()+" "+record.get(i).getSetNum()+" "+record.get(i).getStrSetDate()+" "+record.get(i).getStrTimeSet() );
 			System.out.println(lightList.get(i).getlNum()+" "+lightList.get(i).getHwCode()+" "+lightList.get(i).getlState());
@@ -130,6 +136,17 @@ public class SettingRecordServiceImpl implements SettingRecordService{
 	@Override
 	public List<SettingRecordVO> getRecentRecord() throws SQLException {
 		List<SettingRecordVO> setList = set.selectRecentRecordList();
+		String[] LNum = {"131","5540","1160","979","96","71","553","10000","8","984","4950","999","649","2899"};
+/*
+		for(int i=0;i<LNum.length;i++) {
+			LightVO li = light.selectLightByLnum(LNum[i]);
+			System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^LNum"+LNum[i]+" "+li.getlState());
+			if(li.getlState()==2) {
+				setList.get(i).setStrState("고장");
+				setList.get(i).setLightState(2);
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+setList.get(i).getLightState()+" "+setList.get(i).getHwCode()+" "+li.getlState());
+			}
+		}*/
 		return setList;
 	}
 
@@ -145,6 +162,10 @@ public class SettingRecordServiceImpl implements SettingRecordService{
 		return setList;
 	}
 
-
+	@Override
+	public List<SettingRecordVO> getRecordByHwCode(String hwCode) throws SQLException {
+		List<SettingRecordVO> setList = set.selectRecordListByHwCode(hwCode);
+		return setList;
+	}
 
 }

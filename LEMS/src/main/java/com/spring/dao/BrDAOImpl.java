@@ -23,13 +23,13 @@ public class BrDAOImpl implements BrDAO{
 		int limit = command.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		List<BrVO> brList = session.selectList("Br-Mapper.selectSerchBrList", command, rowBounds);
+		List<BrVO> brList = session.selectList("Br-Mapper.selectSearchBrList", command, rowBounds);
 		
 		return brList;
 	}
 	
 	@Override
-	public BrVO selectBrByBrNum(int brNum) throws SQLException {
+	public BrVO selectBrByBrNum(String brNum) throws SQLException {
 		BrVO br=session.selectOne("Br-Mapper.selectBrByBrNum", brNum);
 		return br;
 	}
@@ -47,7 +47,7 @@ public class BrDAOImpl implements BrDAO{
 	}
 
 	@Override
-	public void deleteBr(int brNum) throws SQLException {
+	public void deleteBr(String brNum) throws SQLException {
 		session.update("Br-Mapper.deleteBr", brNum);
 		
 	}

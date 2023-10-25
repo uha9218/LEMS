@@ -5,8 +5,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import com.spring.dto.ElecUsingVO;
 import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
+import com.spring.dto.SunlightVO;
 
 public interface SettingRecordService {
 	
@@ -21,5 +23,8 @@ public interface SettingRecordService {
 	
 	//구간별 설정 기록 조회
 	List<SettingRecordVO> getRecordByHwcode(String HwCode) throws SQLException;
+	
+	//구간별 설정 기록 조회(구간)
+	List<SettingRecordVO> getRecordByHwCode(String hwCode) throws SQLException;
 	
 }

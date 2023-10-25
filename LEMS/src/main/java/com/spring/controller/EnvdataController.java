@@ -55,6 +55,17 @@ public class EnvdataController {
 		return url;
 	}
 
+	@GetMapping("/trafficDetailMonth")
+	public String trafficDetailMonth(SearchListCommand command, Model model)throws Exception{
+		String url = "/envdata/trafficDetailMonth";
+		
+		Map<String,Object> dataMap = daydataService.getMonthDataList(command);
+		
+		model.addAllAttributes(dataMap);
+		
+		return url;
+	}
+
 	@GetMapping("/sun")
 	public String sun(SearchListCommand command, Model model) throws Exception {
 		String url = "/envdata/sun";
@@ -78,8 +89,14 @@ public class EnvdataController {
 	}
 
 	@GetMapping("/sunVariation")
-	public String sunVariation() throws Exception {
+
+	public String sunVariation(SearchListCommand command, Model model)throws Exception{
 		String url = "/envdata/sunVariation";
+		
+		Map<String, Object> dataMap = sunlightService.getSunlightList(command);
+		
+		model.addAllAttributes(dataMap);
+		
 
 		return url;
 	}

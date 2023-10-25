@@ -22,12 +22,12 @@
            <div class="row">
            <div class="col-md-1"></div>
                <div class="col-md-5">
-                  <div class="card" style="width: 100%; height: 100%;">
-                     <div class="card-header">
-                        <h5 class="card-title" style="font-size: 1.2em;">Controller</h5>
+                  <div class="card" style="width: 100%; height: 103%;">
+                     <div class="card-header" style="width: 100%; height: 10%;">
+                        <h5 class="card-title" style="font-size: 1.5em; margin: 0 auto;">Controller</h5>
                         <div class="card-tools">
-                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;" onclick="submit_form();">적용</button>
-                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1em;" onclick="location.reload();">복원</button>
+                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1.3em; margin: 0 auto;"  onclick="submit_form();">적용</button>
+                           <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1.3em; margin: 0 auto;" onclick="location.reload();">복원</button>
                         </div>
                      </div>
                      <!-- /.card-header -->
@@ -39,14 +39,16 @@
                                     <tr class="jsgrid-header-row">
                                        <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable"
                                           style="width: 100px; text-align:center;">구간</th>
-                                       <th class="jsgrid-header-cell jsgrid-header-sortable"
-                                          style="width: 250px; text-align:center;">설정 날짜</th>
+                                         <th class="jsgrid-header-cell jsgrid-header-sortable"
+                                          style="width: 250px; text-align:center;">적용 시간대</th>
                                        <th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
                                           style="width: 150px; text-align:center;">점등 여부</th>
+                                       <th class="jsgrid-header-cell jsgrid-header-sortable"
+                                          style="width: 250px; text-align:center;">설정 날짜</th>
                                     </tr>   
                                  </table>
                               </div>
-                              <div class="jsgrid-grid-body" style="height: 420px;">
+                              <div class="jsgrid-grid-body" style="height: 100%;">
                                  <table class="jsgrid-table" style="width: 100%;">
                                      <c:if test="${empty setList}" >
 										<tr>
@@ -57,10 +59,11 @@
 									</c:if>	
                                     <tbody>
                                       <c:forEach items="${setList }" var="set">
-                                    		<tr class="jsgrid-alt-row " style="height: 30px; text-align:center; font-size: 1.2em;" >
+                                    		<tr class="jsgrid-alt-row " style="height: 38px; text-align:center; font-size: 1.5em;" >
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${set.hwCode }</td>
-                                    			<td class="jsgrid-cell jsgrid-align-center" style="width: 200px;"><fmt:formatDate value="${set.setDate }" pattern="yyyy-MM-dd HH:mm"/></td>
+                                         	    <td class="jsgrid-cell jsgrid-align-center" style="width: 250px;"><fmt:formatDate value="${set.timeSet }" pattern="yyyy-MM-dd HH:mm"/></td>
                                          		<td class="jsgrid-cell jsgrid-align-center" style="width: 150px;"><input class="light-check" data-hwCode="${set.hwCode }" data-reason="${set.reason }" id="lightToggle" type="checkbox"  <c:choose><c:when test="${set.lightState eq 0 }">unchecked</c:when> <c:when test="${set.lightState eq 1 }">checked</c:when> <c:when test="${set.lightState eq 2 }">disabled</c:when> <c:otherwise></c:otherwise> </c:choose>  data-toggle="toggle" data-size="mini"></td>
+                                    			<td class="jsgrid-cell jsgrid-align-center" style="width: 250px;"><fmt:formatDate value="${set.setDate }" pattern="yyyy-MM-dd HH:mm"/></td>
                                     		</tr> 
                                     	</c:forEach> 
                                     </tbody>
@@ -73,9 +76,12 @@
                </div>
                
                <div class="col-md-5">
-                  <div class="card" style="width: 100%; height: 100%; ">
-                     <div class="card-header">
-                        <h5 class="card-title" style="font-size: 1.2em;">Recommendation</h5>
+                  <div class="card" style="width: 100%; height: 103%; ">
+                     <div class="card-header"  style="width: 100%; height: 10%;">
+                        <h5 class="card-title" style="font-size: 1.5em;">Recommendation</h5>
+                        <div class="card-tools">
+                     	   <button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 1.3em; margin: 0 auto;" onclick="javascript:OpenWindow('basis.do','추천근거',400,500);">추천근거</button>
+                     	</div>
                      </div>
                      <!-- /.card-header -->
                      <div class="card-body">
@@ -87,15 +93,15 @@
 	                                      <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable"
 												style="width: 100px; text-align:center;">구간</th>
 											<th class="jsgrid-header-cell jsgrid-header-sortable"
-												style="width: 200px; text-align:center;">설정 날짜</th>
+												style="width: 200px; text-align:center;">적용 시간대</th>
 											<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
 												style="width: 100px; text-align:center;">점등 여부</th>
 											<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-												style="width: 100px; text-align:center;">근거</th>
+												style="width: 100px; text-align:center;">절감 전력량</th>
 	                                 	</tr>
                                  </table>
                               </div>
-                              <div class="jsgrid-grid-body" style="height: 420px;">
+                              <div class="jsgrid-grid-body" style="height: 100%;">
                                  <table class="jsgrid-table" style="width: 100%;">
                                     <c:if test="${empty recList}" >
 										<tr>
@@ -106,11 +112,27 @@
 									</c:if>	
                                     <tbody>
                                     	<c:forEach items="${recList }" var="rec">
-                                    		<tr class="jsgrid-alt-row " style="height: 30px; text-align:center; font-size: 1.2em;" >
+                                    		<tr class="jsgrid-alt-row " style="height: 38px; text-align:center; font-size: 1.5em;" >
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${rec.hwCode }</td>
                                     			<td class="jsgrid-cell jsgrid-align-center" style="width: 200px;"><fmt:formatDate value="${rec.recDate }" pattern="yyyy-MM-dd HH:mm"/></td>
-                                    			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${rec.strState }</td>
-                                    			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;"><button type="button" class="btn btn-tool btn-primary btn-xs" style="font-size: 0.65em;" onclick="javascript:OpenWindow('basis.do?statNum=${rec.recNum }','추천근거',400,500);">추천근거</button></td>
+												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
+												    <small 
+												        <c:choose>
+												            <c:when test="${rec.strState eq 'on'}">
+												                class="badge badge-primary"
+												            </c:when >
+												            <c:when test="${rec.strState eq 'off'}">
+												                class="badge badge-secondary"
+												            </c:when>
+												            <c:otherwise>
+												                class="badge badge-danger"
+												            </c:otherwise>
+												         </c:choose>
+												        >
+												        ${rec.strState}
+												    </small>
+												</td>
+                                    			<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">${rec.predUse }kwh</td>
                                     		</tr> 
                                     	</c:forEach> 
 									</tbody>	
@@ -221,6 +243,11 @@
 	   
 	 }	
  
+   </script>
+   <script >
+   setTimeout(function() {
+	    location.reload();
+	}, 25 * 1000);
    </script>
 
 </body>

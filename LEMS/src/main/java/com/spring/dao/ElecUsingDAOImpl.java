@@ -51,6 +51,11 @@ public class ElecUsingDAOImpl implements ElecUsingDAO{
 			}
 		}
 	}
+	@Override
+	public List<ElecUsingVO> selectRecentElecUsingListByHwCode(String hwCode) throws SQLException {
+		List<ElecUsingVO> elec = session.selectList("ElecUsing-Mapper.selectRecentElecUsingListByHwCode",hwCode);
+		return elec;
+	}
 
 	
 }

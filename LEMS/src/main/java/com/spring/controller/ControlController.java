@@ -85,9 +85,9 @@ public class ControlController {
 		return url;
 	}
 	@GetMapping("/basis")
-	public String basis(Model model,String statNum) throws Exception{	
+	public String basis(Model model) throws Exception{	
 		String url="/control/basis";
-		StatVO st = stat.getStat(statNum);
+		StatVO st = stat.getStat();
 		model.addAttribute("st",st);		
 		return url;
 	}

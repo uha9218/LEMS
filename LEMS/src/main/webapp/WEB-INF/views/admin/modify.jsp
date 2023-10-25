@@ -14,7 +14,7 @@
 			<div class="mailbox-read-info">
 				<form role="form" method="post" action="modify.do" id="modifyForm" name="modifyForm" >
 					<div class="card-body" align="center">
-						<input type="hidden" class="form-control" name="regDate" id="regDate" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${admin.regDate }" /> "/>
+						<input type="hidden" class="form-control" name="regDate" id="regDate" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${admin.regDate }" /> "/>
 						<input type="hidden" class="form-control" name="adminNum" id="adminNum" value="${admin.adminNum }"/>
 						<div class="form-group row">
 							<label for="inputID" class="col-sm-6 col-form-label">이름</label>
@@ -35,13 +35,9 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputRoll" class="col-sm-6 col-form-label">권한</label>
+							<label for="inputPassword" class="col-sm-6 col-form-label">전화번호</label>
 							<div class="col-sm-6">
-								<select class="custom-select rounded-0" id="roll" name="roll">
-									<option value="super">최고 관리자</option>
-									<option value="admin">관리자</option>
-									<option value="user">사용자</option>
-								</select>
+								<input type="text" class="form-control" id="phone" name="phone" value="${admin.phone }"/>
 							</div>
 						</div>
 						

@@ -11,8 +11,8 @@ public class StatDAOImpl implements StatDAO{
 		this.session = session;
 	}
 	@Override
-	public StatVO selectStat(String statNum) throws Exception {
-		StatVO stat =session.selectOne("Stat-Mapper.selectStat",statNum); 
+	public StatVO selectStat() throws Exception {
+		StatVO stat =session.selectOne("Stat-Mapper.selectStat"); 
 		return stat;
 	}
 	
