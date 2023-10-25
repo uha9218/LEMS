@@ -48,4 +48,19 @@ public class DaydataDAOImpl implements DaydataDAO{
 		return daydataList;
 	}
 
+	@Override
+	public List<DaydataVO> selectDaydataList() throws Exception {
+		List<DaydataVO> daydataList = sqlSession.selectList("Daydata-Mapper.selectDaydataList");
+		
+		if(daydataList.size() > 0) {
+			for(int i=0;i<daydataList.size();i++) {
+				if(daydataList.get(i).getDayTrf().contains(".")) {
+					daydataList.get(i).setDayTrf(daydataList.get(i).getDayTrf().substring(0, daydataList.get(i).getDayTrf().indexOf(".")));
+				}
+			}
+		}
+		
+		return daydataList;
+	}
+
 }

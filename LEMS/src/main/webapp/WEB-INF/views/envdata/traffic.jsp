@@ -109,10 +109,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
+			</div>
 			<div class="card-footer">
 				<%@ include file="/WEB-INF/views/envdata/pagination1.jsp" %>				
 			</div>
-		</div>
 <%@ include file="/WEB-INF/views/module/footer_js.jsp" %>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

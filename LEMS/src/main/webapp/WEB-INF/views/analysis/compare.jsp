@@ -87,7 +87,7 @@
 					<div class="card-body">
 					 <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
 						<div class="compareCanvas">
-							<canvas id="compareChart" height="220%"></canvas>
+							<canvas id="compareChart" height="170%"></canvas>
 						</div>
 					</div>
 				</div>
@@ -110,9 +110,9 @@
 							<th style="width: 13%;">No.</th>
 							<th style="width: 10%;">구간</th>
 							<th style="width: 20%;">날짜</th>
-							<th style="width: 22%;">실제소비량(kW)</th>
+							<th style="width: 22%;">실측소비량(kW)</th>
 							<th style="width: 22%;">예측소비량(kW)</th>
-							<th>오차(%)</th>
+							<th>절감(%)</th>
 						</tr>
 					</thead>
 						<c:if test="${empty daydataList }">
@@ -130,7 +130,7 @@
 								</td>
 								<td>${daydata.dayEle }</td>
 								<td>${daydata.dayPre }</td>
-								<td>오차</td>
+								<td>${Math.round(((daydata.dayPre - daydata.dayEle) / daydata.dayEle * 100) * 100) / 100}</td>
 							<tr>
 						</c:forEach>
 					</tbody>
@@ -147,8 +147,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 
-<script>
-	
+<script>	
 	$(function() {
 		 $.datepicker.setDefaults({
 		     dateFormat: 'yy-mm-dd' 
@@ -277,7 +276,7 @@
            {
                label: '실측전력량(kW)',
                type:'bar',
-               yAxisID: 'y-left',
+               yAxisID: 'y',
                data: [],
                backgroundColor: [
             	   '#FFCC33'
@@ -290,7 +289,6 @@
            {
                label: '예측전력량(kW)',
                type:'bar',
-               yAxisID: 'y-right',
                data: [],
                backgroundColor: [
             	   '#6699FF'
@@ -314,11 +312,10 @@
                    color:'white',
                    font: {
 	                    size: 20,
-	                    style: 'italic'
 	                },
                }
            },
-           'y-left': {
+           'y': {
                type: 'linear',
                position: 'left',
                title: {
@@ -328,28 +325,14 @@
                    font: {
 	                    size: 20 
 	                },
-               },
-               grid: {
-                   display: false
-               }
-           },
-           'y-right': {
-               type: 'linear',
-               position: 'right',
-               title: {
-                   display: true,
-                   text: '예측전력량(kW)',
-                   color:'white',
-                   font: {
-	                    size: 20 
-	                },
-               },
+               
                grid: {
                    display: false
                }
            }
        }
-   }
+     }
+  }
  	<c:forEach items="${daydataList}" var="daydata">
  		//chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
  		chartData.labels.push('${daydata.dayNum}');
