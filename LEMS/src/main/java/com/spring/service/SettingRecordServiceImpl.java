@@ -1,7 +1,6 @@
 package com.spring.service;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -163,6 +162,10 @@ public class SettingRecordServiceImpl implements SettingRecordService{
 		return setList;
 	}
 
-
+	@Override
+	public List<SettingRecordVO> getRecordByHwCode(String hwCode) throws SQLException {
+		List<SettingRecordVO> setList = set.selectRecordListByHwCode(hwCode);
+		return setList;
+	}
 
 }

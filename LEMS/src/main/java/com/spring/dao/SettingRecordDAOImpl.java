@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.spring.dto.ElecUsingVO;
 import com.spring.dto.RecommandVO;
 import com.spring.dto.SettingRecordVO;
+import com.spring.dto.SunlightVO;
 
 public class SettingRecordDAOImpl implements SettingRecordDAO{
 
@@ -77,6 +79,10 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 			session.update("SettingRecord-Mapper.updateRecordList",record.get(i));
 		}
 	}
-  
+	@Override
+	public List<SettingRecordVO> selectRecordListByHwCode(String hwCode) throws SQLException {
+		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListByHwCode",hwCode);
+		return srList;
+	}
 
 }

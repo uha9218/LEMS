@@ -73,4 +73,18 @@
 		(#{setNum},#{lightState},#{reason},#{hwCode},TO_DATE(#{strSetDate},'YYYY/MM/DD HH24:MI:SS'),TO_DATE(#{strTimeSet},'YYYY/MM/DD HH24:MI'))
 	</update>
 	
+	<select id="selectRecordListByHwCode" resultType="record">
+	<![CDATA[
+		select *
+		from(
+			select *
+			from settingRecord
+            where hwCode BETWEEN 'A' AND 'N'
+			order by setDate desc
+		)
+		where rownum<=14
+        order by hwCode
+        ]]>
+	</select>
+	
 </mapper>

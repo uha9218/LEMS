@@ -86,7 +86,6 @@
     	where sunnum=#{sunnum}
     </select>
 
-
 	<select id="selectSunlightByHwCode" resultType="sunlight">
 		select *
 		from sunlight
