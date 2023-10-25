@@ -98,10 +98,44 @@
 					<div class="card-body">
 					 <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
 						<div class="trafficCanvas">
-							<canvas id="trafficChart" height="145%"></canvas>
+							<canvas id="trafficChart" height="100%"></canvas>
 						</div>
 					</div>
 				</div>
+				</div>
+				<div class="card">
+					<table class="table-s table-bordered dataTable dtr-inline" id="daydataList" 
+						style="width: 100%; height: 90%; text-align: center;">
+						<thead>
+							<tr style="font-size: 1.5em;">
+								<th style="width: 20%;">구분</th>
+								<th style="width: 40%;">교통량</th>
+								<th style="width: 40%;">통행속도</th>
+							</tr>
+						</thead>
+						<tbody style="font-size: 1.3em;">
+							<tr>
+								<td>평균</td>
+								<td>${staticMap.traAvg }</td>
+								<td>${staticMap.spAvg }</td>
+							</tr>
+							<tr>
+								<td>표준편차</td>
+								<td>${staticMap.traDevi }</td>
+								<td>${staticMap.spDevi }</td>
+							</tr>
+							<tr>
+								<td>최대값</td>
+								<td>${staticMap.traMax }</td>
+								<td>${staticMap.spMax }</td>
+							</tr>
+							<tr>
+								<td>최소값</td>
+								<td>${staticMap.traMin }</td>
+								<td>${staticMap.spMin }</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</section>
 		<div class="col-lg-4" >
@@ -117,7 +151,7 @@
 	         </div>
 				<table class="table table-bordered table-striped" id="daydataList" style="text-align: center;">
 					<thead>
-						<tr style="font-size: 0.95em;">
+						<tr style="font-size: 1em;">
 							<th style="width: 10%;">No.</th>
 							<th style="width: 25%;">날짜</th>
 							<th style="width: 20%;">구간</th>
@@ -144,40 +178,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="card">
-					<table class="table-s table-bordered dataTable dtr-inline" id="daydataList" 
-						style="width: 100%; height: 90%; text-align: center;">
-						<thead>
-							<tr style="font-size: 0.95em;">
-								<th style="width: 20%;">구분</th>
-								<th style="width: 40%;">교통량</th>
-								<th style="width: 40%;">통행속도</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>평균</td>
-								<td>${staticMap.traAvg }</td>
-								<td>${staticMap.spAvg }</td>
-							</tr>
-							<tr>
-								<td>표준편차</td>
-								<td>${staticMap.traDevi }</td>
-								<td>${staticMap.spDevi }</td>
-							</tr>
-							<tr>
-								<td>최대값</td>
-								<td>${staticMap.traMax }</td>
-								<td>${staticMap.spMax }</td>
-							</tr>
-							<tr>
-								<td>최소값</td>
-								<td>${staticMap.traMin }</td>
-								<td>${staticMap.spMin }</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 				<%@ include file="/WEB-INF/views/envdata/trafficDetailpagination.jsp" %>				
 			</div>
 		</div>
@@ -360,7 +360,7 @@
 		                text: '구간',
 		                color: 'white',
 		                font: {
-		                    size: 20 // X-축 레이블의 글자 크기를 16px로 설정
+		                    size: 20 
 		                }
 		            }
 		        },
@@ -372,7 +372,7 @@
 		                text: '교통량',
 		                color: 'white',
 		                font: {
-		                    size: 20 // Y-축(왼쪽) 레이블의 글자 크기를 16px로 설정
+		                    size: 20 
 		                },
 		                grid: {
 		                    display: false
@@ -387,7 +387,7 @@
 		                text: '주행속도',
 		                color: 'white',
 		                font: {
-		                    size: 20 // Y-축(오른쪽) 레이블의 글자 크기를 16px로 설정
+		                    size: 20 
 		                },
 		                grid: {
 		                    display: false

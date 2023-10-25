@@ -25,34 +25,30 @@ public class DaydataServiceImpl implements DaydataService{
 	public Map<String,Object> getMonthDataList(SearchListCommand command) throws Exception{
 		Map<String,Object> dataMap = new HashMap<String,Object>();
 		Map<String, Object> staticMap = new HashMap<String, Object>();
-		List<DaydataVO> dayMonthList = daydataDAO.selectSearchDaydataList(command);
+		List<DaydataVO> dayMonthList = daydataDAO.selectDaydataList();
 		List<DaydataVO> monthData = new ArrayList<DaydataVO>();
 		String[] hwCode= {"A","B","C","D","E","F","G","H","I","J","K","L","M","N"};
-		int[] hwCount= {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		LocalDate now = LocalDate.now();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
 		String currentMonth = now.format(formatter);
-		int[] traffSum={0,0,0,0,0,0,0,0,0,0,0,0,0,0};;
+		int[] traffSum={0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 		float[] spdAvg={0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 		//initialize
 		for(int i=0;i<hwCode.length;i++) {
-			dataMap.put(hwCode[i]+"monthTraff", traffSum+"");
-			dataMap.put(hwCode[i]+"monthSpd", spdAvg+"");
+			dataMap.put(hwCode[i]+"monthTraff", 0);
+			dataMap.put(hwCode[i]+"monthSpd", 0);
 		}
-		
 		
 		for(int i=0;i<dayMonthList.size();i++) {
 			if(format.format(dayMonthList.get(i).getDayDate()).substring(0,7).equals(currentMonth)) {
 				for(int j=0;j<hwCode.length;j++) {
 					if(hwCode[j].equals(dayMonthList.get(i).getHwCode())) {
 						traffSum[j]+= Integer.parseInt(dayMonthList.get(i).getDayTrf());
-						dataMap.replace(hwCode[i]+"monthTraff",traffSum[j]);
+						//System.out.println(dayMonthList.get(i).getHwCode()+" : "+traffSum[j]);
 						spdAvg[j]+=Float.parseFloat(dayMonthList.get(i).getDaySpd());
-						hwCount[j]++;
-						//System.out.println(hwCode[j]+"monthSpd : "+spdAvg[j]);
-						dataMap.replace(hwCode[j]+"monthSpd", spdAvg[j]);
+						//System.out.println(dayMonthList.get(i).getHwCode()+" : "+spdAvg[j]);
 					}
 				}
 			}
@@ -60,11 +56,10 @@ public class DaydataServiceImpl implements DaydataService{
 		for(int i=0;i<hwCode.length;i++) {
 			monthData.add(new DaydataVO());
 			monthData.get(i).setStrDate(currentMonth);
-			monthData.get(i).setDayTrf(dataMap.get(hwCode[i]+"monthTraff")+"");
+			monthData.get(i).setDayTrf(traffSum[i]+"");
 			monthData.get(i).setHwCode(hwCode[i]);
-			dataMap.replace(hwCode[i]+"monthSpd", String.format("%.1f", spdAvg[i]/hwCount[i]) );
-			monthData.get(i).setDaySpd(dataMap.get(hwCode[i]+"monthSpd")+"");
-		
+			float tmp=spdAvg[i]/(dayMonthList.size()/14);
+			monthData.get(i).setDaySpd(String.format("%.1f", tmp));
 		}
 
 		float Montrasum=0; 
@@ -114,6 +109,7 @@ public class DaydataServiceImpl implements DaydataService{
 
 		dataMap.put("staticMap", staticMap);
 		dataMap.put("dayMonthList", dayMonthList);
+		dataMap.put("monthData", monthData);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCommand(command);
@@ -145,6 +141,9 @@ public class DaydataServiceImpl implements DaydataService{
 				//SpeedAvg
 				float satmp = Float.parseFloat(daydataList.get(i).getDaySpd());
 				daydataList.get(i).setDaySpd(String.format("%.1f", satmp));
+				
+				float dptmp = Float.parseFloat(daydataList.get(i).getDayPre());
+				daydataList.get(i).setDayPre(String.format("%.1f", dptmp));
 				
 				//occ
 				//float occtmp = Float.parseFloat(daydataList.get(i).getDayOcc());
@@ -183,6 +182,8 @@ public class DaydataServiceImpl implements DaydataService{
 		
 		dataMap.put("staticMap", staticMap);
 		dataMap.put("daydataList", daydataList);
+		
+		
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCommand(command);

@@ -94,11 +94,44 @@
                   <div class="card-body">
                    <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
 		              <div class="sunCanvas">
-		                  <canvas id="sunChart" height="150%"></canvas>
+		                  <canvas id="sunChart" height="100%"></canvas>
 		              </div>
                   </div>
            	 </div>
             </div>
+            <div class="card">
+               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:30%;text-align:center;">
+                  <thead>
+					<tr style="font-size:1.5em;">
+						<th style="width:20%;">구분</th>
+						<th style="width:40%;">밤의길이</th>
+						<th style="width:40%;">전력량(kW)</th>
+					</tr>
+                  </thead>
+                  <tbody style="font-size:1.3em;">
+                	<tr>
+                        <td>평균</td>
+                        <td>${staticMap.flAvg }</td>
+                        <td>${staticMap.euAvg }</td>
+                     </tr>
+                     <tr>
+                        <td>표준편차</td>
+                        <td>${staticMap.flDevi }</td>
+                        <td>${staticMap.euDevi }</td>
+                     </tr>
+                    <tr>
+                        <td>최대값</td>
+                        <td>${staticMap.flMax }</td>
+                        <td>${staticMap.euMax }</td>
+                     </tr>
+                     <tr>
+                        <td>최소값</td>
+                        <td>${staticMap.flMin }</td>
+                        <td>${staticMap.euMin }</td>
+                     </tr>
+                  </tbody>
+                </table>
+              </div>
            </section>
             <div class="col-lg-4">
             <div class="" style="position: relative; display: inline-block;">
@@ -113,7 +146,7 @@
 	         </div>
                <table class="table table-bordered table-striped" id="sunList"  style="text-align:center;">
                   <thead>
-					<tr style="font-size:0.90em;">
+					<tr style="font-size:1em;">
 						<th style="width:15%;">No.</th>
 						<th style="width:25%;">날짜</th>
 						<th style="width:15%;">구간</th>
@@ -143,40 +176,6 @@
 				  		</c:forEach>	
 				</tbody>
                </table>
-               
-             <div class="card">
-               <table class="table-s table-bordered dataTable dtr-inline" style="width:100%; height:90%;text-align:center;">
-                  <thead>
-					<tr style="font-size:0.95em;">
-						<th style="width:20%;">구분</th>
-						<th style="width:40%;">밤의길이</th>
-						<th style="width:40%;">전력량(kW)</th>
-					</tr>
-                  </thead>
-                  <tbody>
-                	<tr>
-                        <td>평균</td>
-                        <td>${staticMap.flAvg }</td>
-                        <td>${staticMap.euAvg }</td>
-                     </tr>
-                     <tr>
-                        <td>표준편차</td>
-                        <td>${staticMap.flDevi }</td>
-                        <td>${staticMap.euDevi }</td>
-                     </tr>
-                    <tr>
-                        <td>최대값</td>
-                        <td>${staticMap.flMax }</td>
-                        <td>${staticMap.euMax }</td>
-                     </tr>
-                     <tr>
-                        <td>최소값</td>
-                        <td>${staticMap.flMin }</td>
-                        <td>${staticMap.euMin }</td>
-                     </tr>
-                  </tbody>
-                </table>
-               </div>
               <%@ include file="/WEB-INF/views/envdata/sunDetailpagination.jsp" %>	
             </div>
           </div>
@@ -314,16 +313,17 @@ $(function() {
     var chartData = {
         labels: [],
         datasets: [
+        	
             {
                 label: '밤의길이',
                 type:'line',
                 yAxisID: 'y-left',
                 data: [],
                 backgroundColor: [
-                    'rgba(255, 255, 051, 0.4)'
+                    'rgba(255, 255, 051, 0.7)'
                 ],
                 borderColor: [
-                	'rgba(255, 255, 051, 0.4)'
+                	'rgba(255, 255, 051, 0.7)'
                 ],
                 borderWidth: 1
             },
@@ -350,7 +350,10 @@ $(function() {
                 title: {
                     display: true,
                     text: '구간',
-                    color: 'white'
+                    color: 'white',
+                    font: {
+	                    size: 20 
+	                },
                 }
             },
             'y-left': {
@@ -371,9 +374,9 @@ $(function() {
                     stepSize: 1, // Y 축 간격 설정
                     callback: function (value, index, values) {
                         // Y 축 라벨에 시간 형식을 표시 (예: '01:00')
-                        var hours = Math.floor(value);
-                        var minutes = (value - hours) * 60;
-                        return hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                  	  var hours = Math.floor(value);
+                      var minutes = (value - hours) * 60;
+                      return hours.toString().slice(0,2) + ':' + value.toString().slice(-2);
                     }
                 }
             },
@@ -395,7 +398,7 @@ $(function() {
         }
     };
     <c:forEach items="${sunlightList}" var="sunlight">
-		chartData.labels.push('${sunlight.hwCode }'); //레이블 배열에 추가
+		chartData.labels.push('${sunlight.sunNum }'); //레이블 배열에 추가
 	 	chartData.datasets[0].data.push(${sunlight.fullLight }); //데이터 배열에 추가
 	 	chartData.datasets[1].data.push(${sunlight.lightUse }); //데이터 배열에 추가
 	</c:forEach>

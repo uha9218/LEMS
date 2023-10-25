@@ -92,27 +92,27 @@
 					</tr>
 		  		</c:if>
 				<tbody>
-		  		<c:forEach items="${sunlightList }" var="sunlight">
-		  			<tr style='font-size:1em;'>
-		  				<td>${sunlight.sunNum }</td>
-		  			<td>
-						<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>
-					</td>
-					<td>${sunlight.hwCode }</td>
-					<td>
-						<fmt:parseDate value="${sunlight.sunRise }" var="sunRise" pattern="Hmm" />
-						<fmt:formatDate value="${sunRise }" pattern="H:mm"/>
-					</td>
-					<td>
-						<fmt:parseDate value="${sunlight.sunSet }" var="sunSet" pattern="HHmm" />
-						<fmt:formatDate value="${sunSet }" pattern="HH:mm"/>
-					</td>
-					<td>
-						<fmt:parseDate value="${sunlight.fullLight }" var="fullLight" pattern="HHmm" />
-						<fmt:formatDate value="${fullLight }" pattern="HH:mm"/>
-					</td>
-		  			</tr>
-		  		</c:forEach>	
+			  		<c:forEach items="${sunlightList }" var="sunlight">
+			  			<tr style='font-size:1em;'>
+			  				<td>${sunlight.sunNum }</td>
+			  			<td>
+							<fmt:formatDate value="${sunlight.sunDate }" pattern="yyyy-MM-dd"/>
+						</td>
+						<td>${sunlight.hwCode }</td>
+						<td>
+							<fmt:parseDate value="${sunlight.sunRise }" var="sunRise" pattern="Hmm" />
+							<fmt:formatDate value="${sunRise }" pattern="H:mm"/>
+						</td>
+						<td>
+							<fmt:parseDate value="${sunlight.sunSet }" var="sunSet" pattern="HHmm" />
+							<fmt:formatDate value="${sunSet }" pattern="HH:mm"/>
+						</td>
+						<td>
+							<fmt:parseDate value="${sunlight.fullLight }" var="fullLight" pattern="HHmm" />
+							<fmt:formatDate value="${fullLight }" pattern="HH:mm"/>
+						</td>
+			  			</tr>
+			  		</c:forEach>	
 				</tbody>
 			</table>
 		</div>

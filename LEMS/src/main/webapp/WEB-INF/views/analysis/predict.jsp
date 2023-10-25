@@ -78,19 +78,19 @@
         </section>
          <div class="card-body">
          	<div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-8">
         	 <div id="pdfDiv">
                <div class="card">
                   <div class="card-body">
                   <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
                      <div class="predictCanvas">
-                        <canvas id="predictChart" height="220%"></canvas>
+                        <canvas id="predictChart" height="170%"></canvas>
                      </div>
                   </div>
                </div>
               </div>
           </div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
             <div class="" style="position: relative; display: inline-block;">
 	            <div style="position: relative; display: inline-block;">
 	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
@@ -277,6 +277,7 @@ $(function() {
              }
           ]
       }
+      
      var chartOptions = {
          responsive:true,
          // maintainAspectRatio: false,
@@ -301,16 +302,17 @@ $(function() {
                      font: {
  	                    size: 20 
  	                },
-                 },
+                
                  grid: {
                      display: false
                  }
-             }
-         }
-     }
+              }    
+           }
+       }
+   }
    	<c:forEach items="${daydataList}" var="daydata">
   //chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
-		chartData.labels.push('${daydata.hwCode}');
+		chartData.labels.push('${daydata.dayNum}');
 		chartData.datasets[0].data.push(${daydata.dayPre}); //데이터 배열에 추가
    	</c:forEach>
       

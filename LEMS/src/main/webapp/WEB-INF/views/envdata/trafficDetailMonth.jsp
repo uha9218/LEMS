@@ -97,60 +97,22 @@
 					<div class="card-body">
 					 <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
 						<div class="trafficCanvas">
-							<canvas id="trafficChart" height="145%"></canvas>
+							<canvas id="trafficChart" height="100%"></canvas>
 						</div>
 					</div>
 				</div>
 				</div>
-			</section>
-			<div class="col-lg-4" >
-			<div class="" style="position: relative; display: inline-block;">
-	            <div style="position: relative; display: inline-block;">
-	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
-	                  onclick="downloadCSV();">CSV</button>
-	            </div>&nbsp;&nbsp;
-	            <div style="position: relative; display: inline-block;">
-	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
-	                  onclick="downloadExcel();">Excel</button>
-	            </div>
-	         </div>
-				<table class="table table-bordered table-striped" id="dayMonthList" style="text-align: center;">
-					<thead>
-						<tr style="font-size: 0.95em;">
-							<th style="width: 25%;">날짜</th>
-							<th style="width: 20%;">구간</th>
-							<th style="width: 25%;">교통량</th>
-							<th style="width: 30%;">통행속도</th>
-						</tr>
-					</thead>
-						<c:if test="${empty dayMonthList }">
-							<tr>
-								<td colspan="5"><strong>해당 내용이 없습니다.</strong></td>
-							</tr>
-						</c:if>
-					<tbody>
-						<c:forEach items="${dayMonthList }" var="data">
-							<tr style='font-size: 1em;'>
-								<td>${data.strDate }</td>
-								<td>${data.hwCode }</td>
-								<td>${data.dayTrf }</td>
-								<td>${data.daySpd }</td>
-							<tr>
-						</c:forEach>
-					</tbody>
-				</table>
-
 				<div class="card">
 					<table class="table-s table-bordered dataTable dtr-inline"
 						style="width: 100%; height: 90%; text-align: center;">
 						<thead>
-							<tr style="font-size: 0.95em;">
+							<tr style="font-size: 1.5em;">
 								<th style="width: 20%;">구분</th>
 								<th style="width: 40%;">교통량</th>
 								<th style="width: 40%;">통행속도</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="font-size: 1.3em;">
 							<tr>
 								<td>평균</td>
 								<td>${staticMap.MontraAvg }</td>
@@ -174,7 +136,43 @@
 						</tbody>
 					</table>
 				</div>
-				<%@ include file="/WEB-INF/views/envdata/trafficDetailMonthpagination.jsp" %>				
+			</section>
+			<div class="col-lg-4" >
+			<div class="" style="position: relative; display: inline-block;">
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadCSV();">CSV</button>
+	            </div>&nbsp;&nbsp;
+	            <div style="position: relative; display: inline-block;">
+	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
+	                  onclick="downloadExcel();">Excel</button>
+	            </div>
+	         </div>
+				<table class="table table-bordered table-striped" id="monthData" style="text-align: center;">
+					<thead>
+						<tr style="font-size: 0.95em;">
+							<th style="width: 25%;">날짜</th>
+							<th style="width: 20%;">구간</th>
+							<th style="width: 25%;">교통량</th>
+							<th style="width: 30%;">통행속도</th>
+						</tr>
+					</thead>
+						<c:if test="${empty monthData }">
+							<tr>
+								<td colspan="5"><strong>해당 내용이 없습니다.</strong></td>
+							</tr>
+						</c:if>
+					<tbody>
+						<c:forEach items="${monthData }" var="data">
+							<tr style='font-size: 1em;'>
+								<td>${data.strDate }</td>
+								<td>${data.hwCode }</td>
+								<td>${data.dayTrf }</td>
+								<td>${data.daySpd }</td>
+							<tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -385,7 +383,7 @@
 		        }
 		    }
 		}
- 	<c:forEach items="${dayMonthList}" var="data">
+ 	<c:forEach items="${monthData}" var="data">
  		//chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
  		chartData.labels.push('${data.hwCode}');
  		chartData.datasets[0].data.push(${data.dayTrf}); //데이터 배열에 추가
