@@ -11,26 +11,26 @@
 	
     <select id="selectSearchLightList" resultType="light">
     	select *
-    	from light
+    	from lighttmp
     	where lnum is not null
     	<include refid="search" />
     </select>
      <select id="selectLightList" resultType="light">
     	select *
-    	from light
+    	from lighttmp
     	where lnum is not null
     </select>
     
 	<select id="selectSearchLightListCount" resultType="int">
     	select count(*)
-    	from light
+    	from lighttmp
     	where lnum is not null
     	<include refid="search" />
     </select>
 
     <select id="selectLightByLnum" resultType="light">
     	select *
-    	from light
+    	from lighttmp
     	where lnum=#{lnum}
     </select>
      <select id="selectLightByHwCode" resultType="light">
@@ -41,11 +41,11 @@
     
     <select id="selectLightByLstate" resultType="light">
     	select *
-    	from light
+    	from lighttmp
     	where lstate=#{lstate}
     </select>
     <update id="updateLight" parameterType="light">
-    	update light
+    	update lighttmp
 		set lState=#{lState}
 		where hwCode=#{hwCode}
     </update>

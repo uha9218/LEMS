@@ -6,6 +6,6 @@ import java.util.Map;
 import com.spring.dto.AlarmVO;
 
 public interface AlarmService {
-	public AlarmVO getAlarm() throws SQLException;
+	public String getAlarm() throws SQLException;
 	public Map<String,Object> getAlarmList() throws SQLException;
 }

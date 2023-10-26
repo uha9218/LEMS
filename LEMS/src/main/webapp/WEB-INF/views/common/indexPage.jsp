@@ -8,6 +8,6 @@
 
 <body>
   <div class="content-wrapper">
-     <iframe name="ifr" frameborder="0" onload="Height();" style="width:100%; height:93.1vh;"></iframe> 				
+    <iframe name="ifr" frameborder="0" style="width:100%; height:93.1vh;"></iframe>
   </div>
 </body>

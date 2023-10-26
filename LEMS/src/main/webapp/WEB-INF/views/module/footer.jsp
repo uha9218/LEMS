@@ -81,15 +81,19 @@ subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
 </script>
 
  <script>
-	  $("#dark_mode").click(function(){
-	      if ($("#ifr").contents().find("body").hasClass("dark-mode")){
-	    	  $("#ifr").contents().find("body").removeClass("dark-mode");
-	    	  $("body").removeClass("dark-mode");
+	  $("a#dark_mode").click(function(){
+		  
+		  var ifram_body = $($("iframe[name='ifr']").get(0).contentDocument.body);
+		  //alert(ifram_body.hasClass("dark-mode"));
+		  
+	      if (!$("body").hasClass("dark-mode")){
+	    	  $("body").addClass("dark-mode");
+	    	  ifram_body.addClass("dark-mode");
 	          $("#darkmode_icon").removeClass("fa-sun");
 	          $("#darkmode_icon").addClass("fa-moon");
 	      } else{
-	    	  $("#ifr").contents().find("body").addClass("dark-mode");
-	    	  $("body").addClass("dark-mode");
+	    	  $("body").removeClass("dark-mode");
+	    	  ifram_body.removeClass("dark-mode");
 	          $("#darkmode_icon").removeClass("fa-moon");
 	          $("#darkmode_icon").addClass("fa-sun");
 	      }

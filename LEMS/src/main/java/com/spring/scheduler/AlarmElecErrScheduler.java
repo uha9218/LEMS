@@ -41,6 +41,7 @@ public class AlarmElecErrScheduler {
 
 		for(int i=0;i<sr.size();i++){
 			if(sr.get(i).getLightState()==2) {
+				System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+sr.get(i).getHwCode());
 				break;
 			}else {
 				double preUse = sr.get(i).getLightState()*10*elecAmount[i];
@@ -52,8 +53,7 @@ public class AlarmElecErrScheduler {
 					alarm.get(alarmCount).setAlarmStrDate(now.format(formatter));
 					alarm.get(alarmCount).setHwCode(sr.get(i).getHwCode());
 					alarm.get(alarmCount).setElecError(Math.abs(realUse-preUse)+"");
-					
-					System.out.println(alarm.get(i).getAlarmNum()+" "+ alarm.get(i).getElecError()+" "+alarm.get(i).getHwCode()+" "+alarm.get(i).getAlarmDate());
+					alarmCount++;
 					
 				}
 			}

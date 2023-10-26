@@ -58,49 +58,49 @@
                         <option value="N" ${command.searchType eq 'N' ? 'selected':'' }>N</option>
                      </select>
                     <!-- Date range as a button -->
-					<div class="input-group-prepend">
-						<span class="input-group-text"> <i
-							class="far fa-calendar-alt"></i>
-						</span>
-					</div>
-					<input type="text" class="form-control float-right"
-						style="width: 100px" id="datepicker" name="datepicker" value="${command.fromDate }" placeholder="날짜 입력">
-					<input type="text" class="form-control float-right"
-						style="width: 100px" id="datepicker2" name="datepicker2" value="${command.toDate }" placeholder="날짜 입력">&nbsp;&nbsp;&nbsp;&nbsp;
-					<!-- keyword -->
-						<button class="btn btn-primary" type="button" id="searchBtn"
-							data-card-widget="search" onclick="searchList_go(1);">조회</button>
-					<!-- end : search bar -->
+               <div class="input-group-prepend">
+                  <span class="input-group-text"> <i
+                     class="far fa-calendar-alt"></i>
+                  </span>
+               </div>
+               <input type="text" class="form-control float-right"
+                  style="width: 100px" id="datepicker" name="datepicker" value="${command.fromDate }" placeholder="날짜 입력">
+               <input type="text" class="form-control float-right"
+                  style="width: 100px" id="datepicker2" name="datepicker2" value="${command.toDate }" placeholder="날짜 입력">&nbsp;&nbsp;&nbsp;&nbsp;
+               <!-- keyword -->
+                  <button class="btn btn-primary" type="button" id="searchBtn"
+                     data-card-widget="search" onclick="searchList_go(1);">조회</button>
+               <!-- end : search bar -->
                   </div>
                </div>
             </div>
          </div>
         </section>
          <div class="card-body">
-         	<div class="row">
-            <div class="col-lg-7">
-        	 <div id="pdfDiv">
+            <div class="row">
+            <div class="col-lg-8">
+            <div id="pdfDiv">
                <div class="card">
                   <div class="card-body">
                   <button id="savePdfBtn" value="pdf다운로드" class="btn btn-block btn-secondary" style="width:5%;" >PDF</button>
                      <div class="predictCanvas">
-                        <canvas id="predictChart" height="220%"></canvas>
+                        <canvas id="predictChart" height="170%"></canvas>
                      </div>
                   </div>
                </div>
               </div>
           </div>
-            <div class="col-lg-5">
+            <div class="col-lg-4">
             <div class="" style="position: relative; display: inline-block;">
-	            <div style="position: relative; display: inline-block;">
-	               <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
-	                  onclick="downloadCSV();">CSV</button>
-	            </div>&nbsp;&nbsp;
-	            <div style="position: relative; display: inline-block;">
-	               <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
-	                  onclick="downloadExcel();">Excel</button>
-	            </div>
-	         </div>
+               <div style="position: relative; display: inline-block;">
+                  <button id="downloadCSV" value="downloadCSV" class="btn btn-block btn-secondary btn-md" 
+                     onclick="downloadCSV();">CSV</button>
+               </div>&nbsp;&nbsp;
+               <div style="position: relative; display: inline-block;">
+                  <button id="downloadExcel" value="downloadExcel" class="btn btn-block btn-secondary btn-md" 
+                     onclick="downloadExcel();">Excel</button>
+               </div>
+            </div>
                <table class="table table-bordered table-striped" id="daydataList" style="text-align: center;">
                   <thead>
                      <tr style='font-size:1em;'>
@@ -111,24 +111,24 @@
                      </tr>
                   </thead>
                   <c:if test="${empty daydataList }" >
-					<tr>
-						<td colspan="4"><strong>해당 내용이 없습니다.</strong></td>
-					</tr>
-				  </c:if>	
-				 <tbody>		  
+               <tr>
+                  <td colspan="4"><strong>해당 내용이 없습니다.</strong></td>
+               </tr>
+              </c:if>   
+             <tbody>        
                   <c:forEach items="${daydataList }" var="daydata">
-                  	<tr style='font-size:1em;'>
-                  		<td>${daydata.dayNum }</td>
-                  		<td>${daydata.hwCode }</td>
-                  		<td>
-							<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>
-						</td>
-						<td>${daydata.dayPre }</td>
-                  	</tr>
+                     <tr style='font-size:1em;'>
+                        <td>${daydata.dayNum }</td>
+                        <td>${daydata.hwCode }</td>
+                        <td>
+                     <fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>
+                  </td>
+                  <td>${daydata.dayPre }</td>
+                     </tr>
                   </c:forEach>
-                 </tbody>	
+                 </tbody>   
                </table>
-             <%@ include file="/WEB-INF/views/analysis/pagination.jsp" %>	
+             <%@ include file="/WEB-INF/views/analysis/pagination.jsp" %>   
             </div>
          </div>
        </div>
@@ -143,112 +143,112 @@
 <script>
       //Date range picker
 $(function() {
-		 $.datepicker.setDefaults({
-		     dateFormat: 'yy-mm-dd' 
-		     ,showOtherMonths: true 
-		     ,showMonthAfterYear:true
-		     ,changeYear: true
-		     ,changeMonth: true               
-		     ,yearSuffix: "년" 
-		     ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
-		     ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
-		     ,dayNamesMin: ['일','월','화','수','목','금','토']
-		     ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
-		     ,minDate: "-2Y" 
-		     ,maxDate: "+3M"               
-		 });
+       $.datepicker.setDefaults({
+           dateFormat: 'yy-mm-dd' 
+           ,showOtherMonths: true 
+           ,showMonthAfterYear:true
+           ,changeYear: true
+           ,changeMonth: true               
+           ,yearSuffix: "년" 
+           ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12']
+           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+           ,dayNamesMin: ['일','월','화','수','목','금','토']
+           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
+           ,minDate: "-2Y" 
+           ,maxDate: "+3M"               
+       });
 
-		 $("#datepicker").datepicker();                    
-		 $("#datepicker2").datepicker();
-		 
-		});
+       $("#datepicker").datepicker();                    
+       $("#datepicker2").datepicker();
+       
+      });
       
-	var doc = new jsPDF();
-	var specialElementHandlers = {
-	    '#editor': function(element, renderer) {
-	        return true;
-	    }
-	}
-	 
-	$('#savePdfBtn').click(function() {
-	    html2canvas($("#pdfDiv"), {
-	        onrendered : function(canvas) {
-	            // 한글깨짐현상때문에 jpeg->jspdf 전환
-	            var imgData = canvas.toDataURL('image/jpeg');
-	            var pageWidth = 210;
-	            var pageHeight = pageWidth * 1.414;
-	            var imgWidth = pageWidth - 20;
-	            var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
-	            var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
-	            doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
-	            doc.save('predict.pdf');
-	        }
-	    });
-	});
+   var doc = new jsPDF();
+   var specialElementHandlers = {
+       '#editor': function(element, renderer) {
+           return true;
+       }
+   }
+    
+   $('#savePdfBtn').click(function() {
+       html2canvas($("#pdfDiv"), {
+           onrendered : function(canvas) {
+               // 한글깨짐현상때문에 jpeg->jspdf 전환
+               var imgData = canvas.toDataURL('image/jpeg');
+               var pageWidth = 210;
+               var pageHeight = pageWidth * 1.414;
+               var imgWidth = pageWidth - 20;
+               var imgHeight = $('#pdfDiv').height() * imgWidth / $('#pdfDiv').width();
+               var doc = new jsPDF('p','mm',[pageHeight, pageWidth]);
+               doc.addImage(imgData, 'JPEG', 10, 10, imgWidth, imgHeight);
+               doc.save('predict.pdf');
+           }
+       });
+   });
       
-	 //downloadCSV
-	   function downloadCSV() {
-	      const table = document.getElementById("daydataList"); // 테이블 설정
-	      const rows = table.getElementsByTagName("tr"); // 행 저장
-	       let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+    //downloadCSV
+      function downloadCSV() {
+         const table = document.getElementById("daydataList"); // 테이블 설정
+         const rows = table.getElementsByTagName("tr"); // 행 저장
+          let csvContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
-	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
-	       const headerRowData = []; // 제목 행 데이터 저장 배열
-	       for (const cell of headerCells) {
-	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
-	       }
-	       csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+          const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+          const headerRowData = []; // 제목 행 데이터 저장 배열
+          for (const cell of headerCells) {
+              headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+          }
+          csvContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
 
-	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
-	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
-	           if (cells.length > 0) {
-	               const rowData = []; // 데이터 저장 배열
-	               for (const cell of cells) {
-	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
-	               }
-	               csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
-	           }
-	       }
+          for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+              const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+              if (cells.length > 0) {
+                  const rowData = []; // 데이터 저장 배열
+                  for (const cell of cells) {
+                      rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+                  }
+                  csvContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+              }
+          }
 
-	       const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
-	       const link = document.createElement("a");
-	       link.setAttribute("href", encodedUri);
-	       link.setAttribute("download", "daydataList.csv"); // .csv 다운로드하는 링크
-	       document.body.appendChild(link);
-	       link.click(); // <a> 클릭해서 다운로드 시작
-	   }
-	   
-	 //downloadExcel
-	   function downloadExcel() {
-	      const table = document.getElementById("daydataList"); // 테이블 설정
-	      const rows = table.getElementsByTagName("tr"); // 행 저장
-	       let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
+          const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent); // uri로 인코딩
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "daydataList.csv"); // .csv 다운로드하는 링크
+          document.body.appendChild(link);
+          link.click(); // <a> 클릭해서 다운로드 시작
+      }
+      
+    //downloadExcel
+      function downloadExcel() {
+         const table = document.getElementById("daydataList"); // 테이블 설정
+         const rows = table.getElementsByTagName("tr"); // 행 저장
+          let excelContent = "\uFEFF"; // BOM (utf8이 자꾸 안돼서 이걸로 함)
 
-	       const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
-	       const headerRowData = []; // 제목 행 데이터 저장 배열
-	       for (const cell of headerCells) {
-	           headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
-	       }
-	       excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
+          const headerCells = rows[0].getElementsByTagName("th"); // 제목 행
+          const headerRowData = []; // 제목 행 데이터 저장 배열
+          for (const cell of headerCells) {
+              headerRowData.push(cell.textContent.trim()); // 제목 행 공백 자르고 배열에 저장
+          }
+          excelContent += headerRowData.join(",") + "\n"; // 쉼표로 데이터 구분, 개행 문자로 행 구분
 
-	       for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
-	           const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
-	           if (cells.length > 0) {
-	               const rowData = []; // 데이터 저장 배열
-	               for (const cell of cells) {
-	                   rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
-	               }
-	               excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
-	           }
-	       }
+          for (let i = 1; i < rows.length; i++) { // 1부터 시작해서 제목 행 다음부터 반복문 실행
+              const cells = rows[i].getElementsByTagName("td"); // 데이터 저장
+              if (cells.length > 0) {
+                  const rowData = []; // 데이터 저장 배열
+                  for (const cell of cells) {
+                      rowData.push(cell.textContent.trim()); // 데이터 공백 자르고 배열에 저장
+                  }
+                  excelContent += rowData.join(",") + "\n"; // 쉼표, 개행 문자로 데이터 구분
+              }
+          }
 
-	       const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
-	       const link = document.createElement("a");
-	       link.setAttribute("href", encodedUri);
-	       link.setAttribute("download", "daydataList.xls"); // .csv 다운로드하는 링크
-	       document.body.appendChild(link);
-	       link.click(); // <a> 클릭해서 다운로드 시작
-	   }
+          const encodedUri = "data:text/excel;charset=utf-8," + encodeURIComponent(excelContent); // uri로 인코딩
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "daydataList.xls"); // .csv 다운로드하는 링크
+          document.body.appendChild(link);
+          link.click(); // <a> 클릭해서 다운로드 시작
+      }
       //chart
      $(function(){
        var ctx = document.getElementById('predictChart').getContext('2d');
@@ -258,7 +258,7 @@ $(function() {
            options: chartOptions
        })
    })
-  	 var chartData = {
+      var chartData = {
          labels: [],
          datasets: [
             
@@ -268,15 +268,16 @@ $(function() {
                  yAxisID: 'y-left',
                  data: [],
                  backgroundColor: [
-                	 '#6699FF'
+                    '#6699FF'
                  ],
                  borderColor: [
-                	 '#6699FF'
+                    '#6699FF'
                  ],
                  borderWidth: 1
              }
           ]
       }
+      
      var chartOptions = {
          responsive:true,
          // maintainAspectRatio: false,
@@ -287,8 +288,8 @@ $(function() {
                      text: '구간',
                      color:'white',
                      font: {
- 	                    size: 20 
- 	                },
+                        size: 20 
+                    },
                  }
              },
              'y-left': {
@@ -299,20 +300,21 @@ $(function() {
                      text: '전력량(kW)',
                      color:'white',
                      font: {
- 	                    size: 20 
- 	                },
-                 },
+                        size: 20 
+                    },
+                
                  grid: {
                      display: false
                  }
-             }
-         }
-     }
-   	<c:forEach items="${daydataList}" var="daydata">
+              }    
+           }
+       }
+   }
+      <c:forEach items="${daydataList}" var="daydata">
   //chartData.labels.push('<fmt:formatDate value="${daydata.dayDate }" pattern="yyyy-MM-dd"/>'); //레이블 배열에 추가
-		chartData.labels.push('${daydata.hwCode}');
-		chartData.datasets[0].data.push(${daydata.dayPre}); //데이터 배열에 추가
-   	</c:forEach>
+      chartData.labels.push('${daydata.dayNum}');
+      chartData.datasets[0].data.push(${daydata.dayPre}); //데이터 배열에 추가
+      </c:forEach>
       
       
    </script>

@@ -11,7 +11,7 @@
 			from alarm
 			order by alarmDate desc
 		)
-		where rownum<=10
+		where rownum<=15
 		]]>
 	</select>
 	<select id="selectRecentAlarm" resultType="alarm">

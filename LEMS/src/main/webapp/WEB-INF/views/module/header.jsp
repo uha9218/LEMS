@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    <!-- Right navbar links -->
 		<ul class="navbar-nav ml-auto">
 		  <li class="nav-item">
-	        <a class="nav-link" id="dark_mode" href="#" role="button">
+	        <a class="nav-link" href="#" role="button">
 			  <i onclick="location.href='<%=request.getContextPath() %>/common/logout.do';" class="fas fa-sign-out-alt">&nbsp;LOGOUT</i>
 	        </a>
 	      </li>
@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	        </a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" id="dark_mode" href="#" role="button">
+	      <a class="nav-link" href="#" role="button">
 	          <i class="fas fa-moon" id="darkmode_icon"></i>
 	        </a>
 	      </li>
@@ -78,12 +78,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    <div class="sidebar">
 	    	<!-- Sidebar user panel (optional) -->
 	    	<div class="user-panel mt-3 pt-3 pb-3 mb-3 d-flex border-bottom border-top">
-		        <div class="image">
-		           <img src="<%=request.getContextPath() %>/admin/getPicture.do?id=${loginUser.adminNum}" class="img-circle elevation-2" alt="User Image">
-		        </div>
 		        <div class="info">
 		          <div class="row">
-		         	<a class="d-block" href="javascript:OpenWindow('<%=request.getContextPath() %>/admin/detail.do?id=${loginUser.adminNum}','내정보',700,800);" class="d-block">&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.name }</a>
+		         	<a class="d-block" href="javascript:OpenWindow('<%=request.getContextPath() %>/admin/detail.do?id=${loginUser.adminNum}','내정보',700,800);" class="d-block">&nbsp;&nbsp;&nbsp;&nbsp;${loginUser.name } 님을 환영합니다.</a>
 		          </div>
 		        </div>
 	     	</div>

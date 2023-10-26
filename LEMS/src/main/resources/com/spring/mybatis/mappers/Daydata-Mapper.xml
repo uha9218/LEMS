@@ -72,6 +72,13 @@
 	 	<include refid="search" />
 	 	 order by dayDate desc, hwCode
     </select>
+    <select id="selectDaydataList" resultType="daydata">
+    	select dayNum, hwCode, dayEle, dayTrf, daySpd, dayPre, dayDlu, TO_CHAR(dayDate,'YYYY-MM-DD HH24:MI:SS') as dayDate
+    	from dayData
+    	where dayNum is not null
+	 	order by dayDate desc, hwCode
+    </select>
+    
     
     <select id="selectSearchDaydataListCount" resultType="int">
     	select count(*)

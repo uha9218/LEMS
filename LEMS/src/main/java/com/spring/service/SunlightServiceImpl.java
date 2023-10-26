@@ -80,9 +80,9 @@ public class SunlightServiceImpl implements SunlightService {
 			eudevi+=Math.pow((Integer.parseInt(sunlightList.get(i).getSunRise())-(eusum/sunlightList.size())), 2);
 		}
 		
-		int tmp=(int)Math.floor(Math.sqrt(fldevi/sunlightList.size()));
+		//int tmp=(int)Math.floor(Math.sqrt(fldevi/sunlightList.size()));
 		
-		staticMap.put("flDevi", tmp+"");
+		staticMap.put("flDevi", String.format("%.1f", Math.sqrt(fldevi/sunlightList.size())));
 		staticMap.put("euDevi", String.format("%.1f", Math.sqrt(eudevi/sunlightList.size())));
 
 		staticMap.replace("flMin", staticMap.get("flMin").substring(0,2) + ":" + staticMap.get("flMin").substring(2,4));

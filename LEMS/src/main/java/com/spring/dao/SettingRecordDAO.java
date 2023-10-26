@@ -16,4 +16,6 @@ public interface SettingRecordDAO {
 	List<SettingRecordVO> selectRecordListByTimeSet(Date TimeSet) throws SQLException;	//TimeSet중 가장 최근 기록을 가져옴
 	void insertRecordList(List<SettingRecordVO> record) throws SQLException, ParseException;	//관리자가 설정시 DB삽입
 	void updateRecordList(List<SettingRecordVO> record)throws SQLException, ParseException;	//추천 설정표가 나오면 관리자 설정과 합쳐서 DB삽입
+	//구간별 설정 기록 조회(구간)
+	List<SettingRecordVO> selectRecordListByALLHwCode(String hwCode) throws SQLException;
 }

@@ -49,6 +49,7 @@ public class RecommandTableScheduler {
 		List<ElecUsingVO> elecList = new ArrayList<ElecUsingVO>();
 		List<RecommandVO> recommand = rec.selectRecentRecommandList();
 		List<AlarmVO> alarmList = new ArrayList<AlarmVO>();
+		String[] LNum = {"131","5540","1160","979","96","71","553","10000","8","984","4950","999","649","2899"};
 		
 		LocalDateTime now = LocalDateTime.now();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -64,60 +65,78 @@ public class RecommandTableScheduler {
 		if(recommand.size()>0) {
 			for(int i=0;i<recommand.size();i++) {
 				record.add(new SettingRecordVO());
+				lightList.add(new LightVO());
+				elecList.add(new ElecUsingVO());
 				record.get(i).setHwCode(recommand.get(i).getHwCode());
 				record.get(i).setSetNum(formatter.format(recommand.get(i).getRecDate())+record.get(i).getHwCode());
 				String strSetDate =  formatter2.format(recommand.get(i).getRecDate());
 				String timeSet=strSetDate.substring(0,strSetDate.length() - 4)+"0";
 				record.get(i).setStrTimeSet(timeSet);
-				
-				//관리자 설정 추가
-				if(adminList.size()>0) {
-					for(int j=0;j<adminList.size();j++) {
-						System.out.println(record.get(i).getHwCode()+" "+adminList.get(j).getHwCode());
-						if(record.get(i).getHwCode().equals(adminList.get(j).getHwCode())) {
-							record.get(i).setLightState(adminList.get(j).getLightState());
-							record.get(i).setReason("admin");
-							record.get(i).setStrSetDate(adminList.get(j).getStrSetDate());
-						}
-					}
-				}
-				if(record.get(i).getReason()==null) {
-					record.get(i).setLightState(recommand.get(i).getRecState());
-					record.get(i).setReason("sys");
-					record.get(i).setStrSetDate(formatter2.format(recommand.get(i).getRecDate()));
-					}
-				//light 정보 수정 & elecUse 정보 추가
-				lightList.add(new LightVO());
-				elecList.add(new ElecUsingVO());
-				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+recommand.get(i).getHwCode()+light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState());
+				lightList.get(i).setHwCode(record.get(i).getHwCode());
 				//이상가로등인 경우
-				if(light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState()==10) {	//on->off
+				if(light.selectLightByLnum(LNum[i]).getlState()==10) {	//on->off
 					lightList.get(i).setlState(10);
 					elecList.get(i).setElecUse("0");
 					record.get(i).setReason("sys");
-				}else if(light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState()==11) { //off->on
+					record.get(i).setStrSetDate(formatter2.format(recommand.get(i).getRecDate()));
+					System.out.println("1111111111111111111111111111111111111111111111111111"+LNum[i]+" "+light.selectLightByLnum(LNum[i]).getlState());
+				}else if(light.selectLightByLnum(LNum[i]).getlState()==11) { //off->on
 					lightList.get(i).setlState(11);
 					elecList.get(i).setElecUse("10");
 					record.get(i).setReason("sys");
-				}else {
-					lightList.get(i).setHwCode(record.get(i).getHwCode());
-					lightList.get(i).setlState(record.get(i).getLightState());
-					if(record.get(i).getLightState()==1) {elecList.get(i).setElecUse("10");}
-					else elecList.get(i).setElecUse("0");
-				}	
-					elecList.get(i).setHwCode(record.get(i).getHwCode());
-					elecList.get(i).setElecuseNum(record.get(i).getSetNum());
-					elecList.get(i).setElecuseDate(timeSet);
+					record.get(i).setStrSetDate(formatter2.format(recommand.get(i).getRecDate()));
+					System.out.println("22222222222222222222222222222222222222222222222222222"+LNum[i]+" "+light.selectLightByLnum(LNum[i]).getlState());
+				}else if(light.selectLightByLnum(LNum[i]).getlState()==2){	//고장
+					elecList.get(i).setElecUse("0");
+					lightList.get(i).setlState(2);
+					record.get(i).setReason("sys");
+					record.get(i).setStrSetDate(formatter2.format(recommand.get(i).getRecDate()));
+					System.out.println("33333333333333333333333333333333333333333333333333333"+LNum[i]+" "+light.selectLightByLnum(LNum[i]).getlState());
+				}else {	
+			
 					
+					//관리자 설정 추가
+					if(adminList.size()>0) {
+						for(int j=0;j<adminList.size();j++) {
+							System.out.println(record.get(i).getHwCode()+" "+adminList.get(j).getHwCode());
+							if(record.get(i).getHwCode().equals(adminList.get(j).getHwCode())) {
+								record.get(i).setLightState(adminList.get(j).getLightState());
+								record.get(i).setReason("admin");
+								record.get(i).setStrSetDate(adminList.get(j).getStrSetDate());
+								lightList.get(i).setlState(adminList.get(j).getLightState());
+								elecList.get(i).setElecUse(adminList.get(j).getLightState()*10+"");
+								System.out.println("44444444444444444444444444444444444444444444444444"+record.get(i).getHwCode());
+							}
+						}
+					}
+					if(record.get(i).getReason()==null) {
+						record.get(i).setLightState(recommand.get(i).getRecState());
+						record.get(i).setReason("sys");
+						record.get(i).setStrSetDate(formatter2.format(recommand.get(i).getRecDate()));
+						lightList.get(i).setHwCode(record.get(i).getHwCode());
+						lightList.get(i).setlState(record.get(i).getLightState());
+						if(record.get(i).getLightState()==1) {elecList.get(i).setElecUse("10");}
+						else elecList.get(i).setElecUse("0");
+						System.out.println("5555555555555555555555555555555555555555555555555555"+record.get(i).getHwCode());
+					}
+					
+				}
+				//light 정보 수정 & elecUse 정보 추가
+				
+				System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+recommand.get(i).getHwCode()+light.selectLightByHwCode(recommand.get(i).getHwCode()).get(0).getlState());
+				
+				elecList.get(i).setHwCode(record.get(i).getHwCode());
+				elecList.get(i).setElecuseNum(record.get(i).getSetNum());
+				elecList.get(i).setElecuseDate(timeSet);	
 			
 				System.out.println("#########################################################################");
 				System.out.println(record.get(i).getHwCode()+" "+record.get(i).getLightState()+" "+record.get(i).getReason()+" "+record.get(i).getSetNum()+" "+record.get(i).getStrSetDate()+" "+record.get(i).getStrTimeSet() );
 				System.out.println(elecList.get(i).getElecUse()+" "+elecList.get(i).getElecuseDate()+" "+elecList.get(i).getElecuseNum()+" "+elecList.get(i).getHwCode());
 				
 			}
+		elec.insertElecUsingList(elecList);
 		set.insertRecordList(record);
 		light.updateLight(lightList);
-		elec.insertElecUsingList(elecList);
 	//	if(alarmCount>0) {al.insertRecordList(alarmList);}
 		
 		}else {	

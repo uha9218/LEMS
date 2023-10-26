@@ -40,6 +40,19 @@
 		<![CDATA[where hwCode=#{hwCode} AND rownum<=14]]>
 		order by timeset desc, setNum desc
 	</select>
+	<select id="selectRecordListByALLHwCode" resultType="record">
+	<![CDATA[
+		select *
+		from(
+			select *
+			from settingRecord
+            where hwCode BETWEEN 'A' AND 'N'
+			order by setDate desc
+		)
+		where rownum<=14
+        order by hwCode
+        ]]>
+	</select>
 	<select id="selectRecordListBySetDate" resultType="record">
 		<![CDATA[select *
 		from (

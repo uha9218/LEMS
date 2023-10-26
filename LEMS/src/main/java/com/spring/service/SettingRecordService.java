@@ -22,4 +22,8 @@ public interface SettingRecordService {
 	//구간별 설정 기록 조회
 	List<SettingRecordVO> getRecordByHwcode(String HwCode) throws SQLException;
 	
+	//구간별 설정 기록 조회(구간)
+		List<SettingRecordVO> getRecordByALLHwCode(String hwCode) throws SQLException;
+
+
 }

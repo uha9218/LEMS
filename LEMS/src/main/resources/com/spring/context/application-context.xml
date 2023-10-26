@@ -70,7 +70,8 @@
 	<bean id="alarmService" class="com.spring.service.AlarmServiceImpl"
 		p:alarmDAO-ref="alarmDAO"
 		p:settingRecordDAO-ref="settingRecordDAO"
-		p:elecUsingDAO-ref="elecUsingDAO"/>
+		p:elecUsingDAO-ref="elecUsingDAO"
+		p:highwayDAO-ref="highwayDAO"/>
 	<bean id="elecUsingService" class="com.spring.service.ElecUsingServiceImpl"
 		p:elecUsingDAO-ref="elecUsingDAO"/>
 </beans>

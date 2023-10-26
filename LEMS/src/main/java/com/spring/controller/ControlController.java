@@ -97,8 +97,10 @@ public class ControlController {
 	public String update(@RequestBody SetRecordCommand command) throws Exception{
 		String url = "recTable.do";
 			
-		List<SettingRecordVO> record = command.getData();
-		set.saveSettingTable(record);
+		List<SettingRecordVO> records = command.getData();
+		
+		
+		set.saveSettingTable(records);
 		
 		return url;
 		

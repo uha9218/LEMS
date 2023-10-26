@@ -68,6 +68,8 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 	public void insertRecordList(List<SettingRecordVO> record) throws SQLException, ParseException {
 		for(int i=0;i<record.size();i++) {
 			session.update("SettingRecord-Mapper.insertRecordList",record.get(i));
+			System.out.println("DAO"+record.get(i).getHwCode()+" "+record.get(i).getLightState()+" "+record.get(i).getReason()+" "+record.get(i).getSetNum()+" "+record.get(i).getStrSetDate()+" "+record.get(i).getStrTimeSet() );
+
 		}
 		
 	}
@@ -77,6 +79,10 @@ public class SettingRecordDAOImpl implements SettingRecordDAO{
 			session.update("SettingRecord-Mapper.updateRecordList",record.get(i));
 		}
 	}
-  
+	@Override
+	public List<SettingRecordVO> selectRecordListByALLHwCode(String hwCode) throws SQLException {
+		List<SettingRecordVO> srList = session.selectList("SettingRecord-Mapper.selectRecordListByALLHwCode",hwCode);
+		return srList;
+	}
 
 }

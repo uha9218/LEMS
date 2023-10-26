@@ -236,6 +236,7 @@
 	 		contentType:'application/json',
 	 		success:function(data){
 	 			location.href=data;
+	 			alert('등록되었습니다');
 	 		},
 	 		error:function(){}	 		
 	 		
@@ -245,9 +246,7 @@
  
    </script>
    <script >
-   setTimeout(function() {
-	    location.reload();
-	}, 25 * 1000);
+
    </script>
 
 </body>

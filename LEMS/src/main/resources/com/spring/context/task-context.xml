@@ -50,7 +50,7 @@ cron : 정기적로 반복
 				   method="updateSettingTable"
 				   cron="10 0/10 * * * *" />
 	</scheduled-tasks>
-	
+
 	<beans:bean id="AlarmTask"
 		class="com.spring.scheduler.AlarmElecErrScheduler"
 		p:settingRecordDAO-ref="settingRecordDAO"
@@ -63,5 +63,5 @@ cron : 정기적로 반복
 				   method="alarmSchduler"
 				   cron="40 1/10 * * * *" />
 	</scheduled-tasks>		
-	
+	 
 </beans:beans>

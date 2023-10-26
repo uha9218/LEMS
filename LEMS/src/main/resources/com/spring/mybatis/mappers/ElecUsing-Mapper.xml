@@ -34,10 +34,10 @@
 		from(
 			select *
 			from elecUsing
-            where hwCode='A'
+          	where hwcode between 'A' and 'N'
 			order by elecUseNum desc
 		)
-		where rownum<=24
+		where rownum<=336
         order by hwCode
 		]]>
 	</select>

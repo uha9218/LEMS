@@ -11,6 +11,8 @@ public interface DaydataDAO {
 
 	List<DaydataVO> selectSearchDaydataList(SearchListCommand command) throws Exception;
 	
+	List<DaydataVO> selectDaydataList() throws Exception;
+	
 	int selectSearchDaydataListCount(SearchListCommand command) throws Exception;
 	
 	DaydataVO selectDaydataBydaynum(String daynum) throws SQLException;

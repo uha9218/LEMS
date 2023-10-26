@@ -1,6 +1,8 @@
 package com.spring.service;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.Map;
 import com.spring.command.ErrCommand;
 import com.spring.dao.AlarmDAO;
 import com.spring.dao.ElecUsingDAO;
+import com.spring.dao.HighwayDAO;
 import com.spring.dao.SettingRecordDAO;
 import com.spring.dto.AlarmVO;
 import com.spring.dto.ElecUsingVO;
+import com.spring.dto.HighwayVO;
 import com.spring.dto.SettingRecordVO;
 
 public class AlarmServiceImpl implements AlarmService{
@@ -28,10 +32,19 @@ public class AlarmServiceImpl implements AlarmService{
 	public void setSettingRecordDAO(SettingRecordDAO set) {
 		this.set = set;
 	}
+	private HighwayDAO hw;
+	public void setHighwayDAO(HighwayDAO hw) {
+		this.hw = hw;
+	}
 	@Override
-	public AlarmVO getAlarm() throws SQLException {
+	public String getAlarm() throws SQLException {
 		AlarmVO alarm = dao.selectRecentAlarm();
-		return alarm;
+		HighwayVO highway = hw.selectHighwayByHwcode(alarm.getHwCode());
+		
+		String ment="";
+		ment = highway.getHwName() + "| 오차전력량: " + alarm.getElecError() + " | "+ alarm.getAlarmDate();  
+		
+		return ment;
 	}
 
 	@Override
@@ -42,8 +55,13 @@ public class AlarmServiceImpl implements AlarmService{
 		List<ErrCommand> ErrCommandList = new ArrayList<ErrCommand>();
 		List<String> realUseList = new ArrayList<String>();
 		
+		LocalDateTime now = LocalDateTime.now();
+		String strSetDate =  now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+		String elecSub=(strSetDate.substring(15,16));
+		
 		double[] elecAmount= {22.33,62.53,178.89,98.49,67.67,59.18,47.34,21.21,141.14,210.15,49.35,84.42,79.50,121.04};
 		for(int i=0;i<sr.size();i++) {
+	
 			double preUse = sr.get(i).getLightState()*10*elecAmount[i];
 			double realUse=Double.parseDouble(elecList.get(i).getElecUse());
 			
